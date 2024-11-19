@@ -1,0 +1,101 @@
+\documentclass[12pt]{article} % 可以选择不同的文档类型，例如 report 或 book
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+
+
+
+\title{Linear Map} 
+\author{Len Fu} 
+\date{11.19.24} 
+
+\begin{document}
+
+% 显示标题
+\maketitle
+
+% 摘要
+\begin{abstract}
+This is the note of Linear Map, maded by Len Fu while his learning progress. 
+The main content is from \textit{Linear Algebra Done Right} , \textit{线性代数\ 北京理工大学出版社}.
+\ and \textit{Linear Algebra\  Allenby}
+\end{abstract}
+
+% 目录
+\tableofcontents
+\newpage
+
+% 正文开始
+\section{Definition and Examples} % 第一级标题
+\subsection{Definiton}
+A mapping\ $T$\ from a vector space\ $V$\ to a vector space\ $W$\ is called 
+a \textit{linear transformation} or a \textit{linear operator} if,
+$$T(\alpha v_{1}+\beta\ v_{2})=\alpha T(v_{1})+\beta T(v_{2})$$
+for all\ $v_{1},v_{2}\in V$\ and all\ $\alpha,\beta\in\mathbf{F}$.\\
+Then if\ $T$\ is a linear operator on $V$ if and only $T$ satisfies
+$$T(v_{1}+v_{2})=T(v_{1})+T(v_{2})$$
+and 
+$$T(\alpha v_{1})=\alpha T(v_{1})$$.
+Thus $T$ is a linear transformation mapping a vector space\ $V$\ to a vector space\ $W$ 
+if and only if $T$ is a linear operator on $V$.\\
+
+\subsection{Examples} % 第二级标题
+
+
+\subsubsection{Linear Operators from $R^{n}$ to $R^{m}$} 
+In general, if $A$ is any $m\times n$ matrix, we can define a linear operator $T_{A}$ 
+from $R^{n}$ to $R^{m}$ $$T_{A}(x)=Ax$$ for all $x\in R^{n}$. The operator $T_{A}$ is linear, 
+since
+\begin{align}
+T_{A}(\alpha x+\beta y)&=A(\alpha x+\beta y)\\
+&=\alpha Ax+\beta Ay\\
+&=\alpha T_{A}(x)+\beta T_{A}(y)
+\end{align}
+Thus we can think of each $m\times n$ matrix as defining a linear operator from $R^{n}$ to $R^{m}$.
+
+\subsubsection{Linear Transformation from $V$ to $W$}
+
+
+
+\section{The Matrix of a Linear Map}
+Let $T\ \in\ \mathcal{L}(V,W)$. Suppose that\ $(v_{1},...,v_{n})$\ is a basis of\ $V$\ and 
+$(w_{1},...,w_{m})$\ is a basis of\ $W$\ .For each $k\ =\ 1,...,n$, we can write\ $Tv_{k}$\ 
+uniquely as a linear combination of\ $w_{1},...,w_{m}$: 
+$$Tv_{k}\ =\ a_{1k}w_{1}\ +\ ...\ +\ a_{mk}w_{m},$$
+where\ $a_{jk}\in\ \mathbf{F}\ for\ j\ in\ 1,...,m.$.\\
+The matrix
+$$
+\begin{bmatrix}
+a_{11} &  ... & a_{1n}\\
+.& &.\\
+.& &.\\
+.& &.\\
+a_{m1} & ... & a_{mn}
+\end{bmatrix}
+$$
+is called the \textit{matrix}\ of\ $T$\ with respect to the 
+bases\ $(v_{1},...,v_{n})$\ and\ $(w_{1},...,w_{m})$.
+We denote it by 
+$$\mathcal{M}(T,(v_{1},...,v_{n}),(w_{1},...,w_{m}))$$.
+or we just write $\mathcal{M}(T)$. The\ $k^{th}$\ column consists of the 
+scalars needed to write\ $Tv_{k}$\ as a linear combination of\ $w_{1},...,w_{m}$. \\
+
+\section{Changing coordinate systems}
+
+
+
+% 结论
+\section{Conclusion}
+This is the conclusion section. Summarize the findings and state any implications or future work.
+
+% 参考文献
+\bibliographystyle{plain} % 参考文献样式
+\bibliography{references} % 参考文献文件
+
+\end{document}
