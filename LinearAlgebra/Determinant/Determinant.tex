@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\linespread{1.5} 
+
+
+\title{Determinant}
+\author{Len Fu}
+\date{11.20.2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This is the note maded by Len Fu while his learning progress.
+    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra\  Allenby}.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Permutation}
+
+\subsection{N Permutation}
+An n-permutation is an arrangement of all the numbers $1,2,...,n$.
+The total number of n-permutations is $n!$.
+\subsection{Inversion and Inversion Number}
+Formally, for a sequence ${a_{n}}$ with elements 
+$a_{i}$ and $a_{j}$ with $i<j$, an inversion is 
+present if $a_{i}>a_{j}$.
+
+The inversion number of a permutation is the number of inversions in it.
+
+A permutation with an odd inversion number is called 
+an odd permutation. And a permutation with an even inversion number 
+is called an even permutation.
+
+\subsection{Transposition}
+Formally, a transposition is a permutation that 
+exchanges two elements and leaves all others unchanged.
+For example, in permutation $\tau=(1,2,3,4,5)$ the 
+transposition $(1,2)$ exchanges 1 and 2.
+Then the resulting permutation is $\tau=(2,1,3,4,5)$.
+
+\subsubsection{Theorem}
+A transposition changes the parity of a permutation.
+\textbf{Proof:}\newline
+Let $\tau = (i_{1}i_{2}...i_{j}i_{j+1}...i_{n})$, and 
+we exchange $i_{j}$ and $i_{j+1}$, then the remain permutation 
+$(i_{1}i_{2}...i_{j}...i_{n})$ and $(i_{1}i_{2}...i_{j+1}...i_{n})$ 
+keep the same parity. But the paritr of $(i_{j}i_{j+1})$ changes,
+so the total parity of $\tau$ changes.
+
+Now consider that if the transposition is between $(i_{j}i_{k})$ like 
+$(...ji_{1}i_{2}...i_{s}k...)$, 
+then we first transpose s times to set j into $i_{s}$ like 
+$(...i_{1}i_{2}...i_{s}jk...)$. 
+And we transpose j and k 
+$(...i_{1}i_{2}...i_{s}kj...)$, 
+then we transpose s times to set k into $i_{1}$ like 
+$(...ki_{1}i_{2}...i_{s}j...)$.
+The total transposition is $2s+1$. 
+So the parity of the permutation changes.
+
+\paragraph{Corollary 1}
+In all n permutation, the number of even permutation 
+is equal to the number of odd permutation, which is 
+$\frac{n!}{2}$.\\
+\textbf{Proof:}\\
+Suppose there are $s$ odd permutation, then there are
+$t$ even permutation. Now transpose the first two elements 
+of all even permutation, then we get $s$ odd permutation.
+Then $s\leq t$, conversly, transpose the first two elements 
+of all odd permutation, then we get $t$ even permutation, and 
+$t\leq s$. So $s=t=\frac{n!}{2}$.
+
+\subsubsection{Theorem}
+Any n-permutation can be transposed from $(123...n)$ and the times 
+of transposition equals to the inversion number of the permutation.
+
+\section{N-Order Determinant}
+\subsection{Definition}
+The n-order determinant is a scalar value that can be computed from 
+the elements of a square matrix of size $n\times n$.
+
+Actually, it can be written abstract
+\begin{align*}
+\det |A|  
+& =
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    a_{21} & a_{22} & \cdots & a_{2n}\\
+    \cdots & \cdots & \cdots & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix} \\
+& = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau (j_{1}j_{2}\cdots j_{n})} a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}} \\
+& = \sum_{i_{1}i_{2}\cdots i_{n}}(-1)^{\tau (i_{1}i_{2}\cdots i_{n})} a_{i_{1}1}a_{i_{2}2}\cdots a_{i_{n}n} \\
+& = a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}
+\end{align*}
+
+
+\subsection{Properties}
+\begin{enumerate}
+    \item Transcope the matrix, the determinant does not change.
+    \item 
+    $$\begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        ka_{i1} & ka_{i2} & \cdots & ka_{in}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{vmatrix}
+    = k\begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        a_{i1} & a_{i2} & \cdots & a_{in}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{vmatrix}$$
+    \item 
+    $$\begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        b_{1}+c_{1} & b_{2}+c_{2} & \cdots & b_{n}+c_{n}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{vmatrix}
+    =
+    \begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        b_{1} & b_{2} & \cdots & b_{n}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{vmatrix}
+    +
+    \begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        c_{1} & c_{2} & \cdots & c_{n}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{vmatrix}$$
+    \item If there are two rows or columns that are the same, the determinant is 0.
+    is 0. 
+    \item If there are two rows or columns are proportionable, the determinant is 0.
+    \item Add a row's or a column's k-times into another one, the determinant keeps the same. 
+    \item Exchange two rows or columns, the determinant changes its sign.
+\end{enumerate}
+
+\textbf{Proof.}
+
+\textbf{1.}
+If we transcope the determinant,
+$$
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    a_{21} & a_{22} & \cdots & a_{2n}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+\ \rightarrow\ 
+\begin{vmatrix}
+    a_{11} & a_{21} & \cdots & a_{n1}\\
+    a_{12} & a_{22} & \cdots & a_{n2}\\
+    \cdots &  &  & \cdots\\
+    a_{1n} & a_{2n} & \cdots & a_{nn}
+\end{vmatrix}$$
+like this, then we expand the right one with respect to the rows like this 
+$$ \sum_{i_{1}i_{2}\cdots i_{n}}(-1)^{\tau (i_{1}i_{2}\cdots i_{n})} a_{i_{1}1}a_{i_{2}2}\cdots a_{i_{n}n}$$
+Actually it keeps from the left one.\\
+\textbf{2.}
+\begin{align*}
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    ka_{i1} & ka_{i2} & \cdots & ka_{in}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+& = k \left( a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in} \right) \\
+& = k \begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    a_{i1} & a_{i2} & \cdots & a_{in}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+\end{align*}
+
+\textbf{3.}
+\begin{align*}
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    b_{1}+c_{1} & b_{2}+c_{2} & \cdots & b_{n}+c_{n}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+& = (b_{1}+c_{1})A_{i1} + (b_{2}+c_{2})A_{i2} + \cdots + (b_{n}+c_{n})A_{in} \\
+& = (b_{1}A_{i1} + b_{2}A_{i2} + \cdots + b_{n}A_{in}) + (c_{1}A_{i1} + c_{2}A_{i2} + \cdots + c_{n}A_{in}) \\
+& = \begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    b_{1} & b_{2} & \cdots & b_{n}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
++ \begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    c_{1} & c_{2} & \cdots & c_{n}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{vmatrix}
+\end{align*}
+
+\textbf{4.}\\
+$det = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau ()}$
+\textbf{5.}\\
+
+
+\end{document}
