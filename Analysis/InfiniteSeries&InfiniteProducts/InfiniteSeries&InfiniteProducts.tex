@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Infinite Series and Infinite Products}
+\author{Len Fu}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This is the note of Infinite Series and Infinite Products,
+ maded by Len Fu while his learning progress.
+ The main content is from \textit{Mathematical Analysis\ Tom A.Apostol}.
+\end{abstract}
+\newpage
+
+\renewcommand{\contentsname}{Contents}
+\tableofcontents
+\newpage
+
+\section{Convergent and Divergent Sequences of Complex Numbers}
+\subsection{Definition of Convergence}
+A sequence of complex numbers\ $a_{n}\in C$\ is called \textit{convergent} if,
+$$for\ every\ \epsilon>0,\ there\ exists\ an\ N\in\mathbb{N}\ such\ that,\
+|a_{n}-a|<\epsilon\ for\ all\ n\geq N.$$
+If ${a_{n}}$ converges to $p$, we write $\lim_{n\rightarrow\inf}a_{n}=p$ and call
+$p$ the limit of the sequence. A sequence is called divergent if it is not convergent.
+
+\subsection{Cauchy Condition}
+A sequence in $\mathbb{C}$ is called a \textit{Cauchy sequence} if it satisfies the 
+\textit{Cauchy condition}:
+for\ every\ $\epsilon>0$ there\ is\ an\ integer\ N\ such\ that\
+$$|a_{n}-a_{m}|<\epsilon\ whenever n\geq N\ and\ m\geq N.$$
+
+The Cauchy condition is particularly useful in establishing 
+convergence when we do not know the actual value to which 
+the sequence converges.
+
+\subsection{Bounded and convergent}
+Every convergent sequence is bounded and hence an unbounded sequence 
+necessarily diverges.
+
+\subsection{Subsequence}
+If a sequence ${a_{n}}$ converges to $p$, then every subsequence ${a_{k_{n}}}$ 
+also converges to $p$.
+
+\subsection{Definition of Divergence}
+A sequence of complex numbers\ $a_{n}\in C$\ is called \textit{divergent} if,
+for\ every\ $\epsilon>0$,\ there\ exists\ an\ $N\in\mathbb{N}$\ such\ that,
+$$|a_{n}-a|\leq\epsilon\ for\ all\ n\geq N.$$
+In this case we write $\lim_{n\rightarrow\infty}a_{n}=+\infty$.
+
+If $\lim_{n\rightarrow\infty}(-a_{n})=\infty$, we write $\lim_{n\rightarrow\infty}(a_{n})=-\infty$ and say that $a_{n}$ 
+diverges to $-\infty$. 
+
+\section{Limit Superior and Limit Inferior of a Real-Valued Sequence}
+\subsection{Definition of inf and sup}
+Let ${a_{n}}$ be a sequence of real numbers. Suppose there is a real number U 
+satisfying the following two conditions:
+
+\begin{enumerate}
+    \item For every $\epsilon > 0$, there exists an integer $N$ such that $n>N$ 
+    implies $$a_{n}<U+\epsilon.$$
+    \item Given $\epsilon>0$ and given $m>0$, there exists an integer $n>m$ such that 
+    $$a_{n}>U-\epsilon.$$ 
+\end{enumerate}
+
+\textbf{Note.} Statement (1) means that all terms of the sequence lie to the left 
+of $U+\epsilon$. Statement (2) means that infinite terms of the sequence lie to the 
+right of $U-\epsilon$.Every real sequence has a limit superior and a limit inferior 
+in the extended real number $\mathbb{R^{*}}$.
+
+Then $U$ is called the \textit{limit superior} of ${a_{n}}$
+and we write $$U=\lim_{n\rightarrow \infty}\sup{a_{n}}$$.
+The limit inferior of ${a_{n}}$ is defined as follows:
+$$\lim_{n\rightarrow \infty}\ inf\ a_{n}=-\lim_{n\rightarrow \infty}\ sup\ b_{n},\ where\ b_{n}=-a_{n}\ for\ n=1,2,...,n$$.
+
+\subsubsection{Theorem}
+Let $a_{n}$ be a sequence of real numbers. Then we have:
+\begin{enumerate}
+    \item $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.
+    \item The sequence converges if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}$ and 
+    $\lim\inf_{n\rightarrow \infty}a_{n}$ are both finite and equal, in which case 
+    $\lim_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=\lim\sup_{n\rightarrow \infty}a_{n}$.
+    \item The sequence diverges to $+\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=+\infty$.
+    \item The sequence diverges to $-\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=-\infty$.
+\end{enumerate}
+\textbf{Note.} A sequence for which $\lim\sup_{n\rightarrow \infty}a_{n}\neq\lim\inf_{n\rightarrow \infty}a_{n} $ is said to oscillate.\\
+\textbf{Proof:}\\
+\textbf{1.}
+From definition, denote $U=\lim\sup_{n\rightarrow \infty}a_{n}$ and $L=\lim\inf_{n\rightarrow \infty}a_{n}$.
+For every $\epsilon_{1}>0$, $b_{n}<-L+\epsilon_{1}$, where $b_{n}=-a_{n}$. And for every $\epsilon_{2}>0$, $a_{n}<U+\epsilon_{2}$.
+\begin{align*}
+    -a_{n} &< -L + \epsilon_{1} \\
+    a_{n} &> L - \epsilon_{1} \\
+    a_{n} &< U + \epsilon_{2} \\
+    L - \epsilon_{1} < &a_{n} < U + \epsilon_{2} \\
+    L &< U + \epsilon_{1} + \epsilon_{2}
+\end{align*}
+Since $\epsilon_{1}$ and $\epsilon_{2}$ is arbitary positive, 
+we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.\\
+\textbf{2.}
+From \texbf{1} we know that 
+
+
+
+
+\end{document}
