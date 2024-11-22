@@ -1,98 +1,402 @@
-\documentclass[12pt]{article} % 可以选择不同的文档类型，例如 report 或 book
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{graphicx}
+\documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath} 
 \usepackage{hyperref}
-\usepackage{ctex}
 \usepackage{amsmath}
-\usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{sol}{Solution}[exe]
+\newtheorem{pro}{Properties}[section]
+
+\linespread{1.5} 
 
 
-
-
-\title{Linear Map} 
+\title{Linear Mapping and Linear Transformation} 
 \author{Len Fu} 
 \date{11.19.24} 
 
 \begin{document}
 
-% 显示标题
+
 \maketitle
 
-% 摘要
 \begin{abstract}
-This is the note of Linear Map, maded by Len Fu while his learning progress. 
+This is the note of Linear Mapping and Linear Transformation, maded by Len Fu while his learning progress. 
 The main content is from \textit{Linear Algebra Done Right} , \textit{线性代数\ 北京理工大学出版社}.
-\ and \textit{Linear Algebra\  Allenby}
+\ and \textit{Linear Algebra\  Allenby}. It's also the notes from the classes of BIT.
 \end{abstract}
 
-% 目录
+
 \tableofcontents
 \newpage
 
-% 正文开始
-\section{Definition and Examples} % 第一级标题
-\subsection{Definiton}
-A mapping\ $T$\ from a vector space\ $V$\ to a vector space\ $W$\ is called 
-a \textit{linear transformation} or a \textit{linear operator} if,
-$$T(\alpha v_{1}+\beta\ v_{2})=\alpha T(v_{1})+\beta T(v_{2})$$
-for all\ $v_{1},v_{2}\in V$\ and all\ $\alpha,\beta\in\mathbf{F}$.\\
-Then if\ $T$\ is a linear operator on $V$ if and only $T$ satisfies
-$$T(v_{1}+v_{2})=T(v_{1})+T(v_{2})$$
+\section{Linear Mapping}
+To prove a mapping is not linear mapping, you just need to find a counterexample.
+\subsection{Mapping}
+\begin{defi}[Mapping]
+Suppose $X$ and $Y$ are two non-empty sets. A mapping $\sigma$
+from $X$ to $Y$, denoted as $\sigma:X\rightarrow Y$, is a rule 
+that assigns to each element $x\in X$ exactly one element $y$ 
+in the set $Y$. The assignment $y=\sigma(x)$ is called the image of $a$
+under the mapping $\sigma$, and $x$ is called the preimage. 
+\end{defi}
+\begin{pro}[Domain]
+    Every element $x$ in the set $X$ must be mapped to some element in $Y$.
+\end{pro}
+\begin{pro}[Uniqueness]
+    For each $x$ in $X$, there is a unique $y$ in $Y$ 
+    such that $\sigma(x)=y$.
+\end{pro}
+
+The set $X$ is called the domain of the mapping $\sigma$, 
+and the set $Y$ is called the codomain. The image of a set,
+which is the set of all elements in $Y$ that are mapped 
+to by elements in $X$, denoted by as $Im(\sigma) or \sigma(X)$.
+, or $$\sigma(X)={y\in Y|\exists x\in X\ such\ that\ \sigma(x)=y}.$$
+
+\begin{defi}[Injective Mapping]
+    A mapping $\sigma$ is called an \textit{injective mapping} or an \textit{onto mapping}
+    if for each $y$ in $Y$, there is a unique $x$ in $X$ such that $\sigma(x)=y$.
+    Formally, for all $x_{1},x_{2}\in X$, if $\sigma(x_{1})=\sigma(x_{2})$, 
+    then $x_{1}=x_{2}$.
+\end{defi}
+
+\begin{defi}[Surjective Mapping]
+    A mapping $\sigma$ is called a \textit{surjective mapping} or a \textit{onto mapping}
+    if for every $y$ in $Y$, there exists an $x$ in $X$ such that $\sigma(x)=y$.
+\end{defi}
+
+\begin{defi}[Bijective Mapping]
+    A mapping $\sigma$ is called a \textit{bijective mapping} or a \textit{onto mapping}
+    if it is both injective and surjective.
+\end{defi}
+
+\begin{defi}[Product of mappings]
+    Set $\sigma$ as a mapping from $X$ to $Y$, and $\tau$ as a mapping from $Y$ to $Z$, 
+    then we can define a new mapping $\tau\circ\sigma$ from $X$ to $Z$ by
+    $$\tau\circ\sigma(x)=\tau(\sigma(x)),\ for\ all\ x\in X.$$
+\end{defi}
+
+\subsection{Linear Mapping}
+\begin{defi}[Linear Mapping]
+    Set the $V_{1}$ and $V_{2}$ as vector spaces on the field $F$. 
+    If a mapping $\tau$ from $V_{1}$ to $V_{2}$ keeps the adding property and the scalar 
+    multiplication property, then we say that $\tau$ is a \textit{linear mapping} or a
+    \textit{linear transformation}.
+    $$\sigma (\alpha + \beta) = \sigma (\alpha) + \sigma (\beta),\ \sigma (k\alpha)=k\sigma (\alpha),\ for\ any\ \alpha\ and\ \beta\in V_{1},k\in \ F.$$
+\end{defi}
+
+The necessary and sufficient condition for a Linear Mapping is 
+$$\sigma (k\alpha +l\beta) = k\sigma(\alpha)+l\sigma(\beta).$$
+
+\subsection{Unitary Mapping}
+Set $V$ as a vector space on the field $F$, a mapping $$\epsilon:V\rightarrow V$$
+is defined as $\epsilon (\alpha)=\alpha,\ for\ all\ \alpha\in V.$
+\subsection{Zero Mapping}
+Set the $V_{1}$ and $V_{2}$ as vector spaces on the field $F$.
+A mapping $$\tau :V_{1}\rightarrow V_{2}$$ 
+is defined as $\tau (0)=0,\ for\ all\ \alpha\in V_{1}.$
+
+\subsection{Properties}
+If $\tau$ is a linear mapping, then it has follow properties:
+\begin{pro}
+    $\tau (\theta) = \theta,\ \tau(-\alpha)=-\tau(\alpha)$
+\end{pro}
+\begin{pro}
+    Linear Mappings keep the linear combination and linear coefficents unchanged.
+\end{pro}
+\begin{pro}
+    Linear Mappings transform the linear relative vector group into 
+    another linear relative groups.
+\end{pro}
+
+\subsection{Matrix Reprentation of the Linear Mapping}
+\begin{defi}
+Set $\sigma$ as a linear mapping from $V_{1}$ to $V_{2}$, 
+choose a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ in the $V_{1}$
+and choose a basis $\beta_{1},\beta_{2},\cdots,\beta_{m}$ in the $V_{2}$.
+If the image of the basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ is
+$$\begin{cases}
+    \sigma(\alpha_{1})=a_{11}\beta_{1}+a_{21}\beta_{2}+\cdots+a_{m1}\beta_{m}\\
+    \sigma(\alpha_{2})=a_{12}\beta_{1}+a_{22}\beta_{2}+\cdots+a_{m2}\beta_{m}\\
+    \cdots\\
+    \sigma(\alpha_{n})=a_{1n}\beta_{1}+a_{2n}\beta_{2}+\cdots+a_{mn}\beta_{m}
+\end{cases}$$ 
+and can be expressed as 
+$$[\sigma(\alpha_{1}),\sigma(\alpha_{2}),\cdots,\sigma(\alpha_{n})]
+=[\beta_{1},\beta_{2},\cdots,\beta_{m}]A.$$
+where 
+$A
+=
+\begin{bmatrix}
+    a_{11}&a_{12}&\cdots&a_{1n}\\
+    a_{21}&a_{22}&\cdots&a_{2n}\\
+    \vdots&\vdots&\ddots&\vdots\\
+    a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}$
+ is called the linear mapping matrix of $\sigma$ under 
+ the basis $\alpha$ and $\beta$.
+\end{defi}
+
+\begin{theorem}
+    If $\sigma$ is a linear mapping from $V_{1}$ to $V_{2}$, 
+    take a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ in the $V_{1}$, 
+    and take a basis $\beta_{1},\beta_{2},\cdots,\beta_{m}$ in the $V_{2}$,
+    then the linear mapping matrix of $\sigma$ under the basis $\alpha$ and $\beta$
+    is A.
+
+    For every $\alpha \in V$, if the coordinate of $\alpha$ under the basis $\alpha$
+    is $(x_{1},x_{2},\cdots,x_{n})^{T}$, then the coordinate of $\sigma(\alpha)$ under the basis $\beta$
+    is $(y_{1},y_{2},\cdots,y_{n})^{T}.$ Then 
+    $$
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{m}
+    \end{bmatrix}
+    =
+    A
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    .$$
+\end{theorem}
+
+\begin{proof}
+    Since 
+    $$
+    [\sigma(\alpha_{1}),\sigma(\alpha_{2}),\cdots,\sigma(\alpha_{n})]
+=[\beta_{1},\beta_{2},\cdots,\beta_{m}]A,
+    $$
+    $$
+    \alpha = [\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    ,\\
+    \sigma(\alpha) = [\sigma(\beta_{1}),\sigma(\beta_{2}),\cdots,\sigma(\beta_{n})]
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{n}
+    \end{bmatrix},
+    $$
+    and 
+    \begin{align*}
+        \sigma{\alpha} 
+        & =
+        \sigma(
+            [\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]
+            \begin{bmatrix}
+                x_{1}\\
+                x_{2}\\
+                \vdots\\
+                x_{n}
+            \end{bmatrix}
+        )\\
+        & =
+        [\sigma(\alpha_{1},\alpha_{2},\cdots,\alpha_{n})]
+        \begin{bmatrix}
+            x_{1}\\
+            x_{2}\\
+            \vdots\\
+            x_{n}
+        \end{bmatrix}
+        & =
+        [\beta_{1},\beta_{2},\cdots,\beta_{n}]A
+        \begin{bmatrix}
+            x_{1}\\
+            x_{2}\\
+            \vdots\\
+            x_{n}
+        \end{bmatrix}
+    \end{align*}
+    Then we hava
+    $$
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{n}
+    \end{bmatrix}
+    =
+    A
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    .$$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Exercise}
+\begin{exe}
+    Set $D:R[x]_{n+1}\rightarrow R[x]_{n}$ as \textit{Derivative Map}, you 
+    should find the matrix reprentation of $D$ under the basis 
+    $1,x,x^{2},\cdots,x_{n}$ and $1,x,x^{2},\cdots,x_{n-1}$.
+\end{exe}
+\begin{sol}
+    Set $f_{1}=1,f_{2}=x,\cdots,f_{n+1}=x^{n}$,
+    then $$D(f_{1})=0,D(f_{2})=1,D(f_{3})=2x,\cdots,D(f_{n+1})=nx^{n-1}.$$
+    \begin{align*}
+        &\begin{cases}
+            D(f_{1})=0f_{1}+0f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            D(f_{2})=1f_{1}+0f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            D(f_{3})=0f_{1}+2f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            \vdots\\
+            D(f_{n+1})=0f_{1}+0f_{2}+\cdots+nf_{n-1}
+        \end{cases}\\
+        & [D(f_{1}),D(f_{2}),D(f_{3}),\cdots,D(f_{n+1})] \\
+        & = [0,1,2x,\cdots,nx^{n-1}] \\ 
+        & = [1,x,\cdots,x^{n-1}]
+        \begin{bmatrix}
+            0 & 1 & 0 & \cdots & 0\\
+            0 & 0 & 2 & \cdots & 0\\
+            \vdots & \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & 0 & \cdots & n
+        \end{bmatrix}
+    \end{align*}
+
+    Thus, the matrix representation of $D$ under the basis $1,x,x^{2},\cdots,x^{n}$ 
+    and basis $1,x,x^{2},\cdots,x^{n-1}$ is
+    $$
+    \begin{bmatrix}
+        0 & 1 & 0 & \cdots & 0\\
+        0 & 0 & 2 & \cdots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & 0 & \cdots & n
+    \end{bmatrix}
+    $$
+\end{sol}
+
+\begin{exe}
+    In $R^{3}$, we form a mapping $\sigma:R^{3}\rightarrow R^{3}$ 
+    by $\sigma[(x_{1},x_{2},x_{3})]=(x_3,0,x_{2}-2x_{1}),\ (x_{1},x_{2},x_{3})\in R$.
+    \begin{enumerate}
+        \item Prove $\sigma$ is a linear mapping.
+        \item Find the matrix representation of $\sigma$ under the basis
+        $(1,0,0),(1,1,0),(1,1,1)$.
+    \end{enumerate}
+\end{exe}
+\begin{sol}
+    Choose any $(x_{1},x_{2},x_{3})$ and $(y_{1},y_{2},y_{3})$ $\in$ $R^{3}$, $k\in R$,
+Since 
+\begin{align*}
+    \sigma[(x_{1},x_{2},x_{3})+(y_{1},y_{2},y_{3})]
+    & = \sigma[(x_{1}+y_{1},x_{2}+y_{2},x_{3}+y_{3})]\\ 
+    & = (x_{3}+y_{3},0,x_{2}+y_{2}-2(x_{1}+y_{1}))\\
+    & =(x_{3},0,x_{2}-2x_{1})+(y_{3},0,y_{2}-2y_{1})\\
+    & =\sigma[(x_{1},x_{2},x_{3})]+ \sigma[(y_{1},y_{2},y_{3})]\\
+    \sigma[k(x_{1},x_{2},x_{3})]
+    & =\sigma[(kx_{1},kx_{2},kx_{3})]\\
+    & =(kx_{3},0,kx_{2}-2kx_{1})\\
+    & =k(x_{3},0,x_{2}-2x_{1})\\
+    & =k\sigma[(x_{1},x_{2},x_{3})]
+\end{align*}
+\end{sol}
+\begin{sol}
+Choose the natrual basis of $R^{3}$, $(1,0,0),(0,1,0),(0,0,1)$.
+\begin{align*}
+    \sigma[(1,0,0)]=(0,0,-2)\\
+    \sigma[(0,1,0)]=(0,0,1)\\
+    \sigma[(0,0,1)]=(1,0,0)
+\end{align*}
 and 
-$$T(\alpha v_{1})=\alpha T(v_{1})$$.
-Thus $T$ is a linear transformation mapping a vector space\ $V$\ to a vector space\ $W$ 
-if and only if $T$ is a linear operator on $V$.\\
-
-\subsection{Examples} % 第二级标题
-
-
-\subsubsection{Linear Operators from $R^{n}$ to $R^{m}$} 
-In general, if $A$ is any $m\times n$ matrix, we can define a linear operator $T_{A}$ 
-from $R^{n}$ to $R^{m}$ $$T_{A}(x)=Ax$$ for all $x\in R^{n}$. The operator $T_{A}$ is linear, 
-since
-\begin{align}
-T_{A}(\alpha x+\beta y)&=A(\alpha x+\beta y)\\
-&=\alpha Ax+\beta Ay\\
-&=\alpha T_{A}(x)+\beta T_{A}(y)
-\end{align}
-Thus we can think of each $m\times n$ matrix as defining a linear operator from $R^{n}$ to $R^{m}$.
-
-\subsubsection{Linear Transformation from $V$ to $W$}
-
-
-
-\section{The Matrix of a Linear Map}
-Let $T\ \in\ \mathcal{L}(V,W)$. Suppose that\ $(v_{1},...,v_{n})$\ is a basis of\ $V$\ and 
-$(w_{1},...,w_{m})$\ is a basis of\ $W$\ .For each $k\ =\ 1,...,n$, we can write\ $Tv_{k}$\ 
-uniquely as a linear combination of\ $w_{1},...,w_{m}$: 
-$$Tv_{k}\ =\ a_{1k}w_{1}\ +\ ...\ +\ a_{mk}w_{m},$$
-where\ $a_{jk}\in\ \mathbf{F}\ for\ j\ in\ 1,...,m.$.\\
-The matrix
+$$
+\begin{cases}
+    (0,0,-2)& =a_{11}(1,0,0)+a_{12}(1,1,0)+a_{13}(1,1,1)\\
+    (0,0,1) & =a_{21}(1,0,0)+a_{22}(1,1,0)+a_{23}(1,1,1)\\
+    (1,0,0) & =a_{31}(1,0,0)+a_{32}(1,1,0)+a_{33}(1,1,1)
+\end{cases}
+$$
+$$
+\begin{cases}
+    a_{11}=0 ,\ a_{12}=2 ,\ a_{13}=-2\\
+    a_{21}=0,\ a_{22}=-1,\ a_{23}= 1\\
+    a_{31}=1,\ a_{32}=0,\ a_{33}=0
+\end{cases}
+$$
 $$
 \begin{bmatrix}
-a_{11} &  ... & a_{1n}\\
-.& &.\\
-.& &.\\
-.& &.\\
-a_{m1} & ... & a_{mn}
+    0 & 0 & 1\\
+    2 & -1 & 0\\
+    -2 & 1 & 0
 \end{bmatrix}
 $$
-is called the \textit{matrix}\ of\ $T$\ with respect to the 
-bases\ $(v_{1},...,v_{n})$\ and\ $(w_{1},...,w_{m})$.
-We denote it by 
-$$\mathcal{M}(T,(v_{1},...,v_{n}),(w_{1},...,w_{m}))$$.
-or we just write $\mathcal{M}(T)$. The\ $k^{th}$\ column consists of the 
-scalars needed to write\ $Tv_{k}$\ as a linear combination of\ $w_{1},...,w_{m}$. \\
-
-\section{Changing coordinate systems}
+That is the answer.
+\end{sol}
 
 
 
-% 结论
-\section{Conclusion}
-This is the conclusion section. Summarize the findings and state any implications or future work.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}

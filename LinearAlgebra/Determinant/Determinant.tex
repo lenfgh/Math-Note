@@ -1,9 +1,20 @@
 \documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{amsthm}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Excercise}[section]
+\newtheorem{solution}{Solution}[section]
+
 
 \linespread{1.5} 
 
@@ -85,6 +96,7 @@ of transposition equals to the inversion number of the permutation.
 
 \section{N-Order Determinant}
 \subsection{Definition}
+\subsubsection{n-order Determinant}
 The n-order determinant is a scalar value that can be computed from 
 the elements of a square matrix of size $n\times n$.
 
@@ -103,7 +115,38 @@ Actually, it can be written abstract
 & = a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}
 \end{align*}
 
+\subsubsection{Minor}
+The minor of an element in a matrix is the determinant 
+of the submatrix formed by deleting the 
+row and column that contain the element.
+That is 
+$$M_{ij}=
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1,j-1} & a_{1,j+1} & \cdots & a_{1n}\\
+    \cdots &  &  & \cdots\\
+    a_{i-1,1} & a_{i-1,2} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{in,j+1} & \cdots & a_{inn}\\
+    \cdots &  &  & \cdots\\
+    a_{i+1,1} & a_{i+1,2} & \cdots & a_{i+1,j-1} & a_{i+1}j+1 & \cdots & a_{i+1n}\\
+    \cdots &  &  & \cdots\\
+    a_{n1} & a_{n2} & \cdots & a_{n,j-1} & a_{n,j+1} & \cdots & a_{nn}
+\end{vmatrix}$$
 
+\subsubsection{Algebraic Cofactor(Cofactor)}
+The algebraic cofactor of an element in a matrix is the product of the minor of the element and 
+$(-1)^{i+j}$, where $i$ is the row number and $j$ is the column number of the element. 
+We denote it by 
+$$A_{ij}=(-1)^{i+j}M_{ij}.$$
+\subsubsection{k-minor  k-cofactor and k-algebraic cofactor}
+A k-minor of a matrix is the determinant of a 
+square submatrix obtained by deleting $(n-k)$ 
+rows and $(n-k)$ columns from the original $n×n$ 
+matrix, where $n$ is the dimension of the matrix.
+
+A k-cofactor of a matrix is a determinant that the original determinant deleting the 
+k-minor that remains as the follow order.
+
+A k-algebraic cofactor of a matrix is a product of $(-1)^{i_{1},i_{2},\cdots,i_{k};j_{1},j_{2},\cdots,j_{k}}$
+ and the k-cofactor.
 \subsection{Properties}
 \begin{enumerate}
     \item Transcope the matrix, the determinant does not change.
@@ -223,6 +266,145 @@ Actually it keeps from the left one.\\
 \textbf{4.}\\
 $det = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau ()}$
 \textbf{5.}\\
+\section{Cramer Rule}
+\begin{theorem}[Cramer Rule]
+
+    If the system of linear equations' 
+    $$Ax=b$$
+    coefficent matrix 
+    $$
+    A=
+    \begin{vmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n}\\
+        \cdots &  &  & \cdots\\
+        a_{i1} & a_{i2} & \cdots & a_{in}\\
+        \cdots &  &  & \cdots\\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{vmatrix}
+    $$
+    its determinant is $d = |A| \neq 0$, then the system of 
+    linear equations has solution, and the solution is unique, and can be expressed as 
+    $$x_{1}=\frac{d_{1}}{d},\ x_{2}=\frac{d_{2}}{d},\ \cdots,\ x_{n}=\frac{d_{n}}{d}.$$
+    where $d_{i}$ is the determinant of the matrix whose the j-th column is replaced by 
+    the constant column vector $b$.
+    $$d_{j}=
+    \begin{vmatrix}
+        a_{11} & \cdots & a_{1,j-1} & b_{1} &\cdots & a_{in}\\
+        \cdots &  & \cdots & \cdots & \cdots\\
+        a_{i1} & \cdots & a_{i,j-1} & b_{i} &\cdots & a_{in}\\
+        \cdots &  & \cdots & \cdots & \cdots\\
+        a_{n1} & \cdots & a_{n,j-1} & b_{n} &\cdots & a_{nn}
+    \end{vmatrix}
+    ,\ j=1,2,\cdots,n.$$
+\end{theorem}
+There are three results inside the theorem:
+\begin{enumerate}
+    \item The system of linear equations has solution.
+    \item The solution is unique.
+    \item The solution is expressed as the formula.
+\end{enumerate}
+
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+    If the homogenous system of linear equations' coefficent matrix's 
+    determinant $|A|\neq 0$, then it only has zero solution. On other word, if 
+    the homogenous system of linear equations has non-zero solution, then $|A|=0$ is certainly.
+\end{theorem}
+\begin{proof}
+    Using the Cramer Rule, we have $d_{j}=0,\ j=1,2,\cdots,n$. That is to say,
+    $$(0,0,\cdots,0)$$ is its unique solution.
+\end{proof}
+
+\section{Laplace Theorem}
+\begin{lemma}
+\end{lemma}
+
+\begin{theorem}[Laplace Theorem]
+    If the system of linear equations
+\end{theorem}
+
+
+\begin{theorem}[Product Rule]
+    Suppose there are two matrix $A$ and $B$,
+    and there determinant is $D_{1}=|A|,\ D_{2}=|B|$.
+    Then the determinant of the product of $A$ and $B$ is
+    $$C=D_{1}D_{2}.$$
+\end{theorem}
+
+\newpage
+\section{Exercise}
+\begin{exercise}[Vandermonde Determinant]
+$$d=
+\begin{vmatrix}
+    1 & 1 & 1 & \cdots & 1\\
+    a_{1} & a_{2} & a_{3} & \cdots & a_{n}\\
+    a_{1}^{2} & a_{2}^{2} & a_{3}^{2} & \cdots & a_{n}^{2}\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    a_{1}^{n} & a_{2}^{n} & a_{3}^{n} & \cdots & a_{n}^{n}
+\end{vmatrix}$$
+is the n-order determinant of the Vandermonde matrix.
+Now we prove that for any $n \geq 2$, d equals to the product of 
+these n numbers all possible differences.
+\end{exercise}
+\begin{solution}
+Use the method of induction, for $k=2$, we have
+$$
+\begin{vmatrix}
+    1 & 1 \\
+    a_{1} & a_{2}
+\end{vmatrix}
+=(a_{2}-a_{1}).$$
+Assume that for $k=n-1$ the result keeps, then we
+consider the $k=n$ case.
+\begin{align*}
+d_{n} 
+& =
+\begin{vmatrix}
+    1 & 1 & 1 & \cdots & 1 \\
+    a_{1} & a_{2} & a_{3} & \cdots & a_{n} \\
+    a_{1}^{2} & a_{2}^{2} & a_{3}^{2} & \cdots & a_{n}^{2} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{1}^{n-1} & a_{2}^{n-1} & a_{3}^{n-1} & \cdots & a_{n}^{n-1}
+\end{vmatrix}\\
+& =
+\begin{vmatrix}
+    1 & 1 & 1 & \cdots & 1 \\
+    0 & a_{2}-a_{1} & a_{3}-a_{1} & \cdots & a_{n}-a_{1} \\
+    0 & a_{2}(a_{2}-a_{1}) & a_{3}(a_{3}-a_{1}) & \cdots & a_{n}(a_{n}-a_{1}) \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & a_{2}^{n-2}(a_{2}-a_{1}) & a_{3}^{n-2}(a_{3}-a_{1}) & \cdots & a_{n}^{n-2}(a_{n}-a_{1})
+\end{vmatrix}\\
+& =
+\begin{vmatrix}
+    a_{2}-a_{1} & a_{3}-a_{1} & \cdots & a_{n}-a_{1} \\
+    a_{2}(a_{2}-a_{1}) & a_{3}(a_{3}-a_{1}) & \cdots & a_{n}(a_{n}-a_{1}) \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{2}^{n-2}(a_{2}-a_{1}) & a_{3}^{n-2}(a_{3}-a_{1}) & \cdots & a_{n}^{n-2}(a_{n}-a_{1})
+\end{vmatrix}\\
+& =
+(a_{2}-a_{1})(a_{3}-a_{1})\cdots(a_{n}-a_{1})
+\begin{vmatrix}
+    1 & 1 & \cdots & 1 \\
+    a_{2} & a_{3} & \cdots & a_{n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{2}^{n-2} & a_{3}^{n-2} & \cdots & a_{n}^{n-2}
+\end{vmatrix}\\
+& =
+(a_{2}-a_{1})(a_{3}-a_{1})\cdots(a_{n}-a_{1})\times d_{n-1}
+\end{align*}
+
+Then the result holds for $k=n$. For simplicity, we write 
+$$d_{n}=\prod_{1\leq i<j\leq n}(a_{j}-a_{i}).$$
+\end{solution}
+
+
+
+
+
+
+
 
 
 \end{document}
