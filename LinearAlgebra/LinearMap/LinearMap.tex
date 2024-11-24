@@ -321,9 +321,9 @@ transformation is unique.
     $$\sigma^{-1}(\alpha_{1})=\beta_{1},\sigma^{-1}(\alpha_{2})=\beta_{2},$$
     then 
     \begin{align*}
-        \sigma^{-1}(\alpha_{1}+\alpha_{2})\\
-        & = \sigma^{-1}(\sigma(\beta_{1}+\beta_{2}))
-        & = \beta_{1}+\beta_{2}
+        & \sigma^{-1}(\alpha_{1}+\alpha_{2})\\
+         = &\sigma^{-1}(\sigma(\beta_{1}+\beta_{2}))\\
+         = &\beta_{1}+\beta_{2}
     \end{align*}
     and
     $$\sigma^{-1}(k\alpha_{1})=k\beta_{1}=k\sigma(\alpha_{1}).$$
@@ -392,11 +392,11 @@ under the basis $\epsilon_{1},\epsilon_{2},\cdots,\epsilon_{n}$.
         \sigma[\beta_{1},\beta_{2},\cdots,\beta_{n}] & = [\beta_{1},\beta_{2},\cdots,\beta_{n}]B\\
         then \\
         & [\beta_{1},\beta_{2},\cdots,\beta_{n}]B\\
-        & =\sigma[\beta_{1},\beta_{2},\cdots,\beta_{n}]\\
-        & =\sigma[(\alpha_{1},\alpha_{2},\cdots,\alpha_{n})P]\\
-        & =\sigma[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]P\\
-        & =[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]AP\\
-        & =[\beta_{1},\beta_{2},\cdots,\beta_{n}]P^{-1}AP\\
+         =&\sigma[\beta_{1},\beta_{2},\cdots,\beta_{n}]\\
+         =&\sigma[(\alpha_{1},\alpha_{2},\cdots,\alpha_{n})P]\\
+         =&\sigma[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]P\\
+         =&[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]AP\\
+         =&[\beta_{1},\beta_{2},\cdots,\beta_{n}]P^{-1}AP\\
     \end{align*}
     Since $\beta_{1},\beta_{2},\cdots,\beta_{n}$ is linear irrelative, 
     thus $$B=P^{-1}AP.$$
@@ -724,31 +724,31 @@ That is the answer.
 \begin{sol}
     Solve the eigenvalue of the $A$,
     \begin{align*}
-    &|\lambda I-A|
+    &|\lambda I-A|\\
     &=
     \begin{vmatrix}
         \lambda-1&-2&-2\\
         -2&\lambda-1&-2\\
         -2&-2&\lambda-1
-    \end{vmatrix}
+    \end{vmatrix}\\
     &=
     \begin{vmatrix}
         \lambda-5&-2&-2\\
         \lambda-5&\lambda-1&-2\\
         \lambda-5&-2&\lambda-1
-    \end{vmatrix}
+    \end{vmatrix}\\
     &=(\lambda-5)
     \begin{vmatrix}
         1&-2&-2\\
         1&\lambda-1&-2\\
         1&-2&\lambda-1
-    \end{vmatrix}
+    \end{vmatrix}\\
     &=(\lambda-5)
     \begin{vmatrix}
         1&0&0\\
         1&\lambda+1&0\\
         1&0&\lambda+1
-    \end{vmatrix}
+    \end{vmatrix}\\
     &=(\lambda+1)^{2}(\lambda-5)
     \end{align*}
     Thus, the eigenvalue of $\sigma$ is $\lambda_{1}=\lambda_{2}=-1$ or $\lambda_{3}=5$.
@@ -777,12 +777,12 @@ That is the answer.
         \beta_{1}&=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{1}=\alpha_{1}-\alpha_{3}\\
         \beta_{2}&=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{2}=\alpha_{2}-\alpha_{3}
     \end{align*}
-    then the eigenvector with eigenvalue -1 is 
+    then the eigenvector of the $\sigma$ with eigenvalue -1 is 
     $$k_{1}\beta_{1}+k_{2}\beta_{2}.$$
     
     For eigenvalue with eigenvalue $\lambda=5$,
     $$\beta_{3}=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{3}=\alpha_{1}+\alpha_{2}+\alpha_{3}$$
-    then $$k_{3}\beta_{3}$$ is the eigenvector with eigenvalue 5.
+    then $$k_{3}\beta_{3}$$ is the eigenvector of the $\sigma$ with eigenvalue 5.
 \end{sol}
 
 
