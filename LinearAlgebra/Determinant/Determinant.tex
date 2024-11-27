@@ -9,11 +9,15 @@
 
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+\newtheorem{corollary}{Corollary}[theorem]
 
-\theoremstyle{definition}
-\newtheorem{exercise}{Excercise}[section]
-\newtheorem{solution}{Solution}[section]
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{example}{Example}[defi]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{solution}{Solution}[exercise]
+\newtheorem{pro}{Properties}[section]
 
 
 \linespread{1.5} 
@@ -21,15 +25,15 @@
 
 \title{Determinant}
 \author{Len Fu}
-\date{11.20.2024}
+\date{11.20.2024-11.27.2024}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    This is the note maded by Len Fu while his learning progress.
-    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra\  Allenby}.
+    This is the note made by Len Fu during his learning progress in BIT.
+    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra Allenby}.
 \end{abstract}
 
 \tableofcontents
@@ -78,17 +82,30 @@ $(...ki_{1}i_{2}...i_{s}j...)$.
 The total transposition is $2s+1$. 
 So the parity of the permutation changes.
 
-\paragraph{Corollary 1}
+\begin{corollary}
 In all n permutation, the number of even permutation 
 is equal to the number of odd permutation, which is 
-$\frac{n!}{2}$.\\
-\textbf{Proof:}\\
+$\frac{n!}{2}$.
+\end{corollary}
+
+\begin{proof}
 Suppose there are $s$ odd permutation, then there are
 $t$ even permutation. Now transpose the first two elements 
 of all even permutation, then we get $s$ odd permutation.
 Then $s\leq t$, conversly, transpose the first two elements 
 of all odd permutation, then we get $t$ even permutation, and 
 $t\leq s$. So $s=t=\frac{n!}{2}$.
+\end{proof}
+
+\begin{corollary}
+    For $$a_{i_{1}k_{1}}a_{i_{2}k_{2}}\cdots a_{i_{n}k_{n}}\ =\ a_{1j_{1}}a_{2j_{2}}\cdots\ a_{nj_{n}}$$
+    the inversion number is 
+    $$(-1)^{\tau(i_{1}i_{2}\cdots i_{n})+\tau k_{1}k_{2}\cdots k_{n}}=(-1)^{\tau j_{1}j_{2}\cdots j_{n}}.$$
+\end{corollary}
+\begin{proof}
+
+\end{proof}
+
 
 \subsubsection{Theorem}
 Any n-permutation can be transposed from $(123...n)$ and the times 
@@ -124,12 +141,38 @@ $$M_{ij}=
 \begin{vmatrix}
     a_{11} & a_{12} & \cdots & a_{1,j-1} & a_{1,j+1} & \cdots & a_{1n}\\
     \cdots &  &  & \cdots\\
-    a_{i-1,1} & a_{i-1,2} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{in,j+1} & \cdots & a_{inn}\\
+    a_{i-1,1} & a_{i-1,2} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{in}\\
     \cdots &  &  & \cdots\\
-    a_{i+1,1} & a_{i+1,2} & \cdots & a_{i+1,j-1} & a_{i+1}j+1 & \cdots & a_{i+1n}\\
+    a_{i+1,1} & a_{i+1,2} & \cdots & a_{i+1,j-1} & a_{i+1,j+1} & \cdots & a_{i+1,n}\\
     \cdots &  &  & \cdots\\
     a_{n1} & a_{n2} & \cdots & a_{n,j-1} & a_{n,j+1} & \cdots & a_{nn}
 \end{vmatrix}$$
+
+
+\subsection{Expansion along a row or a column}
+\begin{theorem}
+    The determinant of a n-order matrix equals to any row's or column's 
+    element multiplied by its algebraic cofactor.
+    , like
+    $$\det = \sum_{j=1}^{n}a_{ij}A_{ij}\ \text{for}\ i=1,2,\cdots,n = \sum_{i=1}^{n}a_{ij}A_{ij}\ \text{for}\ j=1,2,\cdots,n.$$
+\end{theorem}
+
+\begin{proof}
+    The factor is 
+    $$(-1)^{i+j}(-1)^{\tau (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\ where\ (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})\ is a permutation of 
+    (12\cdots j-1,j+1\cdots n).$$
+    then 
+    \begin{align*}
+        &(-1)^{i+j}(-1)^{\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\\
+        &=(-1)^{(i-1)+(j-1)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\\
+        &=(-1)^{\tau(i12\cdots i-1,i+1\cdots n)+(j-1)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}
+    \end{align*}
+    
+\end{proof}
+
+
+
+
 
 \subsubsection{Algebraic Cofactor(Cofactor)}
 The algebraic cofactor of an element in a matrix is the product of the minor of the element and 
@@ -137,10 +180,19 @@ $(-1)^{i+j}$, where $i$ is the row number and $j$ is the column number of the el
 We denote it by 
 $$A_{ij}=(-1)^{i+j}M_{ij}.$$
 \subsubsection{k-minor  k-cofactor and k-algebraic cofactor}
+
 A k-minor of a matrix is the determinant of a 
-square submatrix obtained by deleting $(n-k)$ 
-rows and $(n-k)$ columns from the original $n×n$ 
+square submatrix obtained by \textbf{selecting} $k$ 
+rows and $k$ columns from the original $n×n$ 
 matrix, where $n$ is the dimension of the matrix.
+
+A k-order principle minor is the determinant of a 
+square submatrix obtained by \textbf{selecting} $k$
+rows and $k$ columns from the original $n×n$
+matrix, where $n$ is the dimension of the matrix and 
+$i_{l}=j_{l}\ for\ l=1,2,\cdots,k$. 
+
+
 
 A k-cofactor of a matrix is a determinant that the original determinant deleting the 
 k-minor that remains as the follow order.
@@ -266,6 +318,15 @@ Actually it keeps from the left one.\\
 \textbf{4.}\\
 $det = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau ()}$
 \textbf{5.}\\
+
+
+
+
+
+
+
+
+
 \section{Cramer Rule}
 \begin{theorem}[Cramer Rule]
 
@@ -333,6 +394,144 @@ There are three results inside the theorem:
     $$C=D_{1}D_{2}.$$
 \end{theorem}
 
+
+\section{Adjoint Matrix}
+\begin{defi}
+    Set $A$ as $n\times n$ matrix, and set $A_{ij}$ as the 
+    determinant of the algebraic cofactor of $a_{ij}$. Then the 
+    $$
+    A^{*}
+    =\begin{bmatrix}
+        A_{11} & A_{21} & \cdots & A_{n1}\\
+        A_{12} & A_{22} & \cdots & A_{n2}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        A_{1n} & A_{2n} & \cdots & A_{nn}
+    \end{bmatrix}
+    $$
+    is called adjoint matrix of the matrix $A$.
+\end{defi}
+\begin{pro}
+    If $A$ is a square matrix, $$AA^{*}=\det{A}I.$$
+\end{pro}
+
+\begin{proof}
+    \begin{align*}
+        A^{*}A
+        &=
+        \begin{bmatrix}
+            A_{11} & A_{21} & \cdots & A_{n1}\\
+            A_{12} & A_{22} & \cdots & A_{n2}\\
+            \vdots & \vdots & \ddots & \vdots\\
+            A_{1i} & A_{2i} & \cdots & A_{ni}\\
+            \vdots & \vdots & \ddots & \vdots\\
+            A_{1n} & A_{2n} & \cdots & A_{nn}
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_{11}&a_{12} & \cdots & a_{1j} & a_{1n}\\
+            a_{21} & a_{22} & \cdots & a_{2j} & a_{2n}\\
+            \vdots & \vdots & \ddots & \vdots & \vdots\\
+            a_{n1} & a_{2n} & \cdots & a_{nj} & a_{nn}
+        \end{bmatrix}\\
+        [A^{*}A]_{ij}&=
+        a_{1j}A_{1i}+a_{2j}A_{2i}+\cdots+a_{nj}A_{nj}\\
+        &=\sum_{k=1}^{n}a_{kj}A_{ki}\\
+        &=\begin{cases}
+            \det{A} & j=i\\
+            0 & j\neq i
+        \end{cases}\\
+        A^{*}A&=
+        \begin{bmatrix}
+            \det{A} & 0 & 0 & \cdots & 0\\
+            0 & \det{A} & 0 & \cdots & 0\\
+            \vdots & \vdots & \ddots & \vdots & \vdots\\
+            0 & 0 & 0 & \cdots & \det{A}
+        \end{bmatrix}
+        &=
+        \det A I
+    \end{align*}
+\end{proof} 
+
+\begin{theorem}
+    A square matrix $A$ is invertible if and 
+    only if its determinant is not equal to zero.
+    When it is invertible,
+    $$A^{-1}=\frac{1}{\det A}A^{*}.$$
+\end{theorem}
+
+\begin{proof}
+    \textbf{Sufficiency:}
+    If $\det A\neq 0$, then 
+    $$(\frac{1}{\det A}A^{*})A=I$$
+    and $A^{-1}=\frac{1}{\det A}A^{*}.$
+
+    \textbf{Neccessity:}
+    If $A$ is invertible, then $AA^{-1}=I$.
+    $$\det AA^{-1}=\det{A} \det A^{-1}=1$$
+    thus $\det A \neq 0$.
+\end{proof}
+ 
+\section{Determinant and the rank of a Matrix}
+\begin{theorem}
+    Set $A$ as a n-square, then $A$ is full rank if and only if
+    $$\det A \neq 0.$$
+\end{theorem}
+
+
+\textbf{Note.}Three conditions following are equivalent.
+\begin{enumerate}
+    \item $A$ is full rank.
+    \item $A$ is invertible.
+    \item $\det A \neq 0$.
+\end{enumerate}
+
+\begin{theorem}
+    Set $A$ as a $m\times n$ matrix, then $r(A)=r$ if
+    and only if there exists a r-rank minor that is not zero,
+    and all r+1-rank minor is zero.
+\end{theorem}
+\textbf{Note.} The rank of the matrix equals to the highest rank 
+of the non-zero minor.
+
+\begin{proof}
+
+
+
+
+    \textbf{Neccessity:}
+    If $r(A)=r$, then there the first $r$ rows of the matrix 
+    is linear irrelative and the rank of the matrix
+    $$\begin{bmatrix}
+        a_{11}&a_{12} & \cdots & a_{1n}\\
+        a_{21} & a_{22} & \cdots & a_{2n}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        a_{r1} & a_{r2} & \cdots & a_{rn}
+    \end{bmatrix}$$
+    is $r$. Then the rank of its transcope is also m. Then its m-rank minor, 
+    which is $r\times r$ square is not zero.
+
+    Select any $r+1$ rows of the matrix, then the rank 
+    of it is $r+1$, and its $r+1\times r+1$ square minor's rank 
+    is r. Since $r<r+1$, the determinant of the $r+1\times n$ submatrix 
+    is zero.
+
+    Then for all rows larger than r+1, the determinant of the submatrix
+    is zero and any k-rank minor is zero$(k>r)$.
+
+    \textbf{Sufficiency:}
+    If there exists a r-rank minor that is not zero,
+    and all r+1-rank minor is zero. Assume that the rank 
+    of the matrix is $k$, since r+1-rank minor is zero, from the \textbf{Neccessity}
+    we know that $k<r+1$. Suppose $k<r$, then all the r-minor is zero, it contradicts 
+    to the \textbf{Neccessity}. Thus, $k\leq r$, so $k=r$.
+\end{proof}
+
+
+
+
+
+
+
+
 \newpage
 \section{Exercise}
 \begin{exercise}[Vandermonde Determinant]
@@ -397,6 +596,39 @@ d_{n}
 
 Then the result holds for $k=n$. For simplicity, we write 
 $$d_{n}=\prod_{1\leq i<j\leq n}(a_{j}-a_{i}).$$
+\end{solution}
+
+\begin{exercise}
+    Assume that $A$ is a invertible 4-square matrix.
+    $$
+    A=
+    \begin{bmatrix}
+        a_{11} & a_{12} & a_{13} & a_{14}\\
+        a_{21} & a_{22} & a_{23} & a_{24}\\
+        a_{31} & a_{32} & a_{33} & a_{34}\\
+        a_{41} & a_{42} & a_{43} & a_{44}
+    \end{bmatrix}
+    $$
+    Find the solution of the 
+    $$
+    \begin{cases}
+        a_{21}x_{1}+a_{22}x_{2}+a_{23}x_{3}+a_{24}x_{4}=b_{2}\\
+        a_{31}x_{1}+a_{32}x_{2}+a_{33}x_{3}+a_{34}x_{4}=b_{3}\\
+        a_{41}x_{1}+a_{42}x_{2}+a_{43}x_{3}+a_{44}x_{4}=b_{4}
+    \end{cases}
+    $$
+\end{exercise}
+
+\begin{solution}
+    Actually, since 
+    $$\sum_{j=1}^{4}a_{ij}A_{ij}=\begin{cases}
+        \det A,\ i=j\\
+        0,\ i\neq j\end{cases}$$
+    we know that $(A_{11},A_{12},A_{13},A_{14})^{T}$ is a solution.
+    Since $A$ is a invertible 4-square matrix, the rank of $A$ is 4 and 
+    the coefficent matrix's rank is 3. Thus there is only one fundmental solution 
+    vector.
+    $$k(A_{11},A_{12},A_{13},A_{14})^{T}\ for\ k\in F$$
 \end{solution}
 
 

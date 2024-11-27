@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{exa}{Example}[defi]
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{sol}{Solution}[exe]
+\newtheorem{pro}{Properties}[section]
+
+
+\linespread{1.5}
+
+
+\title{Eigenvalue and Eigenvector}
+\author{Len Fu}
+\date{11.27.2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This is the note made by Len Fu during his learning progress in BIT.
+    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra Allenby}.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Similarity of the Matrix}
+\subsection{Basis}
+\begin{defi}
+    Set $A,B\in C^{n\times n}$. If there exists
+    an n-order invertible matrix $P$ such that 
+    $$P^{-1}AP=B$$, we say that $A$ and $B$ are similar,
+    denoted as $A\sim B$, and $P$ is called the 
+    \textit{similarity transformation} from $A$ to $B$. 
+\end{defi}
+
+\begin{pro}[Reflectivity]
+    $A\sim A$.
+\end{pro}
+
+\begin{pro}[Symmetry]
+    If $A\sim B$, then $B\sim A$.
+\end{pro}
+
+\begin{pro}[Transitivity]
+    If $A\sim B$ and $B\sim C$, then $A\sim C$.
+\end{pro}
+
+\subsection{Similar Diagonalization}
+\begin{defi}[Digonalizable]
+    If there exists an invertible matrix $P$ such that
+    $$P^{-1}AP=D$$
+    where $A$ is a square and $D$ is a diagonal matrix.
+    Then $A$ is called \textit{diagonalizable}.
+\end{defi}
+
+
+\section{Eigenvalue and Eigenvector of the Matrix}
+\subsection{Basis}\
+\begin{defi}
+    Set $A$ as a $n\times n$ square, if there exists a 
+    number $\lambda$ and $n-nonzero$ vector $X$, satisfying 
+    $$AX=\lambda X\ or\ (\lambda I-A)X=0$$
+    then we say that $\lambda$ is an eigenvalue of $A$, and
+    $X$ is an eigenvector of $A$ with eigenvalue $\lambda$.
+\end{defi}
+
+\textbf{Note.}
+\begin{enumerate}
+    \item Only squares have eigenvectors and eigenbvalues.
+    \item Eigenvector must be nonvector and eigenvalue can be zero.
+\end{enumerate}
+
+Since $(\lambda I-A)X=0$ and $X$ is nonzero vector, then 
+$\det (\lambda I-A)$ should be zero to ensure $X$ is nonzero vector of the solution.
+
+Consider the solution of $(\lambda I-A)X=0$.
+The characteristic polynomial of $A$ is 
+$$b_{n}\lambda^{n}+b_{n-1}\lambda^{n-1}+\cdots+b_{1}\lambda+b_{0}.$$
+
+To solve the polynomial,
+\begin{align*}
+    &\begin{vmatrix}
+        \lambda-a_{11} & -a_{12} & \cdots & -a_{1n} \\
+        -a_{21} & \lambda-a_{22} & \cdots & -a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        -a_{n1} & -a_{n2} & \cdots & \lambda-a_{nn}
+    \end{vmatrix}
+    \\ & =
+    b_{n}\lambda^{n}+b_{n-1}\lambda^{n-1}+\cdots+b_{1}\lambda+b_{0}
+\end{align*}
+Consider the expasion of the determinant, except for 
+$$(\lambda-a_{11})(\lambda-a_{22})\cdots (\lambda-a_{nn})$$ 
+other terms' highest order of $\lambda$ is $n-2$.
+Then the coefficents
+$$\begin{cases}
+    b_{n} = 1 \\
+    b_{n-1} = -(a_{11}+a_{22}+\cdots+a_{nn}) = tr()\\ 
+\end{cases}
+$$
+
+
+
+
+
+\end{document}
