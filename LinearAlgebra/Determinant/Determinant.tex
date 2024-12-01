@@ -103,11 +103,15 @@ $t\leq s$. So $s=t=\frac{n!}{2}$.
     $$(-1)^{\tau(i_{1}i_{2}\cdots i_{n})+\tau k_{1}k_{2}\cdots k_{n}}=(-1)^{\tau j_{1}j_{2}\cdots j_{n}}.$$
 \end{corollary}
 \begin{proof}
-
+    When we move an element $a_{ik}$, the $\tau(i)$ and $\tau(k)$ change the parity simutaneously and 
+    theri sum's parity keeps unchanged.
+    After finite transposition, we get 
+    $$(-1)^{\tau(i_{1}i_{2}\cdots i_{n})+\tau (k_{1}k_{2}\cdots k_{n})}=(-1)^{\tau(12\cdots n)+\tau(j_{1}j_{2}\cdots j_{n})=(-1)^{\tau(j_{1}j_{2}\cdots j_{n})}}.$$
+    And it's obviously that we can have the same result if we have the expasion by column.
 \end{proof}
 
 
-\subsubsection{Theorem}
+\begin{theorem}
 Any n-permutation can be transposed from $(123...n)$ and the times 
 of transposition equals to the inversion number of the permutation.
 
@@ -150,7 +154,7 @@ $$M_{ij}=
 
 
 \subsection{Expansion along a row or a column}
-\begin{theorem}
+\begin{theorem}[Laplace Expansion Theorem]
     The determinant of a n-order matrix equals to any row's or column's 
     element multiplied by its algebraic cofactor.
     , like
@@ -159,22 +163,41 @@ $$M_{ij}=
 
 \begin{proof}
     The factor is 
-    $$(-1)^{i+j}(-1)^{\tau (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\ where\ (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})\ is a permutation of 
+    $$(-1)^{i+j}(-1)^{\tau (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\ where\ (j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})\ is\ a\ permutation\ of\ 
     (12\cdots j-1,j+1\cdots n).$$
     then 
     \begin{align*}
         &(-1)^{i+j}(-1)^{\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\\
         &=(-1)^{(i-1)+(j-1)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\\
-        &=(-1)^{\tau(i12\cdots i-1,i+1\cdots n)+(j-1)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}
+        &=(-1)^{\tau(i12\cdots i-1,i+1\cdots n)+(j-1)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}\\
+        &=(-1)^{\tau(i12\cdots i-1,i+1\cdots n)+\tau(jj_{1}j_{2}\cdots j_{i-1}j_{i+1}\cdots j_{n})}
+        &=(-1)^{\tau(12\cdots i-1,i,i+1\cdots n)+\tau(j_{1}j_{2}\cdots j_{i-1}j_{i}j_{i+1}\cdots j_{n})}
+        &=(-1)^{\tau(j_{1}j_{2}\cdots j_{i-1}jj_{i+1}\cdots j_{n})}
     \end{align*}
-    
+    Then the $$a_{ij}A_{ij}=(-1)^{j_{1}j_{2}\cdots j_{n}}a_{1j_{1}}a_{2j_{2}}\cdots a_{nj_{n}}$$ is a part of the determinant.
 \end{proof}
 
+
+\begin{theorem}
+    The sum of the product of any one row's (column's) elements and another row's (column's) elements' algebraic cofactor is 0.
+    That is $$\sum_{k=1}^{n}a_{ik}A_{jk}=0\ for\ i\neq j$$ or $$\sum_{k=1}^{n}a_{ki}A_{kj}=0\ for\ i\neq j.$$
+\end{theorem}
+
+\begin{proof}
+    Construct a matrix of its form and it's obvious that for two rows or two columns are the same, the determinant is zero.
+\end{proof}
+
+
+Then we can get an important formula
+$$\sum_{k=1}^{n}a_{ik}A_{jk}=\begin{cases}D\ j=i\\0\ j\neq i\end{cases}$$
+and 
+$$\sum_{k=1}^{n}a_{ki}A_{kj}=\begin{cases}D\ j=i\\0\ j\neq i\end{cases}.$$
 
 
 
 
 \subsubsection{Algebraic Cofactor(Cofactor)}
+
 The algebraic cofactor of an element in a matrix is the product of the minor of the element and 
 $(-1)^{i+j}$, where $i$ is the row number and $j$ is the column number of the element. 
 We denote it by 
@@ -242,15 +265,14 @@ A k-algebraic cofactor of a matrix is a product of $(-1)^{i_{1},i_{2},\cdots,i_{
         a_{n1} & a_{n2} & \cdots & a_{nn}
     \end{vmatrix}$$
     \item If there are two rows or columns that are the same, the determinant is 0.
-    is 0. 
     \item If there are two rows or columns are proportionable, the determinant is 0.
     \item Add a row's or a column's k-times into another one, the determinant keeps the same. 
     \item Exchange two rows or columns, the determinant changes its sign.
 \end{enumerate}
 
 \textbf{Proof.}
-
-\textbf{1.}
+\begin{enumerate}
+    \item 
 If we transcope the determinant,
 $$
 \begin{vmatrix}
@@ -269,15 +291,16 @@ $$
 like this, then we expand the right one with respect to the rows like this 
 $$ \sum_{i_{1}i_{2}\cdots i_{n}}(-1)^{\tau (i_{1}i_{2}\cdots i_{n})} a_{i_{1}1}a_{i_{2}2}\cdots a_{i_{n}n}$$
 Actually it keeps from the left one.\\
-\textbf{2.}
+
+\item 
 \begin{align*}
-\begin{vmatrix}
+&\begin{vmatrix}
     a_{11} & a_{12} & \cdots & a_{1n}\\
     \cdots &  &  & \cdots\\
     ka_{i1} & ka_{i2} & \cdots & ka_{in}\\
     \cdots &  &  & \cdots\\
     a_{n1} & a_{n2} & \cdots & a_{nn}
-\end{vmatrix}
+\end{vmatrix}\\
 & = k \left( a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in} \right) \\
 & = k \begin{vmatrix}
     a_{11} & a_{12} & \cdots & a_{1n}\\
@@ -288,7 +311,7 @@ Actually it keeps from the left one.\\
 \end{vmatrix}
 \end{align*}
 
-\textbf{3.}
+\item
 \begin{align*}
 \begin{vmatrix}
     a_{11} & a_{12} & \cdots & a_{1n}\\
@@ -315,19 +338,41 @@ Actually it keeps from the left one.\\
 \end{vmatrix}
 \end{align*}
 
-\textbf{4.}\\
-$det = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau ()}$
-\textbf{5.}\\
+\item    Assume that the l-th and k-th rows are the same,
+$det = \sum_{j_{1}j_{2}\cdots j_{n}}(-1)^{\tau (j_{1}j_{2}\cdots j_{n})}a_{1j_{1}a_{2j_{2}}\cdots a_{nj_{n}}}$
+Since $a_{li}=a_{ki}$ for $i=1,2,\cdots,n$, then $a_{lj_{l}}a_{kj_{k}}=a_{lj_{k}}a_{kj_{l}}$ and the parity changes.
+The sum is zero.
+\item 
+Use \textbf{2} and \textbf{4}
+
+\item 
+Use \textbf{3} and \textbf{5}
+
+\item Obviously.
+
+\end{enumerate}
+
+
+\begin{pro}
+    For n-square matrix $A$,
+    \begin{enumerate}
+        \item $\det (kA)=k^{n}\det A$
+        \item $\det A^{T}=\det A$
+        \item $\det A^{-1}=(\det A)^{-1}$
+        \item $\det \begin{bmatrix}A&0\\C&D\end{bmatrix}=\det A\det D=\det\begin{bmatrix}A&B\\0&D\end{bmatrix}$
+        \item If $A$ is orthogonal matrix, then $\det A=\pm1$
+        \item If $A\xrightarrow{+cR_{i}} B$, then $\det B=c\det A$
+        \item If $A\xrightarrow{R_{j}+kR_{i}} B$, then $\det B=\det A$
+        \item If $A\xrightarrow{R_{ij}} B$, then $\det B=-\det A$
+    \end{enumerate}
+\end{pro}
 
 
 
 
 
-
-
-
-
-\section{Cramer Rule}
+\section{Application}
+\subsection{Cramer Rule}
 \begin{theorem}[Cramer Rule]
 
     If the system of linear equations' 
@@ -378,21 +423,49 @@ There are three results inside the theorem:
     $$(0,0,\cdots,0)$$ is its unique solution.
 \end{proof}
 
-\section{Laplace Theorem}
-\begin{lemma}
-\end{lemma}
 
-\begin{theorem}[Laplace Theorem]
-    If the system of linear equations
+\subsection{Product Rule}
+
+\subsubsection{Elementary Matrix}
+
+\begin{theorem}
+    The determinant of the elementary matrix is not zero and 
+    $$\det E_{ij}=-1\ \det E_{i}(c)=c\neq 0\ \det E_{ij}(k)=1.$$
 \end{theorem}
 
+\begin{theorem}
+    If $P$ is an elementary matrix then 
+    $$\det PA = \det P\det A.$$
+\end{theorem}
 
+\subsubsection{Product Rule}
 \begin{theorem}[Product Rule]
     Suppose there are two matrix $A$ and $B$,
     and there determinant is $D_{1}=|A|,\ D_{2}=|B|$.
     Then the determinant of the product of $A$ and $B$ is
     $$C=D_{1}D_{2}.$$
 \end{theorem}
+
+\begin{proof}
+    If $A$ is an invertible n-square, then $A$ can be expressed as the multiplication 
+    of elementary metrices
+    $$A=P_{s}P_{s-1}\cdots P_{1},$$
+    thus $$\det A =\det P_{s}\det P_{s-1}\cdots \det P_{1}$$
+    and $$\det AB = \det P_{s}\det P_{s-1}\cdots \det P_{1} \det B=\det A \det B= D_{1}D_{2}.$$
+
+    If $A$ is not an invertible matrix, then the $r(A)<n$ and there exists a couples of $P,Q$ satisfying that 
+    $$P_{l}P_{l-1}\cdots P_{1}AQ_{1}Q_{2}\cdots Q_{t}=diag(1,\cdots,1,0,\cdots,0):= \Lambda ,$$
+    where the rank of $\Lambda$ is $r(A)$, then 
+    $$A = P^{-1}_{1}P^{-1}_{2}\cdots P^{-1}_{l}\Lambda Q^{-1}_{t}Q^{-1}_{t-1}\cdots Q^{-1}_{1},$$
+    then $$\det \Lambda\cdots =0$$
+    $$\det A = 0$$
+    $$\det AB = 0.$$
+\end{proof}
+
+\begin{corollary}
+    If $A_{i}(i=1,2,\cdots,s)$ is n-square, then 
+    $$\det (A_{1}A_{2}\cdots A_{s})=\det A_{1}A_{2}\cdots A_{s}.$$
+\end{corollary}
 
 
 \section{Adjoint Matrix}
@@ -631,9 +704,39 @@ $$d_{n}=\prod_{1\leq i<j\leq n}(a_{j}-a_{i}).$$
     $$k(A_{11},A_{12},A_{13},A_{14})^{T}\ for\ k\in F$$
 \end{solution}
 
+\begin{exercise}
+    Calculate the determinant 
+    $$D_{n}
+    \begin{vmatrix}
+        a_{1}+b_{1}&a_{2}&\cdots&a_{n}\\
+        a_{1}&a_{2}+b_{2}&\cdots&a_{n}\\
+        \vdots&\vdots&\ddots&\vdots\\
+        a_{1}&a_{2}&\cdots&a_{n}+b_{n}
+    \end{vmatrix}
+    ,\ b_{1}b_{2}\cdots b_{n}\neq 0.$$
+\end{exercise}
 
-
-
+\begin{solution}
+    \begin{align*}
+        D_{n}
+        &=
+        \begin{vmatrix}
+            1&a_{1}&a_{2}&\cdots&a_{n}\\
+            0&a_{1}+b_{1}&a_{2}&\cdots&a_{n}\\
+            0&a_{1}&a_{2}+b_{2}&\cdots&a_{n}\\
+            \vdots&\vdots&\vdots&\ddots&\vdots\\
+            0&a_{1}&a_{2}&\cdots&a_{n}+b_{n}
+        \end{vmatrix}\\
+        &=
+        \begin{vmatrix}
+            1&a_{1}&a_{2}&\cdots&a_{n}\\
+            -1&b_{1}&0&\cdots&0\\
+            -1&0&b_{2}&\cdots&0\\
+            \vdots&\vdots&\vdots&\ddots&\vdots\\
+            -1&0&0&\cdots&b_{n}
+        \end{vmatrix}\\ 
+    \end{align*}
+\end{solution}
 
 
 
