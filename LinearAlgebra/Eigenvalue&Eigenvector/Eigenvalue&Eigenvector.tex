@@ -1,0 +1,390 @@
+\documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{exa}{Example}[defi]
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{sol}{Solution}[exe]
+\newtheorem{pro}{Properties}[section]
+
+
+\linespread{1.5}
+
+
+\title{Eigenvalue and Eigenvector}
+\author{Len Fu}
+\date{11.27.2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This is the note made by Len Fu during his learning progress in BIT.
+    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra Allenby}.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Eigenvalue and Eigenvector of the Matrix}
+\subsection{Basis}\
+\begin{defi}
+    Set $A$ as a $n\times n$ square, if there exists a 
+    number $\lambda$ and $n-nonzero$ vector $X$, satisfying 
+    $$AX=\lambda X\ or\ (\lambda I-A)X=0$$
+    then we say that $\lambda$ is an eigenvalue of $A$, and
+    $X$ is an eigenvector of $A$ with eigenvalue $\lambda$.
+\end{defi}
+
+\textbf{Note.}
+\begin{enumerate}
+    \item Only squares have eigenvectors and eigenvalues.
+    \item Eigenvector must be nonvector and eigenvalue can be zero.
+\end{enumerate}
+
+
+\begin{defi}
+    $(\lambda I-A)$ is the eigrnmatrix of $A$. $|\lambda I-A|$ is the eigenpolynomial of $A$.
+    $|\lambda I-A|=0$ is the eigenequation of the matrix $A$.
+\end{defi}
+
+Then the eigenvector of $A$ with eigenvalue $\lambda$ is the combination of the solution vectors of $(\lambda I-A)X=0$.
+
+Since $(\lambda I-A)X=0$ and $X$ is nonzero vector, then 
+$\det (\lambda I-A)$ should be zero to ensure $X$ is nonzero vector of the solution.
+
+Consider the solution of $(\lambda I-A)X=0$.
+The characteristic polynomial of $A$ is 
+$$b_{n}\lambda^{n}+b_{n-1}\lambda^{n-1}+\cdots+b_{1}\lambda+b_{0}.$$
+
+To solve the polynomial,
+\begin{align*}
+    &\begin{vmatrix}
+        \lambda-a_{11} & -a_{12} & \cdots & -a_{1n} \\
+        -a_{21} & \lambda-a_{22} & \cdots & -a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        -a_{n1} & -a_{n2} & \cdots & \lambda-a_{nn}
+    \end{vmatrix}
+    \\ & =
+    b_{n}\lambda^{n}+b_{n-1}\lambda^{n-1}+\cdots+b_{1}\lambda+b_{0}
+\end{align*}
+Consider the expasion of the determinant, except for 
+$$(\lambda-a_{11})(\lambda-a_{22})\cdots (\lambda-a_{nn})$$ 
+other terms' highest order of $\lambda$ is $n-2$.
+Then the coefficents
+$$\begin{cases}
+    b_{n} = 1 \\
+    b_{n-1} = -(a_{11}+a_{22}+\cdots+a_{nn}) = tr()\\ 
+\end{cases}
+$$
+And we divide the determinant into two parts and one is 
+$$\begin{vmatrix}
+    -a_{11} & -a_{12} & \cdots & -a_{1n} \\
+    -a_{21} & \lambda-a_{22} & \cdots & -a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    -a_{n1} & -a_{n2} & \cdots & \lambda-a_{nn}
+\end{vmatrix}$$
+the other one doesn't contribute to the $b_{0}$, thus $$b_{0}=(-1)^{n}|A|.$$
+
+From the polynomial theorem, 
+$$f(\lambda)=(\lambda-\lambda_{1})(\lambda-\lambda_{2})\cdots (\lambda-\lambda_{n})=0.$$
+Then 
+$$b_{0}=(-1)^{n}\lambda_{1}\lambda_{2}\cdots\lambda_{n}\ b_{n-1}=-(\lambda_{1}+\lambda_{2}+\cdots+\lambda_{n})$$
+
+And there are some properties of the \textbf{Eigenvalue and Eigenvector}.
+\begin{pro}
+\begin{enumerate}
+    \item $|A|=\lambda_{1}\lambda_{2}\cdots\lambda_{n}$.
+    \item $tr A=\sum_{i=1}^{n}\lambda_{i}$
+    \item If $X_{1},X_{2},\cdots,X_{s}$ are eigenvectors of $A$ that belong to eigenvalue $\lambda_{0}$, then
+    the linear combination of $X_{1},X_{2},\cdots,X_{s}$ is also an eigenvector of $A$ that belongs to eigenvalue $\lambda_{0}$.
+    And all eigenvectors plus zero vector forms an \textbf{eigenspace} of $A$ with eigenvalue $\lambda_{0}$, denoted as $V_{\lambda_{0}}$
+    and it's a solution space of $(\lambda_{0}I-A)X=0.$
+\end{enumerate}
+\end{pro}
+
+\begin{pro}If $\lambda$ is an eigenvalue of $A$ with eigenvector $X$, then we have
+    \begin{enumerate}
+
+\item $k\lambda$ is the eigenvalue of $kA$.
+\item $\lambda^{m}$ is the eigenvalue of $A^{m}$($m\in N^{*}$).
+\item $f(\lambda)$ is the eigenvalue of $f(A)$ if $f$ is a polynomial transformation.
+\item When $A$ is invertible, $\lambda^{-1}$ is the eigenvalue of $A^{-1}$
+    \end{enumerate}
+And $X$ is the eigenvector of matrices above with corresponding eigenvalue.
+
+\end{pro}
+
+\begin{pro}
+The matrix $A$ and $A^{T}$ have the same \textbf{spectrum}.
+\end{pro}
+
+\subsection{Algebraic Multiplicity and Geometric Multiplicity}
+
+\begin{defi}[Geometric Multiplicity]
+As for the eigenvalue $\lambda_{i}$ of $A$, its all eigenvectors are the nonzero-solutions of the equation 
+$(\lambda_{i}I-A)X=0$. Thus the number of independent eigenvectors of $A$ with eigenvalues $\lambda_{i}$ is 
+no more than $n-rank(\lambda_{i}-A)$. The number is the dimension of the eigenspace $V_{\lambda_{i}}$ and the number 
+of the solution vectors of the fundamental system of solutions of $A$. We call this number as the \textbf{geometric multiplicity} of $\lambda_{i}$, equals to 
+$$q_{i}=n-rank(\lambda_{i}I-A),\ i=1,2,\cdots,s.$$I
+\end{defi}
+
+\begin{defi}[Algebraic Multiplicity]
+From the theorem of the polynomial, n-square $A$ on $\mathbb{C}$ can be divided 
+$$f_{A}(\lambda)=(\lambda-\lambda_{1})^{p_{1}}(\lambda-\lambda_{2})^{p_{2}}\cdots(\lambda-\lambda_{s})^{p_{s}}$$
+where $\lambda_{1},\lambda_{2},\cdots,\lambda_{s}$ are all distinct eigenvalues of $A$. We call $p_{i}$ the \textbf{algebraic multiplicity} of $\lambda_{i}$.
+\end{defi}
+
+\begin{theorem}
+The geometric multiplicity of any eigenvalue $\lambda_{i}$ of $A$ is not larger than the algebraic multiplicity of $\lambda_{i}$.
+\end{theorem}
+\begin{proof}
+    Set $$X_{i1},X_{i2},\cdots,X_{iq}$$
+    as a basis of the eigenspace $V_{\lambda_{i}}$, we extent it into a basis of $\mathbb{C^{n}}$ :
+    $$X_{i1},X_{i2},\cdots,X_{iq_{i}},Y_{1},Y_{2},\cdots,Y_{n-q_{i}},$$
+    then we have 
+    \begin{align*}
+        &A[X_{i1},X_{i2},\cdots,X_{iq_{i}},Y_{1},Y_{2},\cdots,Y_{n-q_{i}}]\\
+        =&[\lambda_{i}X_{i1},\lambda_{2}X_{i2},\cdots,X_{iq_{i}},AY_{1},AY_{2},\cdots,AY_{n-q_{i}}]\\
+        =&[X_{i1},X_{i2},\cdots,X_{iq_{i}},Y_{1},Y_{2},\cdots,Y_{n-q_{i}}]\begin{bmatrix}
+            \lambda_{i}I_{q_{i}}&*\\0&A_{1}\end{bmatrix}\\
+    \end{align*}
+    where $A_{1}$ is $n-q_{i}$ square. Now set $$P=[X_{i1},X_{i2},\cdots,X_{iq_{i}},Y_{1},Y_{2},\cdots,Y_{n-q_{i}}],$$ 
+    obviously $P$ id invertible. Then 
+    \begin{align*}
+        AP=P\begin{bmatrix}
+            \lambda_{i}I_{q_{i}}&*\\0&A_{1}\end{bmatrix}\\
+        and\\
+        A\sim\begin{bmatrix}
+            \lambda_{i}I_{q_{i}}&*\\0&A_{1}\end{bmatrix}
+    \end{align*}
+    Thus
+    \begin{align*}
+        f_{A}()
+    \end{align*}
+
+\end{proof}
+
+
+\section{Similarity of the Matrix}
+\subsection{Basis}
+\begin{defi}
+    Set $A,B\in C^{n\times n}$. If there exists
+    an n-order invertible matrix $P$ such that 
+    $$P^{-1}AP=B$$, we say that $A$ and $B$ are similar,
+    denoted as $A\sim B$, and $P$ is called the 
+    \textit{similarity transformation} from $A$ to $B$. 
+\end{defi}
+
+\begin{pro}[Reflectivity]
+    $A\sim A$.
+\end{pro}
+
+\begin{pro}[Symmetry]
+    If $A\sim B$, then $B\sim A$.
+\end{pro}
+
+\begin{pro}[Transitivity]
+    If $A\sim B$ and $B\sim C$, then $A\sim C$.
+\end{pro}
+
+
+\begin{pro}
+\begin{enumerate}
+\item $P^{-1}(A_{1}+A_{2}+\cdots+A_{n})P=P^{-1}A_{1}P+P^{-1}A_{2}P+\cdots+P^{-1}A_{n}P=P^{-1}\sum_{i=1}^{n}P^{-1}A_{i}P.$
+\item $P^{-1}(kA)P=kP^{-1}AP.$
+\end{enumerate}
+\end{pro}
+
+
+
+
+
+
+
+
+
+
+\subsection{Conditions of Similar Digonalizablity}
+
+
+\begin{defi}[Digonalizable]
+    If there exists an invertible matrix $P$ such that
+    $$P^{-1}AP=D$$
+    where $A$ is a square and $D$ is a diagonal matrix.
+    Then $A$ is called \textit{diagonalizable}.
+\end{defi}
+
+\begin{theorem}[NS Condition]
+    A n-square $A$ is similar diagonalizable if and only if $A$ has $n$ linear independent eigenvectors.
+\label{theorem:NS}
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+P^{-1}AP=diag(\lambda_{1},\lambda_{2},\cdots,\lambda_{n})\\
+AP=Pdiag(\lambda_{1},\lambda_{2},\cdots,\lambda_{n})
+\end{align*}
+Now set $P=[X_{1},X_{2},\cdots,X_{n}]$, and 
+$$[AX_{1},AX_{2},\cdots,AX_{n}]=[\lambda_{1}X_{1},\lambda_{2}X_{2},\cdots,\lambda_{n}X_{n}]$$
+then we have $$(A-\lambda_{i})X_{i}=0,\ for\ i=1,2,\cdots,n.$$
+Since $P$ is invertible, we can find $n$ linear irrelative vectors $X_{1},X_{2},\cdots,X_{n}$.
+And $X_{1},X_{2},\cdots,X_{n}$ are n linear irrelative eigenvectors of $A$ and $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ are 
+eigenvalues of $A$.
+
+Inversely, if $A$ has $n$ linear irrelative eigenvectors $X_{1},X_{2},\cdots,X_{n}$ with eigenvalues $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$,
+satisfying that 
+$$AX_{i}=\lambda_{i}X_{i},\ for\ i=1,2,\cdots,n.$$
+Set $P=[X_{1},X_{2},\cdots,X_{n}]$ and obviously $P$ is invertible, and 
+$$P^{-1}AP=diag{\lambda_{1},\lambda_{2},\cdots,\lambda_{n}}$$
+which reveals that $A$ is similar diagonalizable.
+\end{proof}
+
+\textbf{Note.}
+\begin{enumerate}
+\item The similar transformation matrix $P$ is not unique.
+\item The order of $X_{1},X_{2},\cdots,X_{n}$ changes as the order of $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ changes.
+\end{enumerate}
+
+
+\begin{theorem}
+The eigenvectors of $A$ with different eigenvalues are linearly independent.
+\end{theorem}
+
+\begin{proof}
+Set $\lambda_{1},\lambda_{2},\cdots,\lambda_{m}$ are non-eqaul eigenvalues of $A$, $X_{1},X_{2},\cdots,X_{n}$ 
+are eigenvectors of $A$ with eigenvalues $\lambda_{1},\lambda_{2},\cdots,\lambda_{m}$, then 
+$$ AX_{i}=\lambda_{i}X_{i}\ for\ i=1,2,\cdots,m.$$
+Now I use the mathematical induction to prove the above statement.
+
+\textbf{Base Case:m=1} Since $X_{1}\neq 0$, $X_{1}$ is linear independent.
+
+\textbf{Inductive Hypothesis:m=k-1} Suppose the statement is true for $m=k-1$.
+
+\textbf{Inductive Step:m=k} Consider the condition that $m=k$, 
+$$k_{1}X_{1}+k_{2}X_{2}+\cdots+k_{m}X_{m}=0$$
+
+Then we left multiply $A$, we get 
+$$k_{1}AX_{1}+k_{2}AX_{2}+\cdots+k_{m}AX_{m}=0.$$
+
+Since $AX_{i}=\lambda_{i}X_{i}$, we get 
+$$k_{1}\lambda_{1}X_{1}+k_{2}\lambda_{2}X_{2}+\cdots+k_{m}\lambda_{m}X_{m}=0.$$
+
+We multiply $\lambda_{m}$ on the first equation and we get 
+$$k_{1}\lambda_{m}X_{1}+k_{2}\lambda_{2}X_{2}+\cdots+k_{m}\lambda_{m}X_{m}=0.$$
+
+Then
+$$k_{1}(\lambda_{1}-\lambda_{m})X_{1}+k_{2}(\lambda_{2}-\lambda_{m})X_{2}+\cdots+k_{m-1}(\lambda_{m-1}-\lambda_{m})X_{m-1}=0,$$
+and since $\lambda_{i}\neq\lambda_{j}$ and $X_{1},X_{2},\cdots,X_{m-1}$ are linearly independent, 
+then $$k_{i}=0\ i=1,2,\cdots,m-1.$$
+Correspondingly, $k_{m}=0$.
+
+Thus $k_{1},k_{2},\cdots,k_{m}=0$, which reveals that $X_{1},X_{2},\cdots,X_{m}$ are linearly independent.
+\end{proof}
+
+\begin{corollary}
+    If n-square $A$ has n distinct eigenvalues, then $A$ can be similar diagonalizable.
+\end{corollary}
+
+\begin{theorem}
+Set $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ are distinct eigenvalues of $A$, $X_{i1},X_{i2},\cdots,X_{il_{i}}$ 
+are linear independent eigenvectors of $A$ belonging to eigenvalue $\lambda_{i},i=1,2,\cdots,m$, then the vector set of $X_{11},X_{12},\cdots,X_{1l_{1}},\cdots,X_{m1},X_{m2},\cdots,X_{ml_{l}}$ is linear independent.
+\end{theorem}
+
+\begin{theorem}[NS Condition]
+    Set $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ are distinct eigenvalues of $A$, $p_{i}\ and\ q_{i}$ are the algebraic multiplicity and geometric multiplicity of $\lambda_{i}$ respectively.
+    Then $A$ can be similar diagonalizable if and only if
+    $$p_{i}=q_{i}\ i=1,2,\cdots,s.$$
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Real-Symmetric Matrix's Normalised Diagonalization}
+
+
+
+\subsection{Jordan Canonical Form}
+
+\subsection{Smith Normal Form}
+
+
+
+
+
+
+
+
+\newpage
+\section{Exercise}
+
+\begin{exe}
+The eigenvalues of $A$ are $1,2,3$, find the eigenvalues of $A^{2}-2I$.
+\end{exe}
+
+\begin{sol}
+    We know that $A\sim diag(1,2,3)$ and then $A^{2}\sim diag(1,4,9)$.
+    Then $(A^{2}-2I)\sim (diag(1,4,9)-2I)=diag(-1,2,7)$, then the eigenvalues 
+    of $A^{2}-2I$ are $-1,2,7$.
+\end{sol}
+
+\begin{exe}
+    Sovle the maxima of the $$f(x_{1},x_{2})=2x_{1}^{2}+2x_{1}x_{2}+2x_{2}^{2}$$
+    under the constraint $x_{1}^{2}+x_{2}^{2}=1$ using \textbf{Lagrange Multipliers}.
+\end{exe}
+
+\begin{sol}
+    Using Lagrange Multipliers,
+    $$L(x_{1},x_{2})=2x_{1}^{2}+2x_{1}x_{2}+2x_{2}^{2}-\lambda(x_{1}^{2}+x_{2}^{2}-1)$$
+    and 
+    $$$$
+\end{sol}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

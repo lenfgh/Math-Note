@@ -1,0 +1,439 @@
+\documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+
+
+
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{exa}{Example}[defi]
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{sol}{Solution}[exe]
+\newtheorem{pro}{Properties}[section]
+
+
+\linespread{1.5} 
+
+\title{Infinite Series and Infinite Products}
+\author{Len Fu}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This is the note of Infinite Series and Infinite Products,
+ maded by Len Fu while his learning progress.
+ The main content is from \textit{Mathematical Analysis\ Tom A.Apostol}.
+\end{abstract}
+\newpage
+
+\renewcommand{\contentsname}{Contents}
+\tableofcontents
+\newpage
+
+\section{Convergent and Divergent Sequences of Complex Numbers}
+\subsection{Basis}
+
+\begin{defi}[Convergence]
+A sequence of complex numbers\ $a_{n}\in C$\ is called \textit{convergent} if,
+$$for\ every\ \epsilon>0,\ there\ exists\ an\ N\in\mathbb{N}\ such\ that,\
+|a_{n}-a|<\epsilon\ for\ all\ n\geq N.$$
+If ${a_{n}}$ converges to $p$, we write $\lim_{n\rightarrow\inf}a_{n}=p$ and call
+$p$ the limit of the sequence. A sequence is called divergent if it is not convergent.
+\end{defi}
+
+
+\begin{defi}[Divergence]
+A sequence of complex numbers\ $a_{n}\in C$\ is called \textit{divergent} if,
+for\ every\ $\epsilon>0$,\ there\ exists\ an\ $N\in\mathbb{N}$\ such\ that,
+$$|a_{n}-a|\leq\epsilon\ for\ all\ n\geq N.$$
+In this case we write $\lim_{n\rightarrow\infty}a_{n}=+\infty$.
+\end{defi}
+
+\subsection{Cauchy Sequence}
+
+\begin{defi}
+A sequence in $\mathbb{C}$ is called a \textit{Cauchy sequence} if it satisfies the 
+\textit{Cauchy condition}:
+for\ every\ $\epsilon>0$ there\ is\ an\ integer\ N\ such\ that\
+$$|a_{n}-a_{m}|<\epsilon\ whenever n\geq N\ and\ m\geq N.$$
+\end{defi}
+
+Obviously, being Cauchy Sequence means that the terms 
+of the sequence are all arbitarily close to each other.
+
+The Cauchy condition is particularly useful in establishing 
+convergence when we do not know the actual value to which 
+the sequence converges.
+
+\begin{prop}
+If a sequence is a Cauchy sequence, then it is bounded.
+\end{prop}
+
+\begin{proof}
+    Suppose ${x_{n}}_{n=1}^{\infty}$ is Cauchy.Pick an $M$ 
+    such that for $n,k\geq M$, we have $|x_{n}-x_{k}|<1$. In particular 
+    for all $n\geq M$, $$|x_{n}-x_{M}|\geq 1.$$
+    Then we use the triangle inequality to obtain:
+    $$|x_{n}|-|x_{M}|\geq |x_{n}-x_{M}| <1$$
+    then for all $n\geq M$, $$|x_{n}|<1+|x_{M}|.$$
+    Now set 
+    $$B:=\max\left\{|x_{1}|,|x_{2}|,\cdots,|x_{M-1}|,1+|x_{M}|\right\}$$
+    Then $B$ is an upper bound for the absolute sequence and it is bounded.
+\end{proof}
+
+\begin{theorem}
+    A sequence of real numbers is convergent if and only if it is converges.
+\end{theorem}
+
+\begin{proof}
+Suppose ${x_{n}}_{n=1}^{\infty}$ converges to x, and let $\epsilon>0$ be given. Then there exists 
+an $M$ such that for $n\geq M$ ,$|x_{n}-x|<\frac{\epsilon}{2}.$
+Hence for $n\geq M$ and $k\geq M$, 
+$$|x_{n}-x|+|x_{k}-x|\geq |x_{n}-x_{k}| \geq \epsilon$$
+and ${x_{n}}_{n=1}^{\infty}$ is a Cauchy sequence.
+
+Now, suppose ${x_{n}}_{n=1}^{\infty}$ is a Cauchy sequence.
+
+
+\end{proof}
+
+
+
+
+
+
+\subsection{Bounded and convergent}
+Every convergent sequence is bounded and hence an unbounded sequence 
+necessarily diverges.
+
+
+\subsection{Tail of a Sequence}
+
+\begin{defi}
+For a sequence ${x_{n}}_{n=1}^{\infty}$, the K-tail (where $K\in \mathbb{N}$), or just the tail, of ${x_{n}}_{n=1}^{\infty}$ is the sequence starting at $K+1$, usually written as 
+$${x_{n+K}}_{n=1}^{\infty}\ \ or \ \ {x_{n}}_{n=K+1}^{\infty}.$$
+The convergence and the limit of a sequence only depends on its tail.
+\end{defi}
+
+\begin{prop}
+Let ${x_{n}}_{n=1}^{\infty}$ be a sequence. Then the following statements are equivalent:
+\begin{enumerate}[label=(i)]
+    \item The sequence ${x_{n}}_{n=1}^{\infty}$ converges.
+    \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for all $K\in \mathbb{N}$.
+    \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for some $K\in \mathbb{N}$.
+\end{enumerate}
+
+Furthermore, if any (and hence all) of the limits exists, then for all $K\in \mathbb{N}$
+$$\lim_{n\to \infty}x_{n}=\lim_{n\to \infty}x_{n+K}.$$
+
+\end{prop}
+
+\begin{proof}
+It is clear that (ii) implies (iii). We can show $(i)\to (ii)\to (iii)\to (i)$
+
+Suppose ${x_{n}}_{n=1}^{\infty}$ converges to $x$. Let $K\in \mathbb{N}$ be arbitrary, and define $y_{n}:=x_{n+K}$. We wish to show that ${y_{n}}_{n=1}^{\infty}$ converges to $x$.
+
+l
+
+\end{proof}
+
+
+
+
+
+
+
+\subsection{Subsequence}
+If a sequence ${a_{n}}$ converges to $p$, then every subsequence ${a_{k_{n}}}$ 
+also converges to $p$.
+
+
+
+If $\lim_{n\rightarrow\infty}-a_{n}=\infty$, we write $\lim_{n\rightarrow\infty}a_{n}=-\infty$ and say that $a_{n}$ 
+diverges to $-\infty$. 
+
+
+
+
+
+
+\section{Limit Superior and Limit Inferior of a Real-Valued Sequence}
+\subsection{Basis}
+Let ${a_{n}}$ be a sequence of real numbers. Suppose there is a real number U 
+satisfying the following two conditions:
+
+\begin{enumerate}
+    \item For every $\epsilon > 0$, there exists an integer $N$ such that $n>N$ 
+    implies $$a_{n}<U+\epsilon.$$
+    \item Given $\epsilon>0$ and given $m>0$, there exists an integer $n>m$ such that 
+    $$a_{n}>U-\epsilon.$$ 
+\end{enumerate}
+
+\textbf{Note.} Statement (1) means that all terms of the sequence lie to the left 
+of $U+\epsilon$. Statement (2) means that infinite terms of the sequence lie to the 
+right of $U-\epsilon$.Every real sequence has a limit superior and a limit inferior 
+in the extended real number $\mathbb{R^{*}}$.
+
+Then $U$ is called the \textit{limit superior} of ${a_{n}}$
+and we write $$U=\lim_{n\rightarrow \infty}\sup{a_{n}}$$.
+The limit inferior of ${a_{n}}$ is defined as follows:
+$$\lim_{n\rightarrow \infty}\ inf\ a_{n}=-\lim_{n\rightarrow \infty}\ sup\ b_{n},\ where\ b_{n}=-a_{n}\ for\ n=1,2,...,n$$.
+
+Or we can use another definition:
+\begin{defi}
+
+
+\end{defi}    
+
+
+
+
+
+
+\begin{corollary}
+Let $a_{n}$ be a sequence of real numbers. Then we have:
+\begin{enumerate}
+    \item $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.
+    \item The sequence converges if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}$ and 
+    $\lim\inf_{n\rightarrow \infty}a_{n}$ are both finite and equal, in which case 
+    $\lim_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=\lim\sup_{n\rightarrow \infty}a_{n}$.
+    \item The sequence diverges to $+\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=+\infty$.
+    \item The sequence diverges to $-\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=-\infty$.
+\end{enumerate}
+\end{corollary}
+
+
+\textbf{Note.} A sequence for which $\lim\sup_{n\rightarrow \infty}a_{n}\neq\lim\inf_{n\rightarrow \infty}a_{n} $ is said to oscillate.\\
+\begin{proof}
+\textbf{1.}
+From definition, denote $U=\lim\sup_{n\rightarrow \infty}a_{n}$ and $L=\lim\inf_{n\rightarrow \infty}a_{n}$.
+For every $\epsilon_{1}>0$, $b_{n}<-L+\epsilon_{1}$, where $b_{n}=-a_{n}$. And for every $\epsilon_{2}>0$, $a_{n}<U+\epsilon_{2}$.
+\begin{align*}
+    -a_{n} &< -L + \epsilon_{1} \\
+    a_{n} &> L - \epsilon_{1} \\
+    a_{n} &< U + \epsilon_{2} \\
+    L - \epsilon_{1} < &a_{n} < U + \epsilon_{2} \\
+    L &< U + \epsilon_{1} + \epsilon_{2}
+\end{align*}
+Since $\epsilon_{1}$ and $\epsilon_{2}$ is arbitary positive, 
+we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.\\
+\textbf{2.}
+
+
+\end{proof}
+
+\subsection{Monotune Sequence}
+
+\begin{defi}
+A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone increasing if ${x_{n}\leq x_{n+1}},\ for\ n=1,2,\cdots$.
+A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing if ${x_{n}\geq x_{n+1}},\ for\ n=1,2,\cdots$.
+If a sequence is either monotone increasing or monotone decreasing, we say that the sequence is monotone.
+\end{defi}
+
+\begin{theorem}
+    A monotonic sequence converges if, and only if, it is bounded.
+
+    Furthermore, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and bounded, then $\lim_{n\to \infty} x_{n}=\sup{x_{n}:n\in \mathbb{N}}$.
+    If ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing and bounded, then $\lim_{n\rightarrow \infty} x_{n}=\inf{x_{n}:n=1,2,\cdots}.$
+\end{theorem}
+
+
+\begin{proof}
+Consider a monotune increasing sequence ${x_{n}}_{n=1}^{\infty}$, if it is bounded, we set $x:=\sup{x_{n}:n\in \mathbb{N}}.$. Let $\epsilon>0$ be arbitary. As $x$
+is the supremum of the sequence, we have at least one $M$ satisfying that $x_{M}>x-\epsilon.$ As ${x_{n=1}}^{\infty}_{n=1}$ is monotue increasing, for $n\leq M$, $|x_{n}-x|\leq|x-x_{M}|\leq \epsilon.$ 
+Hence ${x_{n}}_{n=1}^{\infty}$  converges to $x$. From the other side, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and convergent, then it is bounded. Vise versa, we can prove the situation of monotune decreasing sequence.
+\end{proof}  
+
+\begin{prop}
+    Let $S\subset R$ be a nonempty subset of $R$. Then there exist monotone sequence ${x_{n}}_{n=1}^{\infty}$ and ${y_{n}}_{n=1}^{\infty}$ such that $x_{n},y_{n}\in S$ and
+    $$\sup S = \lim_{n\to \infty}x_{n}\ \ and \inf S = \lim_{n\to \infty}y_{n}.$$ 
+\end{prop}
+
+
+
+
+\section{Infinite Series}
+Let ${a_{n}}$ be a sequence of real or comcplex
+numbers, and form a new sequence ${s_{n}}$ as follows:
+$$s_{n}=a_{1}+a_{2}+\cdots +a_{n}\ (n=1,2,\cdots)$$
+
+\subsection{Basis}
+\begin{defi}[Series]
+The orderd pair of sequences ${a_{n}},{s_{n}}$ is 
+called an infinite series. The number $s_{n}$ is called 
+the \textit{nth partial sum} of the series. The series is said 
+to \textit{converge} or to \textit{diverge} according 
+as ${s_{n}}$ is convergent or divergent. The following 
+symbols are used to denote series:
+$$a_{1}+a_{2}+\cdots +a_{n}+\cdots,\ ,a_{1}+a_{2}+a_{3}+\cdots,\ ,\sum_{k=1}^{\infty}a_{k}.$$
+\end{defi}
+
+\begin{defi}[Patial Sum]
+A series converges if the sequence ${s_{k}}_{k=1}^{\infty}$ defined by 
+$$s_{k}:=\sum_{n=1}^{k}x_{n}=x_{1}+x_{2}+x_{3}+\cdots +x_{k}+\cdots$$
+converges. The numbers $s_{k}$ are called the \textit{partial sums}.
+\end{defi}
+
+\textbf{Note.} The letter $k$ used in $\sum_{k=1}^{\infty}a_{k}$ 
+is a \textbf{"dummy variable"} and may be replaced by 
+any other letter.
+
+If the sequence ${s_{n}}$ defined as previous converges to $s$, the 
+number $s$ is called the \textit{sum} of the series, and we write
+$$ s=\sum_{k=1}^{\infty}a_{k}$$.
+
+\begin{corollary}
+    Let $a=\sum a_{n}$ and $b=\sum b_{n}$ be convergent 
+    series. Then, for every $\alpha$ and $\beta$, the series $\sum (\alpha a_{n}+\beta b_{n})$
+    converges to the sum $(\alpha a+\beta b)$.
+\end{corollary}
+\begin{proof}
+    $\sum_{k=1}^{n} (\alpha a_{k}+\beta b_{k})=\alpha \sum_{n=1}^{\infty}a_{n}+\beta \sum_{n=1}^{\infty}b_{n}.$
+\end{proof}
+
+\begin{corollary}
+    Assume that $a_{n}\neq 0$ for each $n=1,2,\cdots$ Then $\sum a_{n}$
+    converges if, and only if, the sequence of patial sums is bounded above.
+\end{corollary}
+\begin{proof}
+    Let $s_{n}=a_{1}+a_{2}+\cdots+a_{n}$. Then we can apply \ref{thm:monotoinc}
+\end{proof}
+
+\begin{theorem}[Telescoping series]
+    Let ${a_{n}}$ and ${b_{n}}$ be two sequences 
+    such that $a_{n}=b_{n+1}-b_{n}$ for $n=1,2,\cdots$.
+    Then $\sum a_{n}$ converges if, and only if, 
+    $\lim_{n\rightarrow \infty}\sum b_{n}$ exists, in which 
+    case we have $\sum_{n=1}^{\infty} a_{n}=\lim_{n\rightarrow \infty}b_{n}-b_{1}$.
+\end{theorem}
+
+\begin{theorem}[Cauchy condition for series]
+    The series $\sum a_{n}$ converges if, and only if,
+    for every $\epsilon>0$, there exists an integer $N$ such that
+    $n>N$ implies 
+    $$|a_{n+1}+a_{n+2}+\cdots+a_{n+p}|<\epsilon\ for\ each\ p=1,2,\cdots$$
+\end{theorem}
+
+Taking $p=1$ in the previous theorem, we find that $\lim_{n\rightarrow \infty}a_{n}=0$ is 
+a necessary condition for the convergence of $\sum a_{n}$. That this condition is not sufficient
+to ensure the convergence of $\sum a_{n}$ is shown as follows as we choose $a_{n}=\frac{1}{n}$:
+$$a_{n+1}+\cdots+a_{n+p}=\frac{1}{2^{m}+1}+\cdots+\frac{1}{2^{m}+2^{m}}\geq\frac{2^{m}}{2^{m}+2^{m}}=\frac{1}{2},$$
+and hence $\sum a_{n}$ diverges. This series is called the \textit{harmonic series}.
+
+\begin{prop}
+    Let $\sum_{n=1}^{\infty}x_{n}$ be a convergent series. Then the sequence 
+    ${x_{n}}_{n=1}^{\infty}$ is convergent and $$\lim_{n\rightarrow \infty}x_{n} = 0.$$
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+% todo 
+
+
+
+\subsection{Inserting and Removing Parentheses}
+
+\newpage
+\section{Exercise}
+
+
+\begin{exe}
+Find : $\underset{n \to \infty}{\lim}\frac{n}{e^{n}}.$ 
+\end{exe}
+\begin{sol}
+    Set continous function $f(x)=\frac{x}{e^{x}}$ and $\lim_{x\to \infty}f(x)=\underset{n \to \infty}{\lim}\frac{n}{e^{n}}$
+Since $\underset{x \to \infty}{\lim}x=\infty=\underset{x \to \infty}{\lim}e^{x},$ we can use L'Hôpital's Rule.
+\begin{align*}
+    &\underset{x \to \infty}{\lim}\frac{x}{e^{x}}\\
+    =& \underset{x \to \infty}{\lim}\frac{1}{e^{x}}\\
+    =0
+\end{align*}
+Thus the limit is $0$.
+\end{sol}
+
+\begin{exe}
+Find : $\underset{n \to \infty}{\lim}\frac{\sin{n}}{n}.$
+\end{exe}
+
+\begin{sol}
+    Since $$-1\leq \sin{n}\leq 1,$$ we have $$-\frac{1}{n}\leq \frac{\sin{n}}{n}\leq \frac{1}{n}.$$
+    As $n$ approaches infinity, the limit of the sequence $\left\{-\frac{1}{n}\right\}$ and $\left\{\frac{1}{n}\right\}$ is both $0$. Using the squeezing theorem, we have $$\underset{n \to \infty}{\lim}\frac{\sin{n}}{n}=0.$$
+\end{sol}
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}\frac{\ln(1+\frac{1}{n})}{n}.$
+\end{exe}
+\begin{sol}
+\begin{align*}
+    &\underset{n \to \infty}{\lim}\frac{\ln(1+\frac{1}{n})}{n}\\
+    =& \frac{\underset{n \to \infty}{\lim} \ln(1+\frac{1}{n})}{\underset{n \to \infty}{\lim} n}\\
+    =&\frac{0}{\infty}\\
+    =&0	
+\end{align*}
+\end{sol}
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}n\sin^{2}(\frac{1}{n}).$
+\end{exe}
+
+\begin{sol}
+    \begin{align*}
+        &\underset{n \to \infty}{\lim}n\sin^{2}(\frac{1}{n})\\
+        =& \underset{n \to \infty}{\lim}\frac{\sin^{2}(\frac{1}{n})}{\frac{1}{n}}\ for\ x\in R^{+} \lim_{x\to \infty}\sin^{2}(\frac{1}{x})=0=\lim_{x\to \infty}\frac{1}{x}, using L'Hôpital's Rule \\
+        =& \underset{x \to \infty}{\lim} 2\sin(\frac{1}{x})\cos(\frac{1}{x})\\
+        =& 0
+    \end{align*}
+\end{sol}
+
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}(n+\frac{1}{n})^{\frac{1}{n}}.$
+\end{exe}
+
+\begin{sol}
+    \begin{align*}
+        &\underset{n \to \infty}{\lim}(n+\frac{1}{n})^{\frac{1}{n}}\\
+        =& \underset{n \to \infty}{\lim}e^{\frac{\ln(n+\frac{1}{n})}{n}}\  \\
+        =& \exp{\underset{n \to \infty}{\lim}\frac{\ln(n+\frac{1}{n})}{n}}\ Obviously\ \underset{n \to \infty}{\lim}\frac{\ln(n+\frac{1}{n})}{n}=0 \\
+        =& 1
+    \end{align*}
+\end{sol}
+
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}\sqrt[n]{\ln n}.$
+\end{exe}
+
+\begin{sol}
+Since $$1\leq \ln n\leq n,\ for\ n\leq 3$$
+we have $$1\leq \sqrt[n]{\ln n}\leq \sqrt[n]{n},\ for\ n\leq 3.$$
+
+As we have shown that $\lim_{n\to \infty}\sqrt[n]{n}=1$, then use the squeezing theorem . We have $$\underset{n \to \infty}{\lim}\sqrt[n]{\ln n}=1.$$
+
+\end{sol}
+
+
+
+
+
+
+\end{document}

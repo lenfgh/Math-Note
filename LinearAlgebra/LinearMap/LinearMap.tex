@@ -1,0 +1,831 @@
+\documentclass{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath} 
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+
+\theoremstyle{definition} 
+\newtheorem{defi}{Definition}[section]
+\newtheorem{example}{Example}[defi]
+\newtheorem{exe}{Exercise}[section]
+\newtheorem{sol}{Solution}[exe]
+\newtheorem{pro}{Properties}[section]
+
+\linespread{1.5} 
+
+
+\title{Linear Mapping and Linear Transformation} 
+\author{Len Fu} 
+\date{11.19.24} 
+
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+This is the note of Linear Mapping and Linear Transformation, maded by Len Fu while his learning progress. 
+The main content is from \textit{Linear Algebra Done Right}
+\ and \textit{Linear Algebra\  Allenby}. It's also the notes from the classes of BIT.
+\end{abstract}
+
+
+\tableofcontents
+\newpage
+
+\section{Linear Mapping}
+To prove a mapping is not linear mapping, you just need to find a counterexample.
+\subsection{Mapping}
+\begin{defi}[Mapping]
+Suppose $X$ and $Y$ are two non-empty sets. A mapping $\sigma$
+from $X$ to $Y$, denoted as $\sigma:X\rightarrow Y$, is a rule 
+that assigns to each element $x\in X$ exactly one element $y$ 
+in the set $Y$. The assignment $y=\sigma(x)$ is called the image of $a$
+under the mapping $\sigma$, and $x$ is called the preimage. 
+\end{defi}
+\begin{pro}[Domain]
+    Every element $x$ in the set $X$ must be mapped to some element in $Y$.
+\end{pro}
+\begin{pro}[Uniqueness]
+    For each $x$ in $X$, there is a unique $y$ in $Y$ 
+    such that $\sigma(x)=y$.
+\end{pro}
+
+The set $X$ is called the domain of the mapping $\sigma$, 
+and the set $Y$ is called the codomain. The image of a set,
+which is the set of all elements in $Y$ that are mapped 
+to by elements in $X$, denoted by as $Im(\sigma) or \sigma(X)$.
+, or $$\sigma(X)={y\in Y|\exists x\in X\ such\ that\ \sigma(x)=y}.$$
+
+\begin{defi}[Injective Mapping]
+    A mapping $\sigma$ is called an \textit{injective mapping} or an \textit{onto mapping}
+    if for each $y$ in $Y$, there is a unique $x$ in $X$ such that $\sigma(x)=y$.
+    Formally, for all $x_{1},x_{2}\in X$, if $\sigma(x_{1})=\sigma(x_{2})$, 
+    then $x_{1}=x_{2}$.
+\end{defi}
+
+\begin{defi}[Surjective Mapping]
+    A mapping $\sigma$ is called a \textit{surjective mapping} or a \textit{onto mapping}
+    if for every $y$ in $Y$, there exists an $x$ in $X$ such that $\sigma(x)=y$.
+\end{defi}
+
+\begin{defi}[Bijective Mapping]
+    A mapping $\sigma$ is called a \textit{bijective mapping} or a \textit{onto mapping}
+    if it is both injective and surjective.
+\end{defi}
+
+\begin{defi}[Product of mappings]
+    Set $\sigma$ as a mapping from $X$ to $Y$, and $\tau$ as a mapping from $Y$ to $Z$, 
+    then we can define a new mapping $\tau\circ\sigma$ from $X$ to $Z$ by
+    $$\tau\circ\sigma(x)=\tau(\sigma(x)),\ for\ all\ x\in X.$$
+\end{defi}
+
+\subsection{Linear Mapping}
+\begin{defi}[Linear Mapping]
+    Set the $V_{1}$ and $V_{2}$ as vector spaces on the field $F$. 
+    If a mapping $\tau$ from $V_{1}$ to $V_{2}$ keeps the adding property and the scalar 
+    multiplication property, then we say that $\tau$ is a \textit{linear mapping} or a
+    \textit{linear transformation}.
+    $$\sigma (\alpha + \beta) = \sigma (\alpha) + \sigma (\beta),\ \sigma (k\alpha)=k\sigma (\alpha),\ for\ any\ \alpha\ and\ \beta\in V_{1},k\in \ F.$$
+\end{defi}
+
+The necessary and sufficient condition for a Linear Mapping is 
+$$\sigma (k\alpha +l\beta) = k\sigma(\alpha)+l\sigma(\beta).$$
+
+\subsection{Identity Mapping}
+Set $V$ as a vector space on the field $F$, a mapping $$\epsilon:V\rightarrow V$$
+is defined as $\epsilon (\alpha)=\alpha,\ for\ all\ \alpha\in V.$
+\subsection{Zero Mapping}
+Set the $V_{1}$ and $V_{2}$ as vector spaces on the field $F$.
+A mapping $$\tau :V_{1}\rightarrow V_{2}$$ 
+is defined as $\tau (0)=0,\ for\ all\ \alpha\in V_{1}.$
+
+\subsection{Properties}
+If $\tau$ is a linear mapping, then it has follow properties:
+\begin{pro}
+    $\tau (\theta) = \theta,\ \tau(-\alpha)=-\tau(\alpha)$
+\end{pro}
+\begin{pro}
+    Linear Mappings keep the linear combination and linear coefficents unchanged.
+\end{pro}
+\begin{pro}
+    Linear Mappings transform the linear relative vector group into 
+    another linear relative groups.
+\end{pro}
+
+\subsection{Matrix Reprentation of the Linear Mapping}
+\begin{defi}
+Set $\sigma$ as a linear mapping from $V_{1}$ to $V_{2}$, 
+choose a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ in the $V_{1}$
+and choose a basis $\beta_{1},\beta_{2},\cdots,\beta_{m}$ in the $V_{2}$.
+If the image of the basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ is
+$$\begin{cases}
+    \sigma(\alpha_{1})=a_{11}\beta_{1}+a_{21}\beta_{2}+\cdots+a_{m1}\beta_{m}\\
+    \sigma(\alpha_{2})=a_{12}\beta_{1}+a_{22}\beta_{2}+\cdots+a_{m2}\beta_{m}\\
+    \cdots\\
+    \sigma(\alpha_{n})=a_{1n}\beta_{1}+a_{2n}\beta_{2}+\cdots+a_{mn}\beta_{m}
+\end{cases}$$ 
+and can be expressed as 
+$$[\sigma(\alpha_{1}),\sigma(\alpha_{2}),\cdots,\sigma(\alpha_{n})]
+=[\beta_{1},\beta_{2},\cdots,\beta_{m}]A.$$
+where 
+$A
+=
+\begin{bmatrix}
+    a_{11}&a_{12}&\cdots&a_{1n}\\
+    a_{21}&a_{22}&\cdots&a_{2n}\\
+    \vdots&\vdots&\ddots&\vdots\\
+    a_{m1}&a_{m2}&\cdots&a_{mn}
+\end{bmatrix}$
+ is called the linear mapping matrix of $\sigma$ under 
+ the basis $\alpha$ and $\beta$.
+\end{defi}
+
+\begin{theorem}
+    If $\sigma$ is a linear mapping from $V_{1}$ to $V_{2}$, 
+    take a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ in the $V_{1}$, 
+    and take a basis $\beta_{1},\beta_{2},\cdots,\beta_{m}$ in the $V_{2}$,
+    then the linear mapping matrix of $\sigma$ under the basis $\alpha$ and $\beta$
+    is A.
+
+    For every $\alpha \in V$, if the coordinate of $\alpha$ under the basis $\alpha$
+    is $(x_{1},x_{2},\cdots,x_{n})^{T}$, then the coordinate of $\sigma(\alpha)$ under the basis $\beta$
+    is $(y_{1},y_{2},\cdots,y_{n})^{T}.$ Then 
+    $$
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{m}
+    \end{bmatrix}
+    =
+    A
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    .$$
+\end{theorem}
+
+\begin{proof}
+    Since 
+    $$
+    [\sigma(\alpha_{1}),\sigma(\alpha_{2}),\cdots,\sigma(\alpha_{n})]
+=[\beta_{1},\beta_{2},\cdots,\beta_{m}]A,
+    $$
+    $$
+    \alpha = [\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    ,\\
+    \sigma(\alpha) = [\sigma(\beta_{1}),\sigma(\beta_{2}),\cdots,\sigma(\beta_{n})]
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{n}
+    \end{bmatrix},
+    $$
+    and 
+    \begin{align*}
+        \sigma{\alpha} 
+        & =
+        \sigma(
+            [\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]
+            \begin{bmatrix}
+                x_{1}\\
+                x_{2}\\
+                \vdots\\
+                x_{n}
+            \end{bmatrix}
+        )\\
+        & =
+        [\sigma(\alpha_{1},\alpha_{2},\cdots,\alpha_{n})]
+        \begin{bmatrix}
+            x_{1}\\
+            x_{2}\\
+            \vdots\\
+            x_{n}
+        \end{bmatrix}
+        & =
+        [\beta_{1},\beta_{2},\cdots,\beta_{n}]A
+        \begin{bmatrix}
+            x_{1}\\
+            x_{2}\\
+            \vdots\\
+            x_{n}
+        \end{bmatrix}
+    \end{align*}
+    Then we hava
+    $$
+    \begin{bmatrix}
+        y_{1}\\
+        y_{2}\\
+        \vdots\\
+        y_{n}
+    \end{bmatrix}
+    =
+    A
+    \begin{bmatrix}
+        x_{1}\\
+        x_{2}\\
+        \vdots\\
+        x_{n}
+    \end{bmatrix}
+    .$$
+\end{proof}
+
+\begin{theorem}
+    Set $\sigma$ as a linear transformation from $V_{1}$ to 
+    $V_{2}$, $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ and 
+    $\alpha_{1}^{'},\alpha_{2}^{'},\cdots,\alpha_{n}^{'}$ 
+    which 
+    $$[\alpha_{1}^{'},\alpha_{2}^{'},\cdots,\alpha_{n}^{'}]=[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]P,$$
+    are two basis of $V_{1}$, and $[\beta_{1}^{'},\beta_{2}^{'},\cdots,\beta_{n}^{'}]=
+    [\beta_{1},\beta_{2},\cdots,\beta_{n}]Q.$
+
+    If the linear mapping $\sigma$ under the basis $\alpha$ and $\beta$ is $A$, 
+    under the basis $\alpha^{'}$ and $\beta^{'}$ is $B$, then 
+    $$B=Q^{-1}AP.$$
+\end{theorem}
+
+\subsection{Isomorphism}
+\begin{defi}
+    Set $V_{1}$ and $V_{2}$ are linear spaces in the field $F$, if the 
+    mapping $\sigma:V_{1}\rightarrow V_{2}$ has the follow properties:
+    \begin{enumerate}
+        \item $\sigma$ is a bijection.
+        \item $\sigma (\alpha +\beta)=\sigma (\alpha)+\sigma(\beta),\ for\ all\ \alpha,\beta \in V_{1}$
+        \item $\sigma(k\alpha)=k\sigma(\alpha),\ for\ all\ k\in F,\ all\ \alpha\in V_{1}$
+    \end{enumerate}
+    Then we say that $V_{1}$ and $V_{2}$ are isomorphic, and $\sigma$ is a 
+    Isomorphism from $V_{1}$ to $V_{2}$, we denote $V_{1}\cong V_{2}.$
+\end{defi}
+
+\section{Linear Transformation}
+\subsection{Linear Transformation}
+\begin{defi}
+    Set $\sigma$ as a transformation in linear space $V$ on the field $F$. 
+    If for every $\alpha,\beta \in V,\ k \in F,$ that
+    $$\sigma(\alpha+\beta)=\sigma(\alpha)+\sigma(\beta),\sigma(k\alpha)=k\sigma(\alpha)$$
+    then we say $\sigma$ is a linear transformation on $V$. 
+\end{defi}
+
+\begin{example}[Scalar Multiplication]
+    Set $k\in F$, define a transformation in $V$,
+    $$\sigma (\alpha)=k \alpha, \alpha\in V$$
+    It's easy to prove $\sigma$ is a linear transformation in $V$, 
+    we call it a \textit{scalar multiplication transformation}.
+\end{example}
+
+Actualy, if $k=0$, this is a zero transformation, and if $k=1$, it is aidentity transformation.
+
+\begin{defi}[Sum, Multiplication and Scalar multiplication of Transformation]
+    Set $\sigma$ and $\tau$ as two transformations in linear space $V$, 
+    $k\in F$, then the sum of $\sigma\ and\ \tau$, is defined as 
+    $$(\sigma+\tau)(\alpha)=\sigma(\alpha)+\sigma(\beta),\forall \alpha\in V$$
+    the multiplication of $\sigma$ and $\tau$, is defined as 
+    $$(\sigma\circ\tau)(\alpha)=\sigma(\tau(\alpha)),\forall \alpha\in V$$
+    the scalar multiplication of $\sigma$ and $k$, is defined as
+    $$(\sigma\circ k)(\alpha)=k\sigma(\alpha),\forall \alpha\in V.$$
+\end{defi}
+
+\begin{defi}[Invertible Transformation]
+    Set $\sigma$ as a transformation in linear space $V$, 
+    if there exists a transformation $\tau$, satisfying that 
+    $$\sigma \tau=\tau\sigma=\epsilon$$
+    then we say $\sigma$ is an invertible transformation, and the 
+    $\tau$ is the inverse transformation of $\sigma$, denoted as $\tau=\sigma^{-1}.$
+\end{defi}
+
+\textbf{Note.} The transformation is invertible if and only if it is bijection and its inverse 
+transformation is unique.
+
+\begin{theorem}
+    Invertible transformation's inverse transformation is also a linear transformation.
+\end{theorem}
+\begin{proof}
+    Set $\sigma$ as a invertible linear transformation, $\sigma^{-1}$ is its inverse transformation.
+    Choose $\alpha_{1},\alpha_{2}\in V,k\in F$, and let
+    $$\sigma^{-1}(\alpha_{1})=\beta_{1},\sigma^{-1}(\alpha_{2})=\beta_{2},$$
+    then 
+    \begin{align*}
+        & \sigma^{-1}(\alpha_{1}+\alpha_{2})\\
+         = &\sigma^{-1}(\sigma(\beta_{1}+\beta_{2}))\\
+         = &\beta_{1}+\beta_{2}
+    \end{align*}
+    and
+    $$\sigma^{-1}(k\alpha_{1})=k\beta_{1}=k\sigma(\alpha_{1}).$$
+    So $\sigma^{-1}$ is also linear.
+\end{proof}
+
+\begin{defi}
+    Set $\sigma$ as a linear transformation from $V_{n}$ to $V_{n}$,
+    choose a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$, if the image 
+    of this basis under the transformation is 
+    $$\begin{cases}
+        \sigma(\alpha_{1})=a_{11}\alpha_{1}+a_{12}\alpha_{2}+\cdots+a_{1n}\alpha_{n}\\
+        \sigma(\alpha_{2})=a_{21}\alpha_{1}+a_{22}\alpha_{2}+\cdots+a_{2n}\alpha_{n}\\
+        \vdots\\
+        \sigma(\alpha_{n})=a_{n1}\alpha_{1}+a_{n2}\alpha_{2}+\cdots+a_{nn}\alpha_{n}
+    \end{cases}$$
+    and can be expressed as 
+    $$[\sigma(\alpha_{1}),\sigma(\alpha_{2}),\cdots,\sigma(\alpha_{n})]=[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]A$$
+    where 
+    $$A=
+    \begin{bmatrix}
+        a_{11}&a_{21}&\cdots&a_{n1}\\
+        a_{12}&a_{22}&\cdots&a_{n2}\\
+        \vdots&\vdots&\ddots&\vdots\\
+        a_{1n}&a_{2n}&\cdots&a_{nn}
+    \end{bmatrix}$$
+    is called the linear transformation matrix of $\sigma$ under
+    the basis $\alpha$.
+\end{defi}
+
+\textbf{Note.} After the basis is setted, the lineaer transformation and the matrix reprentation is unique.
+
+If $\sigma$ is a linear transformation in the vector space $F^{n}$, and 
+$$\sigma(\alpha)=A\alpha,\ \alpha\in F^{n}$$
+then $A$ is the matrix reprentation of $\sigma$ in $F^{n}$ 
+under the basis $\epsilon_{1},\epsilon_{2},\cdots,\epsilon_{n}$.
+
+\begin{theorem}
+    Set $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ is a basis of the 
+    linear vector $V_{n}$ on the field $F$, and two martrix reprentations of linear transformation 
+    $\sigma$ and $\tau$ is $A$ and $B$, then
+    \begin{enumerate}
+        \item $\sigma+\tau$ under the basis is $A+B$.
+        \item $\sigma\tau$ under the basis is $AB$.
+        \item $\sigma(k\alpha)$ under the basis is $kA$.
+        \item $\sigma$ is invertible if and only if $A$ is invertible, and 
+        $\sigma^{-1}$ under the basis is $A^{-1}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Matrix Transformation under the basis transformation]
+    In the vector space $V_{n}$, we choose two basis
+    $$\alpha_{1},\alpha_{2},\cdots,\alpha_{n};\beta_{1},\beta_{2},\cdots,\beta_{n},$$
+    and the transition matrix from the basis $\alpha$ to the basis $\beta$ is $P$.
+    Assume that the matrix reprentation of linear transformation $\sigma$ under the two basis 
+    is $A$ and $B$, then 
+    $$B=P^{-1}AP.$$
+\label{MatrixTransUnderBasisTrans}
+\end{theorem}
+
+\begin{proof}
+    For 
+    \begin{align*}
+        (\beta_{1},\beta_{2},\cdots,\beta_{n}) & = (\alpha_{1},\alpha_{2},\cdots,\alpha_{n})P\\
+        \sigma[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}] & = [\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]A\\
+        \sigma[\beta_{1},\beta_{2},\cdots,\beta_{n}] & = [\beta_{1},\beta_{2},\cdots,\beta_{n}]B\\
+        then \\
+        & [\beta_{1},\beta_{2},\cdots,\beta_{n}]B\\
+         =&\sigma[\beta_{1},\beta_{2},\cdots,\beta_{n}]\\
+         =&\sigma[(\alpha_{1},\alpha_{2},\cdots,\alpha_{n})P]\\
+         =&\sigma[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]P\\
+         =&[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]AP\\
+         =&[\beta_{1},\beta_{2},\cdots,\beta_{n}]P^{-1}AP\\
+    \end{align*}
+    Since $\beta_{1},\beta_{2},\cdots,\beta_{n}$ is linear irrelative, 
+    thus $$B=P^{-1}AP.$$
+\end{proof}
+
+\subsection{Eigenvalue and Eigenvector of the Linear Transformation}
+
+\begin{defi}
+    Set $\sigma$ as a linear transformation in the vector space $V$,
+    if for a number $\lambda\in F$, there exists a \textbf{nonvector} $\alpha\in V$,
+    that 
+    $$\sigma(\alpha)=\lambda\alpha.$$
+    then we say $\lambda$ is an \textit{eigenvalue} of linear transformation $\sigma$, and
+    $\alpha$ is an \textit{eigenvector} of $\sigma$.
+\end{defi}
+
+Assume $\sigma$ is a linear transformation in the vector space $V$, and $\lambda$ is an eigenvalue 
+of $\sigma$, then $\alpha$ is an eigenvector of $\sigma$ with eigenvalue $\lambda$, then $\sigma(\alpha)=\lambda \alpha.$
+Choose a basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$ of $V$, and set 
+$$\alpha=x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}=\begin{bmatrix}\alpha_{1}&\alpha_{2}&\cdots&\alpha_{n}\end{bmatrix}
+\begin{bmatrix}
+    x_{1}\\
+    x_{2}\\
+    \vdots\\
+    x_{n}
+\end{bmatrix}.$$
+then 
+$$\sigma(\alpha)=\lambda\alpha=\lambda x_{1}\alpha_{1}+\lambda x_{2}\alpha_{2}+\cdots+\lambda x_{n}\alpha_{n}$$
+and
+$$\sigma(\alpha)=\begin{bmatrix}\alpha_{1}&\alpha_{2}&\cdots&\alpha_{n}\end{bmatrix}
+(\lambda
+\begin{bmatrix}
+    x_{1}\\
+    x_{2}\\
+    \vdots\\
+    x_{n}
+\end{bmatrix})$$
+then 
+$$\lambda\begin{bmatrix}
+    x_{1}\\
+    x_{2}\\
+    \vdots\\
+    x_{n}
+\end{bmatrix}
+=
+A\begin{bmatrix}
+    x_{1}\\
+    x_{2}\\
+    \vdots\\
+    x_{n}
+\end{bmatrix}$$
+where $A$ is the matrix reprentation of $\sigma$ under the basis $\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$.
+Let $X=(x_{1},x_{2},\cdots,x_{n})^{T}$, then 
+$$AX=\lambda X.$$
+
+Thus $\lambda$ is the eigenvalue of the matrix $A$, and the $X$ is the 
+eigenvector of $A$ with eigenbvalue $\lambda$.
+
+Vise versa, if $\lambda$ is the eigenvalue of the matrix $A$, and $X$ is the eigenvector of $A$ with eigenbvalue $\lambda$,
+ then set $\alpha=x_{1}\alpha_{1}+x_{2}\alpha_{2}+\cdots+x_{n}\alpha_{n}$,
+If $\alpha\in V$, and $\alpha\neq \theta$.
+\begin{align*}
+    \lambda\alpha&=\lambda([\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]\begin{bmatrix}x_{1}\\x_{2}\\\vdots\\x_{n}\end{bmatrix})
+    =[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}](\lambda\begin{bmatrix}x_{1}\\x_{2}\\\vdots\\x_{n}\end{bmatrix})\\
+    &=[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}](\lambda X)=[\alpha_{1},\alpha_{2},\cdots,\alpha_{n}](AX)\\
+    &=([\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]A)X=\sigma([\alpha_{1},\alpha_{2},\cdots,\alpha_{n}]\begin{bmatrix}x_{1}\\x_{2}\\\vdots\\x_{n}\end{bmatrix})\\
+    &=\sigma(\alpha)
+\end{align*}
+then $\lambda$ is the eigenvalue of $\sigma$ with eigenvector $\alpha$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Exercise}
+
+\begin{exe}
+    Set $D:R[x]_{n+1}\rightarrow R[x]_{n}$ as \textit{Derivative Map}, you 
+    should find the matrix reprentation of $D$ under the basis 
+    $1,x,x^{2},\cdots,x_{n}$ and $1,x,x^{2},\cdots,x_{n-1}$.
+\end{exe}
+\begin{sol}
+    Set $f_{1}=1,f_{2}=x,\cdots,f_{n+1}=x^{n}$,
+    then $$D(f_{1})=0,D(f_{2})=1,D(f_{3})=2x,\cdots,D(f_{n+1})=nx^{n-1}.$$
+    \begin{align*}
+        &\begin{cases}
+            D(f_{1})=0f_{1}+0f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            D(f_{2})=1f_{1}+0f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            D(f_{3})=0f_{1}+2f_{2}+0f_{3}+\cdots+0f_{n-1}\\
+            \vdots\\
+            D(f_{n+1})=0f_{1}+0f_{2}+\cdots+nf_{n-1}
+        \end{cases}\\
+        & [D(f_{1}),D(f_{2}),D(f_{3}),\cdots,D(f_{n+1})] \\
+        & = [0,1,2x,\cdots,nx^{n-1}] \\ 
+        & = [1,x,\cdots,x^{n-1}]
+        \begin{bmatrix}
+            0 & 1 & 0 & \cdots & 0\\
+            0 & 0 & 2 & \cdots & 0\\
+            \vdots & \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & 0 & \cdots & n
+        \end{bmatrix}
+    \end{align*}
+
+    Thus, the matrix representation of $D$ under the basis $1,x,x^{2},\cdots,x^{n}$ 
+    and basis $1,x,x^{2},\cdots,x^{n-1}$ is
+    $$
+    \begin{bmatrix}
+        0 & 1 & 0 & \cdots & 0\\
+        0 & 0 & 2 & \cdots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & 0 & \cdots & n
+    \end{bmatrix}
+    $$
+\end{sol}
+
+\begin{exe}
+    In $R^{3}$, we form a mapping $\sigma:R^{3}\rightarrow R^{3}$ 
+    by $\sigma[(x_{1},x_{2},x_{3})]=(x_3,0,x_{2}-2x_{1}),\ (x_{1},x_{2},x_{3})\in R$.
+    \begin{enumerate}
+        \item Prove $\sigma$ is a linear mapping.
+        \item Find the matrix representation of $\sigma$ under the basis
+        $(1,0,0),(1,1,0),(1,1,1)$.
+    \end{enumerate}
+\end{exe}
+\begin{sol}
+    Choose any $(x_{1},x_{2},x_{3})$ and $(y_{1},y_{2},y_{3})$ $\in$ $R^{3}$, $k\in R$,
+Since 
+\begin{align*}
+    \sigma[(x_{1},x_{2},x_{3})+(y_{1},y_{2},y_{3})]
+    & = \sigma[(x_{1}+y_{1},x_{2}+y_{2},x_{3}+y_{3})]\\ 
+    & = (x_{3}+y_{3},0,x_{2}+y_{2}-2(x_{1}+y_{1}))\\
+    & =(x_{3},0,x_{2}-2x_{1})+(y_{3},0,y_{2}-2y_{1})\\
+    & =\sigma[(x_{1},x_{2},x_{3})]+ \sigma[(y_{1},y_{2},y_{3})]\\
+    \sigma[k(x_{1},x_{2},x_{3})]
+    & =\sigma[(kx_{1},kx_{2},kx_{3})]\\
+    & =(kx_{3},0,kx_{2}-2kx_{1})\\
+    & =k(x_{3},0,x_{2}-2x_{1})\\
+    & =k\sigma[(x_{1},x_{2},x_{3})]
+\end{align*}
+\end{sol}
+\begin{sol}
+Choose the natrual basis of $R^{3}$, $(1,0,0),(0,1,0),(0,0,1)$.
+\begin{align*}
+    \sigma[(1,0,0)]=(0,0,-2)\\
+    \sigma[(0,1,0)]=(0,0,1)\\
+    \sigma[(0,0,1)]=(1,0,0)
+\end{align*}
+and 
+$$
+\begin{cases}
+    (0,0,-2)& =a_{11}(1,0,0)+a_{12}(1,1,0)+a_{13}(1,1,1)\\
+    (0,0,1) & =a_{21}(1,0,0)+a_{22}(1,1,0)+a_{23}(1,1,1)\\
+    (1,0,0) & =a_{31}(1,0,0)+a_{32}(1,1,0)+a_{33}(1,1,1)
+\end{cases}
+$$
+$$
+\begin{cases}
+    a_{11}=0 ,\ a_{12}=2 ,\ a_{13}=-2\\
+    a_{21}=0,\ a_{22}=-1,\ a_{23}= 1\\
+    a_{31}=1,\ a_{32}=0,\ a_{33}=0
+\end{cases}
+$$
+$$
+\begin{bmatrix}
+    0 & 0 & 1\\
+    2 & -1 & 0\\
+    -2 & 1 & 0
+\end{bmatrix}
+$$
+That is the answer.
+\end{sol}
+
+\begin{exe}
+    In the matrix space $R^{2\times2}$, we set a linear transformation $\sigma:$
+    $\sigma(X)=AX,\ X\in R^{2\times2}$
+    where
+    $$
+    A=\begin{bmatrix}
+        1 & 2\\
+        4 & 3
+    \end{bmatrix}$$
+    Find the representation of $\sigma$ under the natural basis in $R^{2\times2}$.
+\end{exe}
+\begin{sol}
+    Set 
+    $$I_{11}=\begin{bmatrix}
+        1 & 0\\
+        0 & 0
+    \end{bmatrix},I_{12}=\begin{bmatrix}
+        0 & 0\\
+        0 & 1
+    \end{bmatrix},I_{21}=\begin{bmatrix}
+        0 & 1\\
+        0 & 0
+    \end{bmatrix},I_{22}=\begin{bmatrix}
+        0 & 0\\
+        0 & 0
+    \end{bmatrix}$$
+    and
+    $$
+    \begin{cases}
+        \sigma(I_{11})=\begin{bmatrix}
+                            1 & 0\\
+                            4 & 0
+                        \end{bmatrix}\\
+        \sigma(I_{12})=\begin{bmatrix}
+                            0 & 1\\
+                            0 & 4
+                        \end{bmatrix}\\
+        \sigma(I_{21})=\begin{bmatrix}
+                            2 & 0\\
+                            3 & 0
+                        \end{bmatrix}\\
+        \sigma(I_{22})=\begin{bmatrix}
+                            0 & 2\\
+                            0 & 3
+                        \end{bmatrix}
+    \end{cases}
+    $$
+    Thus,
+    $$
+    \begin{cases}
+        \sigma(I_{11})=1I_{11}+0I_{12}+4I_{21}+0I_{22}\\
+        \sigma(I_{12})=0I_{11}+1I_{12}+0I_{21}+4I_{22}\\
+        \sigma(I_{21})=2I_{11}+0I_{12}+3I_{21}+0I_{22}\\
+        \sigma(I_{22})=0I_{11}+2I_{12}+0I_{21}+3I_{22}
+    \end{cases}
+    $$
+    then 
+    $$
+    \begin{bmatrix}
+        1 & 0 & 2 & 0\\
+        0 & 1 & 0 & 2\\
+        4 & 0 & 3 & 0\\
+        0 & 4 & 0 & 3
+    \end{bmatrix}
+    $$
+    is the answer.
+\end{sol}
+
+\begin{exe}
+    We know that a linear transformation $\sigma$'s matrix reprentation under the 
+    basis $\alpha_{1},\alpha_{2},\alpha_{3}$ is 
+    $$ A=
+    \begin{bmatrix}
+        1&2&3\\
+        4&5&6\\
+        7&8&9
+    \end{bmatrix}.$$
+    Find the matrix reprentation of $\sigma$ under the basis $\alpha_{3},\alpha_{2},\alpha_{1}$
+\end{exe}
+\begin{sol}
+    Since
+    $$
+    [\alpha_{3},\alpha_{2},\alpha_{1}]
+    =[\alpha_{1},\alpha_{2},\alpha_{3}]
+    \begin{bmatrix}
+        0&0&1\\
+        0&1&0\\
+        1&0&0
+    \end{bmatrix}
+    ,$$
+    then from the theorem \ref{MatrixTransUnderBasisTrans}, 
+    \begin{align*}
+    B
+    & =
+    \begin{bmatrix}
+        0&0&1\\
+        0&1&0\\
+        1&0&0
+    \end{bmatrix}
+    A
+    \begin{bmatrix}
+        0&0&1\\
+        0&1&0\\
+        1&0&0
+    \end{bmatrix}\\
+    &=
+    \begin{bmatrix}
+        7&8&9\\
+        4&5&6\\
+        1&2&3
+    \end{bmatrix}
+    \begin{bmatrix}
+        0&0&1\\
+        0&1&0\\
+        1&0&0
+    \end{bmatrix}\\
+    &=
+    \begin{bmatrix}
+        9&8&7\\
+        6&5&4\\
+        3&2&1
+    \end{bmatrix}
+    \end{align*}
+    is the answer.
+\end{sol}
+
+\begin{exe}
+    Set the linear transformation $\sigma$ under the basis 
+    $\alpha_{1},\alpha_{2},\alpha_{3}$, and its matrix reprentation is 
+    $$A=
+    \begin{bmatrix} 
+        1&2&2\\
+        2&1&2\\
+        2&2&1
+    \end{bmatrix}.$$
+    Find the eigenvalue of $\sigma$ and its eigenvector.
+\end{exe}
+
+\begin{sol}
+    Solve the eigenvalue of the $A$,
+    \begin{align*}
+    &|\lambda I-A|\\
+    &=
+    \begin{vmatrix}
+        \lambda-1&-2&-2\\
+        -2&\lambda-1&-2\\
+        -2&-2&\lambda-1
+    \end{vmatrix}\\
+    &=
+    \begin{vmatrix}
+        \lambda-5&-2&-2\\
+        \lambda-5&\lambda-1&-2\\
+        \lambda-5&-2&\lambda-1
+    \end{vmatrix}\\
+    &=(\lambda-5)
+    \begin{vmatrix}
+        1&-2&-2\\
+        1&\lambda-1&-2\\
+        1&-2&\lambda-1
+    \end{vmatrix}\\
+    &=(\lambda-5)
+    \begin{vmatrix}
+        1&0&0\\
+        1&\lambda+1&0\\
+        1&0&\lambda+1
+    \end{vmatrix}\\
+    &=(\lambda+1)^{2}(\lambda-5)
+    \end{align*}
+    Thus, the eigenvalue of $\sigma$ is $\lambda_{1}=\lambda_{2}=-1$ or $\lambda_{3}=5$.
+    For $\lambda=-1$,
+    $$
+    \begin{cases}
+        -2x_{1}-2x_{2}-2x_{3}=0\\
+        -2x_{1}-2x_{2}-2x_{3}=0\\
+        -2x_{1}-2x_{2}-2x_{3}=0
+    \end{cases}
+    $$
+    then two solutions of it is $X_{1}=(1,0,-1)^{T}$ and 
+    $X_{2}=(0,1,-1)$.
+    For $\lambda=5$,
+    $$
+    \begin{cases}
+        4x_{1}-2x_{2}-2x_{3}=0\\
+        -2x_{1}+4x_{2}-2x_{3}=0\\
+        -2x_{1}-2x_{2}+4x_{3}=0
+    \end{cases}
+    $$
+    then one solution of it is $X_{3}=(1,1,1)^{T}$.
+
+    For eigenvectors with eigenvalue $\lambda=-1$,
+    \begin{align*}
+        \beta_{1}&=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{1}=\alpha_{1}-\alpha_{3}\\
+        \beta_{2}&=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{2}=\alpha_{2}-\alpha_{3}
+    \end{align*}
+    then the eigenvector of the $\sigma$ with eigenvalue -1 is 
+    $$k_{1}\beta_{1}+k_{2}\beta_{2}.$$
+    
+    For eigenvalue with eigenvalue $\lambda=5$,
+    $$\beta_{3}=[\alpha_{1},\alpha_{2},\alpha_{3}]X_{3}=\alpha_{1}+\alpha_{2}+\alpha_{3}$$
+    then $$k_{3}\beta_{3}$$ is the eigenvector of the $\sigma$ with eigenvalue 5.
+\end{sol}
+
+
+\section{Conclusion}
+\begin{enumerate}
+    \item Judge whether it's a linear transformation.
+    \item Find the matrix representation of a linear transformation under the specific basis.
+    \item Find the matrix representation of a linear transformation under the different basis.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
