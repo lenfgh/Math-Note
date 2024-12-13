@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -122,6 +123,43 @@ Now, suppose ${x_{n}}_{n=1}^{\infty}$ is a Cauchy sequence.
 Every convergent sequence is bounded and hence an unbounded sequence 
 necessarily diverges.
 
+
+\subsection{Tail of a Sequence}
+
+\begin{defi}
+For a sequence ${x_{n}}_{n=1}^{\infty}$, the K-tail (where $K\in \mathbb{N}$), or just the tail, of ${x_{n}}_{n=1}^{\infty}$ is the sequence starting at $K+1$, usually written as 
+$${x_{n+K}}_{n=1}^{\infty}\ \ or \ \ {x_{n}}_{n=K+1}^{\infty}.$$
+The convergence and the limit of a sequence only depends on its tail.
+\end{defi}
+
+\begin{prop}
+Let ${x_{n}}_{n=1}^{\infty}$ be a sequence. Then the following statements are equivalent:
+\begin{enumerate}[label=(i)]
+    \item The sequence ${x_{n}}_{n=1}^{\infty}$ converges.
+    \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for all $K\in \mathbb{N}$.
+    \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for some $K\in \mathbb{N}$.
+\end{enumerate}
+
+Furthermore, if any (and hence all) of the limits exists, then for all $K\in \mathbb{N}$
+$$\lim_{n\to \infty}x_{n}=\lim_{n\to \infty}x_{n+K}.$$
+
+\end{prop}
+
+\begin{proof}
+It is clear that (ii) implies (iii). We can show $(i)\to (ii)\to (iii)\to (i)$
+
+Suppose ${x_{n}}_{n=1}^{\infty}$ converges to $x$. Let $K\in \mathbb{N}$ be arbitrary, and define $y_{n}:=x_{n+K}$. We wish to show that ${y_{n}}_{n=1}^{\infty}$ converges to $x$.
+
+l
+
+\end{proof}
+
+
+
+
+
+
+
 \subsection{Subsequence}
 If a sequence ${a_{n}}$ converges to $p$, then every subsequence ${a_{k_{n}}}$ 
 also converges to $p$.
@@ -130,6 +168,11 @@ also converges to $p$.
 
 If $\lim_{n\rightarrow\infty}-a_{n}=\infty$, we write $\lim_{n\rightarrow\infty}a_{n}=-\infty$ and say that $a_{n}$ 
 diverges to $-\infty$. 
+
+
+
+
+
 
 \section{Limit Superior and Limit Inferior of a Real-Valued Sequence}
 \subsection{Basis}
@@ -197,14 +240,33 @@ we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\righ
 \end{proof}
 
 \subsection{Monotune Sequence}
+
+\begin{defi}
+A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone increasing if ${x_{n}\leq x_{n+1}},\ for\ n=1,2,\cdots$.
+A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing if ${x_{n}\geq x_{n+1}},\ for\ n=1,2,\cdots$.
+If a sequence is either monotone increasing or monotone decreasing, we say that the sequence is monotone.
+\end{defi}
+
 \begin{theorem}
     A monotonic sequence converges if, and only if, it is bounded.
+
+    Furthermore, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and bounded, then $\lim_{n\to \infty} x_{n}=\sup{x_{n}:n\in \mathbb{N}}$.
+    If ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing and bounded, then $\lim_{n\rightarrow \infty} x_{n}=\inf{x_{n}:n=1,2,\cdots}.$
 \end{theorem}
+
+
 \begin{proof}
-    If $a_{n}\uparrow$, $\lim_{n\rightarrow \infty}=\sup {a_{n}:n=1,2,\cdots}.$ If 
-    $a_{n}\downarrow$, $\lim_{n\rightarrow \infty}=\inf {a_{n}:n=1,2,\cdots}.$
-\label{thm:monotoinc}
-\end{proof}
+Consider a monotune increasing sequence ${x_{n}}_{n=1}^{\infty}$, if it is bounded, we set $x:=\sup{x_{n}:n\in \mathbb{N}}.$. Let $\epsilon>0$ be arbitary. As $x$
+is the supremum of the sequence, we have at least one $M$ satisfying that $x_{M}>x-\epsilon.$ As ${x_{n=1}}^{\infty}_{n=1}$ is monotue increasing, for $n\leq M$, $|x_{n}-x|\leq|x-x_{M}|\leq \epsilon.$ 
+Hence ${x_{n}}_{n=1}^{\infty}$  converges to $x$. From the other side, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and convergent, then it is bounded. Vise versa, we can prove the situation of monotune decreasing sequence.
+\end{proof}  
+
+\begin{prop}
+    Let $S\subset R$ be a nonempty subset of $R$. Then there exist monotone sequence ${x_{n}}_{n=1}^{\infty}$ and ${y_{n}}_{n=1}^{\infty}$ such that $x_{n},y_{n}\in S$ and
+    $$\sup S = \lim_{n\to \infty}x_{n}\ \ and \inf S = \lim_{n\to \infty}y_{n}.$$ 
+\end{prop}
+
+
 
 
 \section{Infinite Series}
@@ -284,29 +346,90 @@ and hence $\sum a_{n}$ diverges. This series is called the \textit{harmonic seri
     
 \end{proof}
 
-
+% todo 
 
 
 
 \subsection{Inserting and Removing Parentheses}
 
+\newpage
+\section{Exercise}
 
 
+\begin{exe}
+Find : $\underset{n \to \infty}{\lim}\frac{n}{e^{n}}.$ 
+\end{exe}
+\begin{sol}
+    Set continous function $f(x)=\frac{x}{e^{x}}$ and $\lim_{x\to \infty}f(x)=\underset{n \to \infty}{\lim}\frac{n}{e^{n}}$
+Since $\underset{x \to \infty}{\lim}x=\infty=\underset{x \to \infty}{\lim}e^{x},$ we can use L'Hôpital's Rule.
+\begin{align*}
+    &\underset{x \to \infty}{\lim}\frac{x}{e^{x}}\\
+    =& \underset{x \to \infty}{\lim}\frac{1}{e^{x}}\\
+    =0
+\end{align*}
+Thus the limit is $0$.
+\end{sol}
+
+\begin{exe}
+Find : $\underset{n \to \infty}{\lim}\frac{\sin{n}}{n}.$
+\end{exe}
+
+\begin{sol}
+    Since $$-1\leq \sin{n}\leq 1,$$ we have $$-\frac{1}{n}\leq \frac{\sin{n}}{n}\leq \frac{1}{n}.$$
+    As $n$ approaches infinity, the limit of the sequence $\left\{-\frac{1}{n}\right\}$ and $\left\{\frac{1}{n}\right\}$ is both $0$. Using the squeezing theorem, we have $$\underset{n \to \infty}{\lim}\frac{\sin{n}}{n}=0.$$
+\end{sol}
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}\frac{\ln(1+\frac{1}{n})}{n}.$
+\end{exe}
+\begin{sol}
+\begin{align*}
+    &\underset{n \to \infty}{\lim}\frac{\ln(1+\frac{1}{n})}{n}\\
+    =& \frac{\underset{n \to \infty}{\lim} \ln(1+\frac{1}{n})}{\underset{n \to \infty}{\lim} n}\\
+    =&\frac{0}{\infty}\\
+    =&0	
+\end{align*}
+\end{sol}
+
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}n\sin^{2}(\frac{1}{n}).$
+\end{exe}
+
+\begin{sol}
+    \begin{align*}
+        &\underset{n \to \infty}{\lim}n\sin^{2}(\frac{1}{n})\\
+        =& \underset{n \to \infty}{\lim}\frac{\sin^{2}(\frac{1}{n})}{\frac{1}{n}}\ for\ x\in R^{+} \lim_{x\to \infty}\sin^{2}(\frac{1}{x})=0=\lim_{x\to \infty}\frac{1}{x}, using L'Hôpital's Rule \\
+        =& \underset{x \to \infty}{\lim} 2\sin(\frac{1}{x})\cos(\frac{1}{x})\\
+        =& 0
+    \end{align*}
+\end{sol}
 
 
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}(n+\frac{1}{n})^{\frac{1}{n}}.$
+\end{exe}
+
+\begin{sol}
+    \begin{align*}
+        &\underset{n \to \infty}{\lim}(n+\frac{1}{n})^{\frac{1}{n}}\\
+        =& \underset{n \to \infty}{\lim}e^{\frac{\ln(n+\frac{1}{n})}{n}}\  \\
+        =& \exp{\underset{n \to \infty}{\lim}\frac{\ln(n+\frac{1}{n})}{n}}\ Obviously\ \underset{n \to \infty}{\lim}\frac{\ln(n+\frac{1}{n})}{n}=0 \\
+        =& 1
+    \end{align*}
+\end{sol}
 
 
+\begin{exe}
+    Find : $\underset{n \to \infty}{\lim}\sqrt[n]{\ln n}.$
+\end{exe}
 
+\begin{sol}
+Since $$1\leq \ln n\leq n,\ for\ n\leq 3$$
+we have $$1\leq \sqrt[n]{\ln n}\leq \sqrt[n]{n},\ for\ n\leq 3.$$
 
+As we have shown that $\lim_{n\to \infty}\sqrt[n]{n}=1$, then use the squeezing theorem . We have $$\underset{n \to \infty}{\lim}\sqrt[n]{\ln n}=1.$$
 
-
-
-
-
-
-
-
-
+\end{sol}
 
 
 
