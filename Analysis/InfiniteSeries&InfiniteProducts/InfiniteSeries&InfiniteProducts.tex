@@ -39,7 +39,9 @@
 \begin{abstract}
 This is the note of Infinite Series and Infinite Products,
  maded by Len Fu while his learning progress.
- The main content is from \textit{Mathematical Analysis\ Tom A.Apostol}.
+ The main content is from \textit{Mathematical Analysis\ Tom A.Apostol} and the course of \textit{Mathematical Analysis\ Z.H.Zhao BIT 2024 Fall}.
+
+In this chapter,  you need to 
 \end{abstract}
 \newpage
 
@@ -47,7 +49,9 @@ This is the note of Infinite Series and Infinite Products,
 \tableofcontents
 \newpage
 
-\section{Convergent and Divergent Sequences of Complex Numbers}
+
+
+\section{Convergence and Divergence}
 \subsection{Basis}
 
 \begin{defi}[Convergence]
@@ -87,7 +91,7 @@ If a sequence is a Cauchy sequence, then it is bounded.
 \end{prop}
 
 \begin{proof}
-    Suppose ${x_{n}}_{n=1}^{\infty}$ is Cauchy.Pick an $M$ 
+    Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is Cauchy.Pick an $M$ 
     such that for $n,k\geq M$, we have $|x_{n}-x_{k}|<1$. In particular 
     for all $n\geq M$, $$|x_{n}-x_{M}|\geq 1.$$
     Then we use the triangle inequality to obtain:
@@ -103,39 +107,31 @@ If a sequence is a Cauchy sequence, then it is bounded.
 \end{theorem}
 
 \begin{proof}
-Suppose ${x_{n}}_{n=1}^{\infty}$ converges to x, and let $\epsilon>0$ be given. Then there exists 
+Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges to x, and let $\epsilon>0$ be given. Then there exists 
 an $M$ such that for $n\geq M$ ,$|x_{n}-x|<\frac{\epsilon}{2}.$
 Hence for $n\geq M$ and $k\geq M$, 
 $$|x_{n}-x|+|x_{k}-x|\geq |x_{n}-x_{k}| \geq \epsilon$$
-and ${x_{n}}_{n=1}^{\infty}$ is a Cauchy sequence.
+and $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a Cauchy sequence.
 
-Now, suppose ${x_{n}}_{n=1}^{\infty}$ is a Cauchy sequence.
-
-
+Now, suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a Cauchy sequence.
 \end{proof}
 
 
-
-
-
-
-\subsection{Bounded and convergent}
-Every convergent sequence is bounded and hence an unbounded sequence 
-necessarily diverges.
+Actually, every convergent sequence is bounded and hence an unbounded sequence necessarily diverges.
 
 
 \subsection{Tail of a Sequence}
 
 \begin{defi}
-For a sequence ${x_{n}}_{n=1}^{\infty}$, the K-tail (where $K\in \mathbb{N}$), or just the tail, of ${x_{n}}_{n=1}^{\infty}$ is the sequence starting at $K+1$, usually written as 
+For a sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$, the K-tail (where $K\in \mathbb{N}$), or just the tail, of $\left\{x_{n}\right\}_{n=1}^{\infty}$ is the sequence starting at $K+1$, usually written as 
 $${x_{n+K}}_{n=1}^{\infty}\ \ or \ \ {x_{n}}_{n=K+1}^{\infty}.$$
 The convergence and the limit of a sequence only depends on its tail.
 \end{defi}
 
 \begin{prop}
-Let ${x_{n}}_{n=1}^{\infty}$ be a sequence. Then the following statements are equivalent:
+Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be a sequence. Then the following statements are equivalent:
 \begin{enumerate}[label=(i)]
-    \item The sequence ${x_{n}}_{n=1}^{\infty}$ converges.
+    \item The sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges.
     \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for all $K\in \mathbb{N}$.
     \item The K-tail ${x_{n+K}}_{n=1}^{\infty}$ converges for some $K\in \mathbb{N}$.
 \end{enumerate}
@@ -148,21 +144,31 @@ $$\lim_{n\to \infty}x_{n}=\lim_{n\to \infty}x_{n+K}.$$
 \begin{proof}
 It is clear that (ii) implies (iii). We can show $(i)\to (ii)\to (iii)\to (i)$
 
-Suppose ${x_{n}}_{n=1}^{\infty}$ converges to $x$. Let $K\in \mathbb{N}$ be arbitrary, and define $y_{n}:=x_{n+K}$. We wish to show that ${y_{n}}_{n=1}^{\infty}$ converges to $x$.
-
-l
-
+Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges to $x$. Let $K\in \mathbb{N}$ be arbitrary, and define $y_{n}:=x_{n+K}$. We wish to show that ${y_{n}}_{n=1}^{\infty}$ converges to $x$.
 \end{proof}
 
+\subsection{Recursively Defined Sequence}
 
+One such class are recursively defined sequences are that the next term depends on the previous term and have a fixed formula.
 
-
+To prove a recursively defined sequence is a 
 
 
 
 \subsection{Subsequence}
-If a sequence ${a_{n}}$ converges to $p$, then every subsequence ${a_{k_{n}}}$ 
-also converges to $p$.
+
+\begin{defi}
+    Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be a squence. Let ${n_{i}}_{i=1}^{\infty}$ be a strictly increasing sequence of integers.Then the sequence 
+    $$\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$$ is called a \textit{subsequence} of $\left\{x_{n}\right\}_{n=1}^{\infty}$.
+\end{defi}
+
+
+\begin{prop}
+    If $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a convergent sequence, then every subsequence ${x_{n_{i}}}_[i=1]^{\infty}$ is convergent, and 
+    $$\lim_{n\to \infty}x_{n}=\lim_{i\to \infty}x_{n_{i}}.$$ 
+    That is, if a sequence ${a_{n}}$ converges to $p$, then every subsequence ${a_{k_{n}}}$ also converges to $p$.
+
+\end{prop}
 
 
 
@@ -170,7 +176,74 @@ If $\lim_{n\rightarrow\infty}-a_{n}=\infty$, we write $\lim_{n\rightarrow\infty}
 diverges to $-\infty$. 
 
 
+\subsection{About the Limit of a Sequence}
 
+\begin{theorem}[Relationship between the Limit of a Sequence and the Limit of a Function]
+    Let $\left\{a_{n}\right\}_{n=1}^{\infty}$ be a sequence, and $f$ is a function defined on $[m,+\infty)$ such that $f(n)=a_{n}\ for\ n\geq m.$
+    \begin{enumerate}
+        \item If $\lim_{x\to\infty}f(x)=L$, then $\left\{a_{n}\right\}_{n=1}^{\infty}$ is convergent and $\lim_{n\rightarrow\infty}a_{n}=L$.
+        \item If $\lim_{x\to\infty}f(x)=\pm \infty$, then $\left\{a_{n}\right\}_{n=1}^{\infty}$ is divergent and $\lim_{n\rightarrow\infty}a_{n}=\pm \infty$.
+    \end{enumerate}
+\end{theorem}
+
+
+\begin{lemma}[Squezze Theorem]
+
+    Let $\left\{a_{n}\right\}_{n=1}^{\infty}$ and $\left\{b_{n}\right\}_{n=1}^{\infty}$ be sequences of real numbers, and $\left\{x_{n}\right\}_{n=1}^{\infty}$
+     be a sequence satisfying 
+     $$a_{n}<x_{n}<b_{n}\ for\ all\ n\in\mathbb{N}.$$
+
+    Suppose that $\lim_{n\rightarrow\infty}a_{n}=\lim_{n\rightarrow\infty}b_{n}=$,
+    then $\lim_{n\rightarrow\infty}a_{n}\lim_{n\rightarrow\infty}x_{n}=\lim_{n\rightarrow\infty}b_{n}$.
+    
+\end{lemma}
+
+\begin{lemma}
+    
+    Let $\left\{a_{n}\right\}_{n=1}^{\infty}$ and $\left\{b_{n}\right\}_{n=1}^{\infty}$ be convergent sequences and 
+    $$a_{n}\leq b_{n}\ for\ all\ n\in \mathbb{N}.$$
+    Then $\lim_{n\rightarrow\infty}a_{n}\leq \lim_{n\rightarrow\infty}b_{n}$.
+\end{lemma}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item If $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a convergent sequence such that $x_{n}\leq 0$ for all $n\in \mathbb{N}$, then $\lim_{n\to\infty}x_{n}\geq0$.
+        \item Let $a,b\in\mathbb{R}$ and let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be a convergent sequence such that 
+        $$a\leq x_{n}\leq b\ for\ all\ n\in \mathbb{N}.$$
+        Then $a\leq \lim_{n\rightarrow\infty}x_{n}\leq b$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{prop}[Algebraic Operations]
+
+    Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ and $\left\{y_{n}\right\}_{n=1}^{\infty}$ be convergent sequences. Then the following statements are true:
+\begin{enumerate}
+    \item For $z_{n}:=x_{n}+y_{n}$, it converges and $$\lim_{n\rightarrow \infty}z_{n}=\lim_{n\rightarrow \infty}x_{n}+\lim_{n\rightarrow \infty}y_{n}=\lim_{n\rightarrow \infty}(x_{n}+y_{n}).$$
+    \item For $z_{n}:=x_{n}-y_{n}$, it converges and $$\lim_{n\rightarrow \infty}z_{n}=\lim_{n\rightarrow \infty}x_{n}-\lim_{n\rightarrow \infty}y_{n}=\lim_{n\rightarrow \infty}(x_{n}-y_{n}).$$
+    \item For $z_{n}:=x_{n}y_{n}$, it converges and $$\lim_{n\rightarrow \infty}z_{n}=\lim_{n\rightarrow \infty}x_{n}\lim_{n\rightarrow \infty}y_{n}=\lim_{n\rightarrow \infty}(x_{n}y_{n}).$$
+    \item For $z_{n}:=\frac{x_{n}}{y_{n}}$, if $\lim_{n\to \infty} y_{n}\neq 0 and y_{n}\neq 0$,it converges and $$\lim_{n\rightarrow \infty}z_{n}=\lim_{n\rightarrow \infty}\frac{x_{n}}{y_{n}}=\lim_{n\rightarrow \infty}\left(\frac{x_{n}}{y_{n}}\right).$$
+\end{enumerate}
+\end{prop}
+
+
+\subsection{Convergence Test}
+\begin{lemma}[Ratio test for sequences]
+    Let $\left\{a_{n}\right\}_{n=1}^{\infty}$ be a sequence of real numbers such that $a_{n}\neq 0$ for all $n\in \mathbb{N}$. If the limit 
+    $$L=\lim_{n\to \infty}\frac{|x_{n+1}|}{|x_{n}|}\ exists.$$
+    And 
+    \begin{enumerate}
+        \item If $L<1$, then $\left\{a_{n}\right\}_{n=1}^{\infty}$ converges to 0.
+        \item If $L>1$, then $\left\{a_{n}\right\}_{n=1}^{\infty}$ diverges.
+    \end{enumerate}
+\end{lemma}
+
+\begin{theorem}[Boundedness]
+    \begin{enumerate}
+        \item If $\left\{a_{n}\right\}_{n=1}^{\infty}$ converges, then it is bounded.
+        \item If $\left\{a_{n}\right\}_{n=1}^{\infty}$ is unbounded, then it diverges.
+    \end{enumerate}
+\end{theorem}
+\noindent\textbf{Note:} It does not imply that all bounded sequences converge. 
 
 
 
@@ -242,27 +315,27 @@ we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\righ
 \subsection{Monotune Sequence}
 
 \begin{defi}
-A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone increasing if ${x_{n}\leq x_{n+1}},\ for\ n=1,2,\cdots$.
-A sequence ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing if ${x_{n}\geq x_{n+1}},\ for\ n=1,2,\cdots$.
+A sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ is monotone increasing if ${x_{n}\leq x_{n+1}},\ for\ n=1,2,\cdots$.
+A sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ is monotone decreasing if ${x_{n}\geq x_{n+1}},\ for\ n=1,2,\cdots$.
 If a sequence is either monotone increasing or monotone decreasing, we say that the sequence is monotone.
 \end{defi}
 
 \begin{theorem}
     A monotonic sequence converges if, and only if, it is bounded.
 
-    Furthermore, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and bounded, then $\lim_{n\to \infty} x_{n}=\sup{x_{n}:n\in \mathbb{N}}$.
-    If ${x_{n}}_{n=1}^{\infty}$ is monotone decreasing and bounded, then $\lim_{n\rightarrow \infty} x_{n}=\inf{x_{n}:n=1,2,\cdots}.$
+    Furthermore, if $\left\{x_{n}\right\}_{n=1}^{\infty}$ is monotone increasing and bounded, then $\lim_{n\to \infty} x_{n}=\sup{x_{n}:n\in \mathbb{N}}$.
+    If $\left\{x_{n}\right\}_{n=1}^{\infty}$ is monotone decreasing and bounded, then $\lim_{n\rightarrow \infty} x_{n}=\inf{x_{n}:n=1,2,\cdots}.$
 \end{theorem}
 
 
 \begin{proof}
-Consider a monotune increasing sequence ${x_{n}}_{n=1}^{\infty}$, if it is bounded, we set $x:=\sup{x_{n}:n\in \mathbb{N}}.$. Let $\epsilon>0$ be arbitary. As $x$
+Consider a monotune increasing sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$, if it is bounded, we set $x:=\sup{x_{n}:n\in \mathbb{N}}.$. Let $\epsilon>0$ be arbitary. As $x$
 is the supremum of the sequence, we have at least one $M$ satisfying that $x_{M}>x-\epsilon.$ As ${x_{n=1}}^{\infty}_{n=1}$ is monotue increasing, for $n\leq M$, $|x_{n}-x|\leq|x-x_{M}|\leq \epsilon.$ 
-Hence ${x_{n}}_{n=1}^{\infty}$  converges to $x$. From the other side, if ${x_{n}}_{n=1}^{\infty}$ is monotone increasing and convergent, then it is bounded. Vise versa, we can prove the situation of monotune decreasing sequence.
+Hence $\left\{x_{n}\right\}_{n=1}^{\infty}$  converges to $x$. From the other side, if $\left\{x_{n}\right\}_{n=1}^{\infty}$ is monotone increasing and convergent, then it is bounded. Vise versa, we can prove the situation of monotune decreasing sequence.
 \end{proof}  
 
 \begin{prop}
-    Let $S\subset R$ be a nonempty subset of $R$. Then there exist monotone sequence ${x_{n}}_{n=1}^{\infty}$ and ${y_{n}}_{n=1}^{\infty}$ such that $x_{n},y_{n}\in S$ and
+    Let $S\subset R$ be a nonempty subset of $R$. Then there exist monotone sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ and ${y_{n}}_{n=1}^{\infty}$ such that $x_{n},y_{n}\in S$ and
     $$\sup S = \lim_{n\to \infty}x_{n}\ \ and \inf S = \lim_{n\to \infty}y_{n}.$$ 
 \end{prop}
 
@@ -275,6 +348,7 @@ numbers, and form a new sequence ${s_{n}}$ as follows:
 $$s_{n}=a_{1}+a_{2}+\cdots +a_{n}\ (n=1,2,\cdots)$$
 
 \subsection{Basis}
+
 \begin{defi}[Series]
 The orderd pair of sequences ${a_{n}},{s_{n}}$ is 
 called an infinite series. The number $s_{n}$ is called 
@@ -313,7 +387,7 @@ $$ s=\sum_{k=1}^{\infty}a_{k}$$.
     converges if, and only if, the sequence of patial sums is bounded above.
 \end{corollary}
 \begin{proof}
-    Let $s_{n}=a_{1}+a_{2}+\cdots+a_{n}$. Then we can apply \ref{thm:monotoinc}
+    Let $s_{n}=a_{1}+a_{2}+\cdots+a_{n}$. Then we can apply the theorem.
 \end{proof}
 
 \begin{theorem}[Telescoping series]
@@ -339,15 +413,20 @@ and hence $\sum a_{n}$ diverges. This series is called the \textit{harmonic seri
 
 \begin{prop}
     Let $\sum_{n=1}^{\infty}x_{n}$ be a convergent series. Then the sequence 
-    ${x_{n}}_{n=1}^{\infty}$ is convergent and $$\lim_{n\rightarrow \infty}x_{n} = 0.$$
+    $\left\{x_{n}\right\}_{n=1}^{\infty}$ is convergent and $$\lim_{n\rightarrow \infty}x_{n} = 0.$$
 \end{prop}
 
 \begin{proof}
     
 \end{proof}
 
+
 % todo 
 
+\begin{theorem}[Cauchy Condition for series]
+    The series $\sum a_{n}$ converges if, and only if, for every $\epsilon>0$ there exists an integer $N$ such that $n>N$ implies
+    $$|a_{n+1}+a_{n+2}+\cdots+a_{n+p}|<\epsilon\ for\ each\ p=1,2,\cdots.$$
+\end{theorem}
 
 
 \subsection{Inserting and Removing Parentheses}
@@ -430,6 +509,211 @@ we have $$1\leq \sqrt[n]{\ln n}\leq \sqrt[n]{n},\ for\ n\leq 3.$$
 As we have shown that $\lim_{n\to \infty}\sqrt[n]{n}=1$, then use the squeezing theorem . We have $$\underset{n \to \infty}{\lim}\sqrt[n]{\ln n}=1.$$
 
 \end{sol}
+
+\begin{exe}
+    Prove that $a_{n}=\sum_{i=1}^{n}\frac{1}{i^{\alpha}}
+    \begin{cases}
+    is\ divevrgent\ for\ \alpha=1\\
+    is\ convergent\ for\ \alpha>1
+    \end{cases}.$
+\end{exe}
+
+
+\begin{sol}
+
+For $\alpha\geq 2$ and all $\epsilon>0$ , there exists $N=[\frac{1}{\epsilon}]$, such that for $n\geq N$, 
+\begin{align*}
+    0<|a_{n+p}-a_{n}|=& \sum_{i=1}^{p}\frac{1}{(n+i)^{\alpha}}\\
+    \leq& \sum_{i=1}^{p}\frac{1}{(n+i)^{2}}\\
+    <& \sum_{i=1}^{p}\frac{1}{(n)(n+i)}\\
+    =& \frac{1}{n}-\frac{1}{n+p}\\
+    <& \frac{1}{n}\\
+    <& \epsilon
+\end{align*}
+
+For $\alpha<1$, 
+\begin{align*}
+    a_{n+p}-a_{n}=& \sum_{i=1}^{p}\frac{1}{(n+i)^{\alpha}}\\
+    >& \sum_{i=1}^{p}\frac{1}{n+i}\\
+    >& \frac{p}{n+p}\\
+    >& \frac{1}{2}
+\end{align*}
+
+There exists $\epsilon=\frac{1}{2}$, such that for all $N$, $\exists n_{0}=p\geq N$, such that
+$$|a_{n+p}-a_{n}|>\frac{1}{2}=\epsilon\ for\ n\geq n_{0}.$$
+\end{sol}
+
+\begin{exe}
+    Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be a sequence. Suppose there are two convergent subsequence $\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$ and
+    $\left\{x_{m_{i}}\right\}_{i=1}^{\infty}$. Suppose 
+    $$\lim_{i\to \infty}x_{n_{i}}=a\ \ and\ \ \lim_{i\to \infty}x_{m_{i}}=b,$$
+    where $a\neq b$. Prove that $\left\{x_{n}\right\}_{n=1}^{\infty}$ is not convergent.
+\end{exe}
+
+\begin{exe}[Homework]
+\end{exe}
+
+\begin{sol}[2.1.16]
+
+    Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is convergent and converges to $L$. Then from the definition we know that for every $\epsilon$, there exists an $M$ that for all $n\geq M$,
+    $$ |x_{n}-L|<\epsilon.$$
+    
+    For all $i\geq M$, we have $n_{i}\geq M$, since $\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$ is a subsequence of $\left\{x_{n}\right\}_{n=1}^{\infty}$, we can have 
+    $$|x_{n_{i}}-L|<\epsilon\ for\ i\geq M.$$
+    And we know that $\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$ converges to $a$, thus we have $a=L$.
+    
+From the other side, we know that the subsequence $\left\{x_{m_{i}}\right\}_{i=1}^{\infty}$ also converges to $L$, thus we have $b=L$.
+Thus we have $a=b=L$, which contradicts the fact that $a\neq b$.
+Hence $\left\{x_{n}\right\}_{n=1}^{\infty}$ is not convergent.
+\end{sol}
+
+\begin{sol}[2.1.17]
+
+The sequence of all rational numbers.
+\end{sol}
+
+
+\begin{sol}[2.1.20]
+We can know that ${y_{n}}_{n=1}^{\infty}$ is a subsequence of the sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$. If $\left\{x_{n}\right\}_{n=1}^{\infty}$ is 
+convergent, then ${y_{n}}_{n=1}^{\infty}$ is also convergent as the subsequence of $\left\{x_{n}\right\}_{n=1}^{\infty}$ and $\lim_{n\to \infty}x_{n}=\lim_{n\to \infty}y_{n}$.
+
+If ${y_{n}}_{n=1}^{\infty}$ is convergent, 
+
+\end{sol}
+
+\begin{sol}[2.1.22]
+
+Suppose $\left\{x_{2n}\right\}_{n=1}^{\infty}$, $\left\{x_{2n-1}\right\}_{n=1}^{\infty}$ and $\left\{x_{3n}\right\}_{n=1}^{\infty}$ converge to $L_{1}$,$L_{2}$ and $L_{3}$ respectively. We know that $\left\{x_{3n}\right\}_{n=1}^{\infty}$ 
+is a subsequence of $\left\{x_{2n-1}\right\}_{n=1}^{\infty}$, thus we can have that $L_{1}=L_{3}$. We know that ${x_{6n}}$ is the subsequence of $\left\{x_{2n}\right\}_{n=1}^{\infty}$ and $\left\{x_{3n}\right\}_{n=1}^{\infty}$, and we assume that 
+$\lim_{n\to \infty}x_{6n}=L'$, then we have $L'=L_{2}=L_{3}$. Hence $L_{1}=L_{2}=L_{3}$ and we set it as $L$.
+
+Consider the convergence of $\left\{x_{2n}\right\}_{n=1}^{\infty}$ and $\left\{x_{2n-1}\right\}_{n=1}^{\infty}$, we can have that for 
+all $\epsilon>0$, there exists $N_{1}$ and $N_{2}$ such that for all $n\geq N_{1}$ and $n\geq N_{2}$,
+$$|x_{2n}-L|<\epsilon\ and\ |x_{2n-1}-L|<\epsilon.$$
+We can have that $N=max\{N_{1},N_{2}\}$. Then we can have that for all $n\geq N$,
+$$|x_{n}-L|<\epsilon.$$
+then we have that $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges to $L$.
+\end{sol}
+
+\begin{sol}[2.1.23]
+
+Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a monotune increasing sequence and its subsequence $\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$ converges to $L$.
+It's easy to prove that $n_{k}\geq k$ for all $k\geq 1$. Then we have that for all $k\geq 1$, $x_{k}\leq x_{n_{k}}$, for ${x_{n_{k}}}_{k=1}^{\infty}$ is bounded especially upper-bounded, we can 
+know that ${x_{k}}_{k=1}^{\infty}$ is bounded above. From the theorem we know that ${x_{k}}_{k=1}^{\infty}$ converges to $L$.
+\end{sol}
+
+\begin{sol}[2.2.6]
+
+    $\lim_{n\to\infty}z_{n}=0\ and\ \lim_{n\to\infty}w_{n}=\infty$. No, because $\lim_{n\to\infty}x_{n}=0$ and $\lim_{n\to\infty}y_{n}=0$.
+\end{sol}
+
+\begin{sol}[2.2.7]
+
+    $x_{n} = (-1)^{n} (1-e^{-n})$
+\end{sol}
+
+\begin{sol}[2.2.8]
+    Set $f(x)=\frac{n^{x}}{2^{x}}$, and we have $\lim_{x\to\infty}f(x)=\lim_{n\to\infty}$.
+    Then use l'Hôpital's Rule twice and we can  $\lim_{x\to\infty}f(x)=0$.And $\lim_{n\to\infty}=0$.
+\end{sol}
+
+\begin{sol}[2.2.9]
+
+    For any $\epsilon>0$, there exists an $M$ such that for all $n\geq M$, we have 
+    $$0<|\frac{|x_{n+1}|-x}{x_{n}-x}-L|<\epsilon.$$
+    Thus \begin{align*}
+        -\epsilon<& \frac{|x_{n+1}-x|}{|x_{n}-x|}-L<\epsilon\\
+        -\epsilon+L<& \frac{|x_{n+1}-x|}{|x_{n}-x|}<L+\epsilon\\
+        0<& \frac{|x_{n+1}-x|}{|x_{n}-x|}<L+\epsilon\\
+    \end{align*}
+    since $\epsilon$ is arbitrary small and $L<1$, we can choose that $L+\epsilon<1$, hence we apply multiple from the m-th term to the n-th term, 
+    \begin{align*}
+        0<& \frac{|x_{n}-x|}{|x_{M}-x|}<(L+\epsilon)^{n}<1\\
+        0<& |x_{n}-x|<|x_{M}-x|*{(L+\epsilon)^{n}}<1\\
+        0<& \lim_{n\to\infty}|x_{n}-x|<\lim_{n\to\infty}|x_{M}-x|*{(L+\epsilon)^{n}}\\
+    \end{align*}
+    since $|x_{M}-x|$ is a finite number, then $\lim_{n\to\infty}|x_{M}-x|*{(L+\epsilon)^{n}}=0$ and we have 
+    $$\lim_{n\to\infty}|x_{n}-x|=0.$$
+    That is to say that $x_{n}=x$.
+\end{sol}
+
+\begin{sol}[2.2.10]
+    
+\end{sol}
+
+\begin{sol}[2.2.14]
+
+    Now we want to show it's monotune and bounded. Fisrtly, 
+    \begin{align*}
+        &x_{n+1}-x_{n}=x_{n}^{2}\geq 0\\
+        \Rightarrow &x_{n} \geq x_{1}=c\\
+    \end{align*} 
+
+    If $c>0$, we have that $$\frac{x_{n+1}}{x_{n}}=x_{n}+1\geq 1+c >0.$$
+    And it diverges.
+
+    If $c<-1$, we have that $x_{n+1}-x_{n}=x_{n}^{2}\geq c^{2}>1$, it's obvious that it diverges.
+    
+    If $-1\leq c\leq 0$, we have that 
+    \begin{align*}
+    &x_{2}=x_{1}(x_{1}+1)\in[-1,0]\\
+    \Rightarrow &x_{3}=x_{2}(x_{2}+1)\in[-1,0]\\
+    \Rightarrow &x_{4}=x_{3}(x_{3}+1)\in[-1,0]\\
+    \vdots\\
+    \Rightarrow &x_{n}=x_{n-1}(x_{n-1}+1)\in[-1,0]\\
+    \end{align*}
+
+    Thus $x_{n}$ is bounded and monotone increasing, it converges. And we can assume it converges to $x$. Then
+\begin{align*}
+    &x=x^{2}+x\\
+    \Rightarrow & x=0
+\end{align*}
+    
+    For $c\in[-1,0]$, we have that $x_{n}$ converges to $0$.
+
+Now if $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges. Then we can know that it converges to $0$. Since $x_{n}$ is not decreasing, then $c\leq 0$ and $x_{n}\leq0$.
+And $c$ must be not smaller than $-1$ since $x_{2}=c(c+1)$. So $c\in[-1,0]$.
+\end{sol}
+
+\begin{sol}[2.1.15]
+    \begin{align*}
+        & \lim_{n\to\infty}(n^2+1)^{\frac{1}{n}}\\
+        =& \lim_{n\to\infty}e^{\frac{\ln(n^2+1)}{n}}\\
+        =& e^{\lim_{n\to\infty}\frac{\ln(n^2+1)}{n}}\\
+        =& e^{\lim_{x\to\infty}\frac{\ln(x^2+1)}{x}}\\
+        =& e^{\lim_{x\to\infty}\frac{2x}{1+x^2}}\\
+        =& e^{\lim_{x\to\infty}\frac{2}{2x}}\\
+        =& e^{0}\\
+        =& 1
+    \end{align*}
+\end{sol}
+
+\begin{sol}[2.1.16]
+
+    \begin{align*}
+        & \frac{C^{n+1}}{(n+1)!}/\frac{C^{n}}{n!}\\
+        =& \frac{C}{n+1}\\
+        \lim_{n\to\infty}\frac{C^{n+1}}{(n+1)!}/\frac{C^{n}}{n!}\\
+        =& \lim_{n\to\infty}\frac{C}{n+1}\\
+        =& 0
+    \end{align*}
+
+    Then $\lim_{n\to\infty}\frac{C^{n}}{n!}=0$, which means for large n, $n!$ is larger than $C^{n}$ and $(n!)^{\frac{1}{n}}>C$. Since $C$ is arbitary, and $(n!)^{\frac{1}{n}}$ 
+    doesn't have an upper bound. That is it diverges.
+\end{sol}
+
+
+\begin{sol}[2.3.8]
+
+    
+\end{sol}
+
+
+
+
+
+
+
 
 
 

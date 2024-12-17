@@ -30,6 +30,8 @@
 
 \maketitle
 
+% todo finish the abstract part.
+
 \begin{abstract}
     This is the note made by Len Fu during his learning progress in BIT.
     The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra Allenby}.
@@ -173,9 +175,23 @@ The geometric multiplicity of any eigenvalue $\lambda_{i}$ of $A$ is not larger 
     \end{align*}
     Thus
     \begin{align*}
-        f_{A}()
+        f_{A}(\lambda)=&\det \left(
+        \lambda I    
+        -
+            \begin{bmatrix}
+                \lambda_{i}I_{q_{i}}&*\\0&A_{1}
+            \end{bmatrix}
+        \right)
+        =&\det \left(
+            \begin{bmatrix}
+                (\lambda-\lambda_{i})I_{q_{i}}&-*\\
+                0&\lambda I_{n-q_{i}}-A_{1}
+            \end{bmatrix}
+        \right)
+        =&(\lambda-\lambda_{i})^{q_{i}}\det (\lambda I_{n-q_{i}}-A_{1})
+        =&(\lambda-\lambda_{i})^{q_{i}}f_{A_{i}}(\lambda)
     \end{align*}
-
+    Thus $p_{i}\geq \ q_{i},\ i=1,2,...,s$.
 \end{proof}
 
 
@@ -304,12 +320,31 @@ Set $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ are distinct eigenvalues of $A$
 are linear independent eigenvectors of $A$ belonging to eigenvalue $\lambda_{i},i=1,2,\cdots,m$, then the vector set of $X_{11},X_{12},\cdots,X_{1l_{1}},\cdots,X_{m1},X_{m2},\cdots,X_{ml_{l}}$ is linear independent.
 \end{theorem}
 
+
+
+
 \begin{theorem}[NS Condition]
     Set $\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$ are distinct eigenvalues of $A$, $p_{i}\ and\ q_{i}$ are the algebraic multiplicity and geometric multiplicity of $\lambda_{i}$ respectively.
     Then $A$ can be similar diagonalizable if and only if
     $$p_{i}=q_{i}\ i=1,2,\cdots,s.$$
 \end{theorem}
 
+\begin{proof}
+    As we know that $$f_{A}(\lambda)=(\lambda-\lambda_{i})^{q_{i}}f_{A_{1}}(\lambda)$$
+    If $A$ is similar diagonalizable, then its eigenpolynomial can written as $(\lambda-\lambda_{i})^{p_{i}}...$, then $p_{i}=q_{i}$ for all $i$.
+\end{proof}
+
+\subsection{Method to Similar Diagonalize}
+
+\begin{enumerate}
+    \item Find all the eigenvalues of $A$, like $\lambda_{1},\lambda_{2},\cdots,\lambda_{s}$.
+    \item For every eigenvalue $\lambda_{i}$, find the rank of $(\lambda_{i}I-A)$, and judge that whether $q_{i}=n-rank(\lambda_{i}I-A)$ equals to its $p_{i}$. If they are equivalent, then it is diagonalizable. If they are not equivalent, then $A$ is not diagonalizable.
+    \item If $A$ is diagonalizable, then for every $\lambda_{i}$, solve the $(\lambda_{i}i-A)X=0$, and we can have a fundamental solve
+$$X_{i1},X_{i2},\cdots,X_{iq_{i}},\ i=1,2,\cdots,s.$$
+    \item Let $P=[X_{11},X_{12},\cdots,X_{1q_{1}},\cdots,X_{s1},X_{s2},\cdots,X_{sq_{s}}]$, then we can get $P^{-1}AP=D$, where 
+    $$D=diag(\lambda_{1},\cdots,\lambda-{1},\cdots,\lambda_{s},\cdots,\lambda_{s})$$
+    with $q_{i}$ $\lambda_{i}$.
+\end{enumerate}
 
 
 
@@ -332,8 +367,74 @@ are linear independent eigenvectors of $A$ belonging to eigenvalue $\lambda_{i},
 
 \section{Real-Symmetric Matrix's Normalised Diagonalization}
 
+\begin{defi}[Conjugate Matrix]
+
+    Set matrix $A$ in the field $\mathbb{C}$, and $A^{\dagger}$ is the Conjugate Matrix of $A$,
+    where $$a_{ij} = a_{ij}^{\dagger}.$$    
+\end{defi}
+
+\begin{pro}
+    \begin{enumerate}
+        \item $(A^{\dagger})^{\dagger}=A$
+        \item $(A^{\dagger})^{T}=(A^{T})^{\dagger}$
+        \item $(kA)^{\dagger}=k^{\dagger}A^{\dagger}$
+        \item $(A+B)^{\dagger}=A^{\dagger}+B^{\dagger}$
+        \item $(AB)^{\dagger}=A^{\dagger}B^{\dagger}$
+        \item $((AB)^{T})^{\dagger}=(B^{T})^{\dagger}(A^{T})^{\dagger}$
+        \item If $A$ is invertible, then $(A^{-1})^{\dagger}=(A^{\dagger})^{-1}$
+        \item If $A$ is square, then $\det A^{\dagger}=(\det A)^{\dagger}$
+        \item $rank(A) = rank (A^{\dagger})$
+    \end{enumerate}
+\end{pro}
+
+\begin{theorem}
+    The eigenvalue of real symmetric matrix is real. 
+\end{theorem}
+
+\begin{theorem}
+    Eigenvectors with different eigenvalues of real symmetric matrix is orthogonal.
+\end{theorem}
+
+\begin{proof}
+Set $\lambda_{1},\lambda_{2}$ are two distinct eigenvalues of real symmetric matrix $A$, their conresponding eigenvectors are 
+$X_{1},X_{2}$, then 
+$$AX_{i}=\lambda_{i}X_{i},\ for\ i=1,2.$$
+To prove $X_{1}\bot X_{2}$, we need to show that $X_{2}^{T}X_{1}=0$. Then 
+\begin{align*}
+    X_{2}^{T}A^{T}=&\lambda_{2}X_{2}^{T}\\
+    X_{2}^{T}A^{T}X_{1}=&\lambda_{2}X_{2}^{T}X_{1}\\
+    (\lambda_{2}-\lambda_{1})(X_{2}^{T}X_{1})&=0
+\end{align*}
+Since $\lambda_{2}\neq\lambda_{1}$, then $X_{2}^{T}X_{1}=0$.
+\end{proof}
+
+\begin{theorem}
+Set $\lambda_{0}$ is any eigenvalue of real symmetric matrix $A$, and $p$ and $q$ represent its algebraic and geometric multiplicity respectively, then
+$p=q$.
+\end{theorem}
+
+\begin{theorem}
+    For any n real symmetric matrix $A$, there exists a n orthogonal matrix $P$ and a diagonal matrix $D$ such that $A=PDP^{-1}$.
+    where $$D=diag(\lambda_{1},\cdots,\lambda_{n})\ and\ P=[\beta_{1},\beta_{2},\cdots,\beta_{n}]\ where\ \beta\ is orthogonal vectors.$$
+\end{theorem}
+
+We can use Gram-Schmidt Orthogonalization to orthogonalize the vectors :
+\begin{enumerate}
+    \item $\beta_1 = \alpha_1$。
+    \item $i = 2, 3, \ldots, m$  $\beta_i$ 
+    \[
+    \beta_i = \alpha_i - \sum_{j=1}^{i-1} \frac{(\alpha_i, \beta_j)}{(\beta_j, \beta_j)} \beta_j
+    \]
+    where $(\cdot, \cdot)$ is the inner product.
+    \item Normalize $\beta_i$ ，and we get the normalised vectors $\gamma_i$：
+    \[
+    \gamma_i = \frac{\beta_i}{\|\beta_i\|}
+    \]
+\end{enumerate}
 
 
+
+\section{}
 \subsection{Jordan Canonical Form}
 
 \subsection{Smith Normal Form}
@@ -367,7 +468,7 @@ The eigenvalues of $A$ are $1,2,3$, find the eigenvalues of $A^{2}-2I$.
     Using Lagrange Multipliers,
     $$L(x_{1},x_{2})=2x_{1}^{2}+2x_{1}x_{2}+2x_{2}^{2}-\lambda(x_{1}^{2}+x_{2}^{2}-1)$$
     and 
-    $$$$
+  
 \end{sol}
 
 
