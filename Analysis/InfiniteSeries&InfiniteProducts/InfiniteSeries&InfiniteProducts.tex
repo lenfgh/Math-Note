@@ -695,8 +695,8 @@ know that ${x_{k}}_{k=1}^{\infty}$ is bounded above. From the theorem we know th
 \end{sol}
 
 \begin{sol}[2.2.8]
-    Set $f(x)=\frac{n^{x}}{2^{x}}$, and we have $\lim_{x\to\infty}f(x)=\lim_{n\to\infty}$.
-    Then use l'Hôpital's Rule twice and we can  $\lim_{x\to\infty}f(x)=0$.And $\lim_{n\to\infty}=0$.
+    Set $f(x)=\frac{x^{2}}{2^{x}}$, and we have $\lim_{x\to\infty}f(x)=\lim_{n\to\infty}\frac{n^{2}}{2^{n}}$.
+    Then use l'Hôpital's Rule twice and we can  $\lim_{x\to\infty}f(x)=0$.And $\lim_{n\to\infty}\frac{n^{2}}{2^{n}}=0$.
 \end{sol}
 
 \begin{sol}[2.2.9]
@@ -720,7 +720,17 @@ know that ${x_{k}}_{k=1}^{\infty}$ is bounded above. From the theorem we know th
 \end{sol}
 
 \begin{sol}[2.2.10]
-    
+    From the theorem of polynomial, we know that $a^{k}-b^{k}=(a-b)(a^{k-1}+a^{k-2}b+\cdots+ab^{k-2}+b^{k-1})$. If we set the limit of the sequence is $x$, 
+    then we have 
+    \begin{align*}
+        |x_{n}-x|=&|x_{n}^{\frac{1}{k}}-x^{\frac{1}{k}}||x_{n}^{\frac{k-1}{k}}+\cdots+x_{n}^{\frac{1}{k}}x^{\frac{k-2}{k}}+x^{\frac{k-1}{k}}|\\
+        |x_{n}^{\frac{1}{k}}-x^{\frac{1}{k}}|=&\frac{|x_{n}-x|}{x_{n}^{\frac{k-1}{k}}+\cdots+x_{n}^{\frac{1}{k}}x^{\frac{k-2}{k}}+x^{\frac{k-1}{k}}}(for\ x_{n}\geq 0)\\
+        <& \frac{|x_{n}-x|}{x^{\frac{k-1}{k}}}
+    \end{align*}
+
+    For every $\epsilon>0$ and $\epsilon '=\epsilon x^{\frac{k-1}{k}}$, we choose $N$ such that for all $n\geq N$, we have $|x_{n}-x|<\epsilon'$. Then we have that
+    $$|x_{n}^{\frac{1}{k}}-x^{\frac{1}{k}}|<\frac{|x_{n}-x|}{x^{\frac{k-1}{k}}}<\frac{\epsilon'}{x^{\frac{k-1}{k}}}=\epsilon.$$
+    Hence we have that $\lim_{n\to\infty}x_{n}^{\frac{1}{k}}=(\lim_{n\to\infty}x_{n})^{\frac{1}{k}}$.
 \end{sol}
 
 \begin{sol}[2.2.14]
@@ -871,8 +881,8 @@ Thus we have $$ I-\epsilon<\inf x_{n}\leq x_{n}\leq \sup x_{n}\leq S+\epsilon.$$
 We denote it that the min and max of the sequence with $n\leq N$ is $x_{min},x_{max}$. Then for $\epsilon>0$, 
 $$
 \begin{cases}
-    x_{min}\leq x\leq x_{max},\ for\ n\leq N\\
-    I-\epsilon<x_{n}\leq S+\epsilon
+    x_{min}\leq x\leq x_{max},\ for\ n< N\\
+    I-\epsilon<x_{n}\leq S+\epsilon,\ for\ n\geq N\\
 \end{cases}
 $$
 And we conclude that they are convergent.
