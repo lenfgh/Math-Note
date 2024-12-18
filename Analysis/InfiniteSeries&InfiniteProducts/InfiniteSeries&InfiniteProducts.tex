@@ -52,6 +52,18 @@ In this chapter,  you need to
 
 
 \section{Convergence and Divergence}
+
+\textbf{Completeness Axiom of Real Numbers:} The real numbers satisfy the following completeness axioms:
+
+\begin{enumerate}
+    \item \textbf{Least Upper Bound Property:} Every non-empty subset of \(\mathbb{R}\) that is bounded above has a least upper bound (supremum) in \(\mathbb{R}\).
+    \item \textbf{Greatest Lower Bound Property:} Every non-empty subset of \(\mathbb{R}\) that is bounded below has a greatest lower bound (infimum) in \(\mathbb{R}\).
+    \item \textbf{Nested Interval Theorem:} Let \(I_n = [a_n, b_n]\) be a sequence of closed intervals such that \(I_1 \supseteq I_2 \supseteq I_3 \supseteq \ldots\) and \(\lim_{n \to \infty} (b_n - a_n) = 0\). Then, the intersection of all these intervals, denoted as \(\bigcap_{n=1}^{\infty} I_n\), consists of exactly one real number \(x\).
+    \item \textbf{Bolzano-Weierstrass Theorem:} Every bounded sequence of real numbers has a convergent subsequence.
+    \item \textbf{Cauchy Convergence Criterion:} A sequence of real numbers converges if and only if it is a Cauchy sequence.
+\end{enumerate}
+
+
 \subsection{Basis}
 
 \begin{defi}[Convergence]
@@ -245,6 +257,20 @@ diverges to $-\infty$.
 \end{theorem}
 \noindent\textbf{Note:} It does not imply that all bounded sequences converge. 
 
+\subsection{Important Theorems}
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+    Let $\left\{a_{n}\right\}_{n=1}^{\infty}$ be a convergent sequence of real numbers. Then there exists a convergent subsequence $\left\{x_{n_{i}}\right\}_{i=1}^{\infty}$.
+\end{theorem}
+
+\begin{theorem}[Nested Interval Theorem]
+    Let \( I_n = [a_n, b_n] \) be a sequence of closed intervals such that:
+\begin{enumerate}
+    \item \( I_1 \supseteq I_2 \supseteq I_3 \supseteq \ldots \) (the intervals are nested),
+    \item \( \lim_{n \to \infty} (b_n - a_n) = 0 \) (the length of the intervals converges to 0).
+\end{enumerate}
+Then, the intersection of all these intervals, denoted as \( \bigcap_{n=1}^{\infty} I_n \), consists of exactly one real number \( x \). Moreover, both sequences \( \{a_n\} \) and \( \{b_n\} \) converge to \( x \).
+\end{theorem}
+
 
 
 \section{Limit Superior and Limit Inferior of a Real-Valued Sequence}
@@ -269,48 +295,104 @@ and we write $$U=\lim_{n\rightarrow \infty}\sup{a_{n}}$$.
 The limit inferior of ${a_{n}}$ is defined as follows:
 $$\lim_{n\rightarrow \infty}\ inf\ a_{n}=-\lim_{n\rightarrow \infty}\ sup\ b_{n},\ where\ b_{n}=-a_{n}\ for\ n=1,2,...,n$$.
 
-Or we can use another definition:
+\begin{corollary}
+    Let $a_{n}$ be a sequence of real numbers. Then we have:
+    \begin{enumerate}
+        \item $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.
+        \item The sequence converges if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}$ and 
+        $\lim\inf_{n\rightarrow \infty}a_{n}$ are both finite and equal, in which case 
+        $\lim_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=\lim\sup_{n\rightarrow \infty}a_{n}$.
+        \item The sequence diverges to $+\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=+\infty$.
+        \item The sequence diverges to $-\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=-\infty$.
+    \end{enumerate}
+    \end{corollary}
+    
+    
+    \textbf{Note.} A sequence for which $\lim\sup_{n\rightarrow \infty}a_{n}\neq\lim\inf_{n\rightarrow \infty}a_{n} $ is said to oscillate.\\
+    \begin{proof}
+    \textbf{1.}
+    From definition, denote $U=\lim\sup_{n\rightarrow \infty}a_{n}$ and $L=\lim\inf_{n\rightarrow \infty}a_{n}$.
+    For every $\epsilon_{1}>0$, $b_{n}<-L+\epsilon_{1}$, where $b_{n}=-a_{n}$. And for every $\epsilon_{2}>0$, $a_{n}<U+\epsilon_{2}$.
+    \begin{align*}
+        -a_{n} &< -L + \epsilon_{1} \\
+        a_{n} &> L - \epsilon_{1} \\
+        a_{n} &< U + \epsilon_{2} \\
+        L - \epsilon_{1} < &a_{n} < U + \epsilon_{2} \\
+        L &< U + \epsilon_{1} + \epsilon_{2}
+    \end{align*}
+    Since $\epsilon_{1}$ and $\epsilon_{2}$ is arbitary positive, 
+    we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.\\
+    \textbf{2.}
+    
+    \end{proof}
+
+
+
+We have another definition for \textbf{Bounded Sequence}:
 \begin{defi}
-
-
+Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be a bounded sequence. Define $\left\{a_{n}\right\}_{n=1}^{\infty}$ and $\left\{b_{n}\right\}_{n=1}^{\infty}$ by $a_{n}:=sup{x_{k}:k\geq n}$ and 
+$b_{n}:=inf{x_{k}:k\geq n}$. Define, if the limits exist,
+$$\lim_{n\rightarrow \infty}\sup x_{n} =\lim_{n\rightarrow \infty} a_{n}\ and\ \lim_{n\rightarrow \infty}\inf x_{n} =\lim_{n\rightarrow \infty} b_{n}$$
 \end{defi}    
 
+\begin{prop}
+    \begin{enumerate}
+        \item The sequence $\left\{a_{n}\right\}_{n=1}^{\infty}$ is bounded monotone decreasing and 
+        $\left\{b_{n}\right\}_{n=1}^{\infty}$ is bounded monotone increasing.
+        \item $\lim_{n\rightarrow \infty}\sup x_{n}=\inf{a_{n}:n\in\mathbb{N}}$ and $\lim_{n\to\infty}\inf x_{n}=\sup{b_{n}:n\in\mathbb{N}}$.
+        \item $\lim_{n\to\infty}\inf x_{n}\leq \lim_{n\to\infty}\sup x_{n}$.
+    \end{enumerate}
+\end{prop}
 
+\begin{theorem}
+    If $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a bounded sequence, then there exists a subsequence 
+    $\left\{x_{n_{k}}\right\}_{k=1}^{\infty}$ such that 
+    $$\lim_{k\to\infty}x_{n_{k}}=\lim_{n\to\infty}\sup x_{n}.$$
+    Similarly, there exists a subsequence $\left\{x_{m_{k}}\right\}_{k=1}^{\infty}$ such that
+    $$\lim_{k\to\infty}x_{m_{k}}=\lim_{n\to\infty}\inf x_{n}.$$
+\end{theorem}
 
+\begin{prop}
+    For a bounded sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$, if it is convergent, then 
+    $$\lim_{n\to\infty} \inf x_{n}=\lim_{n\to\infty} \sup x_{n}.$$
+    Furthermore, if $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges, then 
+    $$\lim_{n\to\infty} x_{n}=\lim_{n\to\infty} \inf x_{n} = \lim_{n\to\infty} \sup x_{n}.$$
+\end{prop}
 
+\begin{prop}
+Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a bounded sequence and $\left\{x_{k}\right\}_{k=1}^{\infty}$ is a subsequence.
+Then 
+$$\lim_{n\to\infty} \inf x_{n}\leq \lim_{k\to\infty} \inf x_{n_{k}} \leq \lim_{k\to\infty} \sup x_{n-{k}} \leq \lim_{n\to\infty} \sup x_{n}.$$ 
+\end{prop}
 
+\begin{prop}[Sub-Check]
+A bounded sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ is convergent and converges to $x$ if and only if every convergent subsequence $\left\{x-{n_{k}}\right\}_{k=1}^{\infty}$ converges to x.
+\end{prop}
 
-\begin{corollary}
-Let $a_{n}$ be a sequence of real numbers. Then we have:
-\begin{enumerate}
-    \item $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.
-    \item The sequence converges if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}$ and 
-    $\lim\inf_{n\rightarrow \infty}a_{n}$ are both finite and equal, in which case 
-    $\lim_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=\lim\sup_{n\rightarrow \infty}a_{n}$.
-    \item The sequence diverges to $+\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=+\infty$.
-    \item The sequence diverges to $-\infty$ if, and only if, $\lim\sup_{n\rightarrow \infty}a_{n}=\lim\inf_{n\rightarrow \infty}a_{n}=-\infty$.
-\end{enumerate}
-\end{corollary}
+With \textbf{Unbounded Sequence}, we can define:
+\begin{defi}
+    We say $\left\{x_[n]\right\}_{n=1}^{\infty}$ diverges to infinity if for every $K\in\mathbb{R}$, there exists an
+    $M\in\mathbb{N}$ such that for all $n\geq M$, we have $x_{n}>K$. We write 
+    $$\lim_{n\rightarrow \infty} x_{n}=\infty.$$
+    Similarly, for $x<K$, we have 
+    $$\lim_{n\rightarrow \infty} x_{n}=-\infty.$$
+\end{defi}
 
+\begin{prop}
+    Suppose $\left\{x_{n}\right\}_{n=1}^{\infty}$ is an unbounded sequence. Then 
+    \[
+    \lim_{n\to\infty} x_{n} =
+    \begin{cases}
+    \infty & \text{if } \left\{x_{n}\right\}_{n=1}^{\infty} \text{ is increasing} \\
+    -\infty & \text{if } \left\{x_{n}\right\}_{n=1}^{\infty} \text{ is decreasing}
+    \end{cases}
+    \]
+\end{prop}
 
-\textbf{Note.} A sequence for which $\lim\sup_{n\rightarrow \infty}a_{n}\neq\lim\inf_{n\rightarrow \infty}a_{n} $ is said to oscillate.\\
-\begin{proof}
-\textbf{1.}
-From definition, denote $U=\lim\sup_{n\rightarrow \infty}a_{n}$ and $L=\lim\inf_{n\rightarrow \infty}a_{n}$.
-For every $\epsilon_{1}>0$, $b_{n}<-L+\epsilon_{1}$, where $b_{n}=-a_{n}$. And for every $\epsilon_{2}>0$, $a_{n}<U+\epsilon_{2}$.
-\begin{align*}
-    -a_{n} &< -L + \epsilon_{1} \\
-    a_{n} &> L - \epsilon_{1} \\
-    a_{n} &< U + \epsilon_{2} \\
-    L - \epsilon_{1} < &a_{n} < U + \epsilon_{2} \\
-    L &< U + \epsilon_{1} + \epsilon_{2}
-\end{align*}
-Since $\epsilon_{1}$ and $\epsilon_{2}$ is arbitary positive, 
-we have $L\leq U$, that is $\lim_{n\rightarrow \infty}\sup a_{n}\leq\lim_{n\rightarrow \infty}\inf b_{n}$.\\
-\textbf{2.}
-
-
-\end{proof}
+\begin{defi}
+Let $\left\{x_{n}\right\}_{n=1}^{\infty}$ be an unbounded sequence. Define $\left\{a_{n}\right\}_{n=1}^{\infty}$ and $\left\{b_{n}\right\}_{n=1}^{\infty}$ as above.
+Then $\left\{a_{n}\right\}_{n=1}^{\infty}$ is decreasing and $\left\{b_{n}\right\}_{n=1}^{\infty}$ is increasing. And $\lim_{n\to\infty} \sup x_{n}=\inf {a_{n}:n\in\mathbb{N}}$ and $\lim_{n\to\infty} \inf x_{n}=\sup {b_{n}:n\in\mathbb{N}}$.
+\end{defi}
 
 \subsection{Monotune Sequence}
 
@@ -675,7 +757,7 @@ Now if $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges. Then we can know that it
 And $c$ must be not smaller than $-1$ since $x_{2}=c(c+1)$. So $c\in[-1,0]$.
 \end{sol}
 
-\begin{sol}[2.1.15]
+\begin{sol}[2.2.15]
     \begin{align*}
         & \lim_{n\to\infty}(n^2+1)^{\frac{1}{n}}\\
         =& \lim_{n\to\infty}e^{\frac{\ln(n^2+1)}{n}}\\
@@ -703,14 +785,156 @@ And $c$ must be not smaller than $-1$ since $x_{2}=c(c+1)$. So $c\in[-1,0]$.
 \end{sol}
 
 
-\begin{sol}[2.3.8]
+\begin{sol}[2.3.7,2.3.8]
 
+Since $\left\{x_{n}\right\}_{n=1}^{\infty}$ and $\left\{y_{n}\right\}_{n=1}^{\infty}$ are both bounded sequences then $|x_{n}|<M_{x}$ and $|y_{n}|<M_{y}$. Thus 
+$$|x_{n}+y_{n}|\leq |x_{n}|+|y_{n}| < M_{x}+M_{y},$$
+and it is bounded.
+
+Now we find a convergent subsequence of $\left\{x_{n}+y_{n}\right\}_{n=1}^{\infty}$ and denote it as $\left\{x_{n_{m}}+y_{n_{m}}\right\}_{m=1}^{\infty}$, and we can have that
+hence $$\lim_{n\to\infty}x_{n_{m}}+y_{n_{m}}=L.$$
+And we find a convergent subsequence of $\left\{x_{n_{m}}\right\}_{m=1}^{\infty}$ and denote it as $\left\{x_{n_{m_{i}}}\right\}_{i=1}^{\infty}$, and we can have that
+hence $$\lim_{i\to\infty}x_{n_{m_{i}}}=x\ and\ \lim_{i\to\infty}x_{n_{m_{i}}}+y_{n_{m_{i}}}=L\ for\ the\ corresponding\ subsequence\ y_{n_{m_{i}}}.$$
+and we can have that $$\lim_{i\to\infty}y_{i} = L-x.$$
+
+Since $\lim_{n\to\infty}\inf x_{n}$ is an inferior bound of $\left\{x_{n}\right\}_{n=1}^{\infty}$, we can have that 
+$$\lim_{n\to\infty}\inf x_{n} \geq x,$$
+also 
+$$\lim_{n\to\infty}\inf y_{n} \geq L-x.$$
+and we have that $$\lim_{n\to\infty}\inf x_{n}+\lim_{n\to\infty}\inf y_{n} \leq \lim_{n\to\infty}\inf x_{n}+y_{n}.$$
+The same is for $\lim_{n\to\infty}\sup x_{n}+\lim_{n\to\infty}\sup y_{n}\geq\lim_{n\to\infty}\inf x_{n}+y_{n}$.
+
+\end{sol}
+
+\begin{sol}[2.3.9]
+
+
+    Let $S \subset \mathbb{R}$ be a bounded and infinite set. We need to prove that $S$ has at least one cluster point.
+
+    Since $S$ is bounded, there exist real numbers $a$ and $b$ such that $S \subset [a, b]$.
     
+    Now, construct a sequence of nested intervals as follows:
+    
+    \begin{enumerate}
+        \item Divide $[a, b]$ into two subintervals: $[a, \frac{a+b}{2}]$ and $[\frac{a+b}{2}, b]$.
+        \item Since $S$ is infinite, at least one of these subintervals contains infinitely many points of $S$. Choose one such subinterval and denote it by $[a_1, b_1]$.
+        \item Repeat this process: divide $[a_n, b_n]$ into two subintervals and select one that contains infinitely many points of $S$, denoting it by $[a_{n+1}, b_{n+1}]$.
+    \end{enumerate}
+    
+    By induction, we obtain a nested sequence of intervals $[a_n, b_n]$, where each $[a_{n+1}, b_{n+1}]$ is a subset of $[a_n, b_n]$, and $b_n - a_n = \frac{b-a}{2^n}$.
+    
+    According to the Nested Interval Theorem, the intersection of all these intervals contains at least one point $L$:
+    
+    \[ L = \bigcap_{n=1}^{\infty} [a_n, b_n] \]
+    
+    Now, we need to show that $L$ is a cluster point of $S$.
+    
+    Take any $\epsilon > 0$. Since $b_n - a_n = \frac{b-a}{2^n}$, there exists an $N$ such that for all $n \geq N$,
+    
+    \[ b_n - a_n < \epsilon \]
+    
+    For such $n$, since $[a_n, b_n]$ contains infinitely many points of $S$, there exists at least one point $x \in S$ with $x \neq L$ within $(L - \epsilon, L + \epsilon)$.
+    
+Therefore, $L$ is a cluster point of $S$.
+\end{sol}
+
+\begin{sol}[2.3.11]
+\begin{enumerate}[label=\alph*]
+\item Now we assume that $\left\{x_{n}\right\}_{n=1}^{\infty}$ is a unbounded sequence, then we can find a unbounded sequence $\left\{x_{n_{m}}\right\}_{m=1}^{\infty}$ and it can't have a convergent subsequence, contradicting to the fact. Thus the sequence is bounded.
+\item If the sequence doesn't converge to $x$, then we can construct a subsequece $\left\{x_{n_{k}}\right\}_{k=1}^{\infty}$ such that for $\epsilon>0$, $|x_{n_{k}}-x|>\epsilon$ for all $k$. Obviously, it doesn't have a subsequence converges to $x$, contradicting to the fact. Thus the sequence converges to $x$.
+\end{enumerate}
+
+\end{sol}
+
+\begin{sol}[2.3.12]
+\begin{enumerate}[label=\alph*]
+\item Since the sequence is bounded, we can find a upper bound $s$ of it, then for all $n\in\mathbb{N}$, $x_{n}<s$.
+\item From the definition, $\lim_{n\to\infty}sup x_{n}=s$.
+\item Yeah. It's right.
+\end{enumerate}
 \end{sol}
 
 
+\begin{sol}[2.3.15]
+\begin{enumerate}[label=\alph*]
+\item We know that for any $\epsilon>0$, there exists an $N$ such that for all $n\geq N$, $|\frac{|x_{n+1}|}{|x_{n}|-L}<\epsilon$.
+Thus we have that $|x_{n+1}|<(\epsilon+L)|x_{n}|$. Choosing $r=\epsilon+L<1$, we have that $|x_{n}|<r^{n-N-1}|x_{N}|$, thus $\left\{x_{n}\right\}_{n=1}^{\infty}$ converges to 0.
+\item We can use the same procedure as before, and get $|x_{n+1}|>r|x_{n}|$ where $r=\epsilon+L>1$, thus $|x_{n}|>r^{n-N-1}|x_{N}|$ and as $n$ tends to $\infty$ $|x_{n}|$ tends to infinity and the sequence is not bounded.
+\end{enumerate}    
+\end{sol}
 
 
+\begin{sol}[2.3.18]
+
+Recalling the definition the sup and inf, we know that for any $\epsilon>0$, there exists an $N$ such that for all $n\geq N$, $\inf x_{n}> I-\epsilon$ and $\sup x_{n}< S+\epsilon$, \textit{(strictly I should verify deffrent $N_{1},N_{2}$, but for simplicity and not sacrificing its understanding, i use the neglecting the process of choosing $N=max(N_{1},N_{2})$)}where $S$ and $I$ is the finite limit.
+Thus we have $$ I-\epsilon<\inf x_{n}\leq x_{n}\leq \sup x_{n}\leq S+\epsilon.$$
+We denote it that the min and max of the sequence with $n\leq N$ is $x_{min},x_{max}$. Then for $\epsilon>0$, 
+$$
+\begin{cases}
+    x_{min}\leq x\leq x_{max},\ for\ n\leq N\\
+    I-\epsilon<x_{n}\leq S+\epsilon
+\end{cases}
+$$
+And we conclude that they are convergent.
+\end{sol}
+
+
+\begin{sol}[2.3.19]
+
+    Now we prove the case of $\sup$ first, and the case of $\inf$ is the same procedure.
+
+    From the definition, for any $\delta>0$, there exists an $N_{1}$ such that for all $n\geq N_{1}$, $x_{n}<\sup x_{n}+\delta$. From the other side, we know that for any $\sigma>0$, there exists an $N_{2}$ such that for all $n\geq N_{2}$, $\sup x_{n}<\lim_{n\to\infty}\sup x_{n}+\sigma$. Then we have that $N=max(N_{1},N_{2})$.
+And for $n\geq N$, we have that
+$$x_{n}<\sup x_{n}+\delta<\lim_{n\to\infty}\sup x_{n}+\delta+\sigma.$$
+And if we choose $\epsilon=\sigma+\delta$, we have that for all $n\geq N$, $x_{n}<\lim_{n\to\infty}\sup x_{n}+\epsilon$, that is $x_{n}-\lim_{n\to\infty}\sup x_{n}<\epsilon$.
+
+Vise versa, the inequality from the other side can be proved by the same procedure.
+
+\end{sol}
+
+\begin{sol}[2.4.2]
+We choose $\epsilon>0$, for any $n\ and\ k\geq N=[\log_{C}(\frac{\epsilon(1-C)}{|x_{2}-x_{1}|})]+1$,
+    \begin{align*}
+        |x_{n}-x_{n-1}|<&C^{n-1}|x_{2}-x_{1}|\\
+        \cdots\\
+        |x_{k+1}-x_{k}|<&C^{k}|x_{2}-x_{1}|\\
+        since\ |x_{n}-x_{k}|<|x_{n}-x_{n-1}|+&\cdots+|x_{k+1}-x_{k}|,\ we\ have\\
+        |x_{n}-x_{k}|<&\frac{C^{k+1}-C^{n}}{1-C}|x_{2}-x_{1}|\\
+        <&\frac{C^{k+1}}{1-C}|x_{2}-x_{1}|\\
+        <&\frac{C^{N}}{1-C}|x_{2}-x_{1}|\\
+        =&\frac{C^{[\log_{C}(\frac{\epsilon(1-C)}{|x_{2}-x_{1}|})]+1}}{1-C}|x_{2}-x_{1}|\\
+        <&\frac{C^{\log_{C}(\frac{\epsilon(1-C)}{|x_{2}-x_{1}|})}}{1-C}|x_{2}-x_{1}|\\
+        <&\epsilon\\
+    \end{align*}
+Thus the sequence is Cauchy.
+\end{sol}
+
+
+\begin{sol}[2.4.4]
+Easy, set the $M$ in $x_{n}$ to be $N$ in $y_{n}$, then you can prove it.
+\end{sol}
+
+\begin{sol}[2.4.5]
+Set the limit is $L$. Suppose $L>0$, then set $\epsilon=\frac{L}{2}$, there exists an $N$ such that for all $n\geq N$, $|x_{n}-L|<\epsilon$, since there exists an $k\geq N$ that 
+$x_{k}<0$, thus $|x_{k}-L|>L$, which contradicts to the fact that $|x_{k}-L|<\epsilon=\frac{L}{2}$. Then $L\leq0$. Vise versa, we can prove that $L\geq 0$ and $L=0$. The sequence converges to 0.
+
+\end{sol}
+
+
+\begin{sol}[2.4.6]
+$k\geq\ n\geq N$, $\frac{n}{k^{2}}\leq\frac{1}{k}\leq\frac{1}{N}$, choose $N=[\frac{1}{\epsilon}]+1$ and you can prove it.
+\end{sol}
+
+\begin{sol}[2.4.7]
+
+    For every $\epsilon>0$, there exists an $N$ such that for all $n,k\geq N$, $|x_{n}-x_{k}|<\epsilon$. Since there are infinitely many $x_{n}=c$, there exists an $k$ 
+    such that $k\geq N$ and $x_{k}=c$. Thus $|x_{n}-c|<\epsilon$, which shows that $\lim_{n\to\infty} x_{n}=c$. 
+    
+\end{sol}
+
+\begin{sol}[2.4.8]
+    $a_{n}=e^{-\frac{n}{520}}$
+\end{sol}
 
 
 
