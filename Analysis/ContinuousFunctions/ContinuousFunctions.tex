@@ -1,14 +1,22 @@
 \documentclass{article}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{enumitem}
-\usepackage{setspace}
 \usepackage{amsthm}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+
+
 
 \theoremstyle{definition} 
 \newtheorem{defi}{Definition}[section]
@@ -18,34 +26,805 @@
 \newtheorem{pro}{Properties}[section]
 
 
-\linespread{1.5}
-
+\linespread{1.5} 
 
 \title{Continuous Functions}
 \author{Len Fu}
-\date{12.6.2024}
+\date{12.10.2024-12.20.2024}
 
 \begin{document}
-\maketitle
-\begin{abstract}
 
+\maketitle
+
+\begin{abstract}
+This is the note of Continous Functions, maded by Len Fu while his learning progress.
+The main content is from \textit{Mathematical Analysis Tom A.Apostol} , \textit{Basic Analysis I Jiří Lebl} the course of \textit{Mathematical Analysis Z.H.Zhao BIT 2024 Fall}.
+Due to urgent the urgent time, the most proof of the propositions and theorems are quoted from \textit{Basic Analysis I Jiří Lebl}.
+
+In this chapter,  you need to learn:
+\begin{enumerate}
+    \item Limit 
+    \item Continuity
+\end{enumerate}
 \end{abstract}
+
+
+\renewcommand{\contentsname}{Contents}
 \tableofcontents
 \newpage
 
 \section{Limit}
+\subsection{Cluster Points}
+\begin{defi}
+Let $S\subset \mathbb{R}$ be a set. A number $x\in\mathbb{R}$ is called a cluster point of $S$ if for every $\epsilon>0$
+ the set $(x-\epsilon,x+\epsilon)\cap S\setminus \left\{x\right\}$ is non-empty.
+
+\end{defi}
+
+\begin{prop}
+Let $S\subset \mathbb{R}$ be a set. Then $x$ is a cluster point of $S$ if and only if there exists a convergent sequence of numbers $\left\{x_{n}\right\}_{n=1}^{\infty}$
+such that $x_{n}\neq x$ and $x_{n}\in S$ for all $n$, and $\lim_[n\rightarrow \infty]x_{n}=x$.
+\end{prop}
+
+\begin{proof}
+To prove the sequence converges to $x$, we can choose $\epsilon=\frac{1}{n}$. To prove a sequece can reveal that $x$ is the cluster point of $S$, emmmm, they are obviously equal.
+\end{proof}
+
+
+\subsection{Limit of Functions}
+\begin{defi}
+Let $f:S\rightarrow \mathbb{R}$ be a function and $c$ is a cluster point of $S\subset \mathbb{R}$. Suppose there exists an $L\in\mathbb{R}$ and for 
+every $\epsilon>0$, there exists a $\delta>0$ such that for all $x\in S$ such that $|x-c|<\delta$, we have $$|f(x)-L|<\epsilon.$$
+We then say $f(x)$ converges to $L$ as $x$ goes to $c$, and we write $$f(x)\rightarrow L\ as\ x\to c.$$
+We say $L$ is a limit of $f(x)$ as $x$ goes to $c$, and if $L$ is unique(it is), we write $$\lim_{x\to c}f(x):=L.$$
+If no such $L$ exists, then we say that the limit does not exist or that $f$ diverges at $c$.
+\end{defi}
+
+\begin{prop}
+    Let $c$ be a cluster point of $S\subset \mathbb{R}$ and let $f:S\to \mathbb{R}$ be a functino such that $f(x)$ converges as $x$ goes to $c$. Then the limit of $f(x)$ as $x$ goes to $c$ is unique.
+\end{prop}
+
+\begin{proof}
+Let $L_{1}$ and $L_{2}$ be two numbers that both satisfy the definition. Take an $\epsilon>0$ and find a $\delta_{1}>0$ such that $|f(x)-L_{1}|<\epsilon /2$ for all $x\in S\setminus \left\{c\right\}$ with $|x-c|<\delta_{1}$. Also find $\delta_{2}>0$ such that $|f(x)-L_{2}|<\epsilon /2$ for all
+$x\in S\setminus \left\{c\right\}$ with $|x-c|<\delta_{2}$. Then we have $$|f(x)-L_{1}|<\epsilon /2\ and\ |f(x)-L_{2}|<\epsilon /2,$$
+put $\delta = min(\delta_{1},\delta_{2})$, we have $$|f(x)-L_{1}|<\epsilon /2\ and\ |f(x)-L_{2}|<\epsilon /2,\ for\ all\ x\in S\setminus \left\{c\right\}\ with\ |x-c|<\delta$$.
+Then we have 
+$$|L_{1}-L_{2}|<|f(x)-L_{1}|+|f(x)-L_{2}|<\epsilon,\ and\ L_{1}=L_{2}$$
+\end{proof}
+
+\begin{defi}[Infinite Limit]
+    Let \( f: S \rightarrow \mathbb{R} \) be a function and suppose \( S \) has \( \infty \) as a cluster point. We say \( f(x) \) diverges to infinity as \( x \) goes to \( \infty \) if for every \( N \in \mathbb{R} \) there exists an \( M \in \mathbb{R} \) such that
+    \[
+    f(x) > N
+    \]
+    whenever \( x \in S \) and \( x \geq M \). We write
+    \[
+    \lim_{x \rightarrow \infty} f(x) := \infty,
+    \]
+    or we say that \( f(x) \rightarrow \infty \) as \( x \rightarrow \infty \).    
+\end{defi}
+
+\begin{prop}[Compositions]
+    Suppose \( f: A \rightarrow B, g: B \rightarrow \mathbb{R}, A, B \subset \mathbb{R}, a \in \mathbb{R} \cup \{-\infty, \infty\} \) is a cluster point of \( A \), and \( b \in \mathbb{R} \cup \{-\infty, \infty\} \) is a cluster point of \( B \). Suppose
+\[
+\lim_{x \rightarrow a} f(x) = b \quad \text{and} \quad \lim_{y \rightarrow b} g(y) = c
+\]
+for some \( c \in \mathbb{R} \cup \{-\infty, \infty\} \). If \( b \in B \), then suppose \( g(b) = c \). Then
+\[
+\lim_{x \rightarrow a} g(f(x)) = c.
+\]
+\end{prop}
+
+
+\subsection{Sequential Limits}
+
+\begin{lemma}
+    Let \( S \subset \mathbb{R} \), let \( c \) be a cluster point of \( S \), let \( f: S \rightarrow \mathbb{R} \) be a function, and let \( L \in \mathbb{R} \). Then \( f(x) \rightarrow L \) as \( x \rightarrow c \) if and only if for every sequence \( \{x_n\}_{n=1}^{\infty} \) such that \( x_n \in S \setminus \{c\} \) for all \( n \), and such that \( \lim_{n \to \infty} x_n = c \), we have that the sequence \( \{f(x_n)\}_{n=1}^{\infty} \) converges to \( L \). 
+\end{lemma}
+
+\begin{corollary}
+    Let \( S \subset \mathbb{R} \) and let \( c \) be a cluster point of \( S \). Suppose \( f: S \rightarrow \mathbb{R} \) and \( g: S \rightarrow \mathbb{R} \) are functions such that the limits of \( f(x) \) and \( g(x) \) as \( x \) goes to \( c \) both exist, and
+\[ f(x) \leq g(x) \quad \text{for all} \; x \in S \setminus \{c\}. \]
+Then
+\[ \lim_{x \to c} f(x) \leq \lim_{x \to c} g(x). \]
+\end{corollary}
+
+\begin{corollary}
+    Let \( S \subset \mathbb{R} \) and let \( c \) be a cluster point of \( S \). Suppose \( f: S \rightarrow \mathbb{R} \) is a function such that the limit of \( f(x) \) as \( x \) goes to \( c \) exists. Suppose there are two real numbers \( a \) and \( b \) such that
+\[ a \leq f(x) \leq b \quad \text{for all} \; x \in S \setminus \{c\}. \]
+Then
+\[ a \leq \lim_{x \to c} f(x) \leq b. \]
+\end{corollary}
+
+\begin{corollary}
+    Let \( S \subset \mathbb{R} \) and let \( c \) be a cluster point of \( S \). Suppose \( f: S \rightarrow \mathbb{R} \), \( g: S \rightarrow \mathbb{R} \), and \( h: S \rightarrow \mathbb{R} \) are functions such that
+\[ f(x) \leq g(x) \leq h(x) \quad \text{for all} \; x \in S \setminus \{c\}. \]
+Suppose the limits of \( f(x) \) and \( h(x) \) as \( x \) goes to \( c \) both exist, and
+\[ \lim_{x \to c} f(x) = \lim_{x \to c} h(x). \]
+Then the limit of \( g(x) \) as \( x \) goes to \( c \) exists and
+\[ \lim_{x \to c} g(x) = \lim_{x \to c} f(x) = \lim_{x \to c} h(x). \]
+\end{corollary}
+
+\begin{corollary}
+    Let \( S \subset \mathbb{R} \) and let \( c \) be a cluster point of \( S \). Suppose \( f: S \rightarrow \mathbb{R} \) and \( g: S \rightarrow \mathbb{R} \) are functions such that the limits of \( f(x) \) and \( g(x) \) as \( x \) goes to \( c \) both exist. Then
+
+\begin{enumerate}[label=(\roman*)]
+    \item \(\lim_{x \to c} (f(x) + g(x)) = \left( \lim_{x \to c} f(x) \right) + \left( \lim_{x \to c} g(x) \right).\)
+    \item \(\lim_{x \to c} (f(x) - g(x)) = \left( \lim_{x \to c} f(x) \right) - \left( \lim_{x \to c} g(x) \right).\)
+    \item \(\lim_{x \to c} (f(x) g(x)) = \left( \lim_{x \to c} f(x) \right) \left( \lim_{x \to c} g(x) \right).\)
+    \item If \(\lim_{x \to c} g(x) \neq 0\) and \( g(x) \neq 0 \) for all \( x \in S \setminus \{c\} \), then
+    \[ \lim_{x \to c} \frac{f(x)}{g(x)} = \frac{\lim_{x \to c} f(x)}{\lim_{x \to c} g(x)}. \]
+\end{enumerate}
+\end{corollary}
+
+\begin{corollary}
+    Let \( S \subset \mathbb{R} \) and let \( c \) be a cluster point of \( S \). Suppose \( f: S \rightarrow \mathbb{R} \) is a function such that the limit of \( f(x) \) as \( x \) goes to \( c \) exists. Then
+\[ \lim_{x \to c} |f(x)| = \left| \lim_{x \to c} f(x) \right|. \]
+
+\end{corollary}
+
+
+\subsection{Limits of restrictions and one-sided limits}
+
+\begin{defi}
+    Let \( f: S \rightarrow \mathbb{R} \) be a function and \( A \subset S \). Define the function \( f|_A: A \rightarrow \mathbb{R} \) by
+    \[ f|_A(x) := f(x) \quad \text{for} \; x \in A. \]
+    We call \( f|_A \) the restriction of \( f \) to \( A \).    
+\end{defi}
+
+\begin{prop}
+    Let \( S \subset \mathbb{R} \), \( c \in \mathbb{R} \), and let \( f: S \rightarrow \mathbb{R} \) be a function. Suppose \( A \subset S \) is such that there is some \( \alpha > 0 \) such that
+\[ (A \setminus \{c\}) \cap (c - \alpha, c + \alpha) = (S \setminus \{c\}) \cap (c - \alpha, c + \alpha). \]
+
+\begin{enumerate}[label=(\roman*)]
+    \item The point \( c \) is a cluster point of \( A \) if and only if \( c \) is a cluster point of \( S \).
+    \item Supposing \( c \) is a cluster point of \( S \), then \( f(x) \rightarrow L \) as \( x \rightarrow c \) if and only if \( f|_A(x) \rightarrow L \) as \( x \rightarrow c \).
+\end{enumerate}
+\end{prop}
+
+
+\begin{proof}
+To prove (i), let $c$ be a cluster point of $A$. Since $A\subset S$, then if \[ (A \setminus \{c\}) \cap (c - \epsilon, c + \epsilon)\] is non-empty 
+for all $\epsilon >0$, then $(S \setminus \{c\}) \cap (c - \epsilon, c + \epsilon)$ is non-empty. Thus $c$ is a cluster point of $S$. If $c$ is not a cluster point of $S$, 
+for $\epsilon<\alpha$, we get that $(A \setminus \{c\}) \cap (c - \epsilon, c + \epsilon) = (S \setminus \{c\}) \cap (c - \epsilon, c + \epsilon)$
+This is true for all \(\varepsilon < \alpha\) and hence \((A \setminus \{c\}) \cap (c - \varepsilon, c + \varepsilon)\) must be nonempty for all \(\varepsilon > 0\). Thus \(c\) is a cluster point of \(A\).
+
+Now suppose \(c\) is a cluster point of \(S\) and \(f(x) \rightarrow L\) as \(x \rightarrow c\). That is, for every \(\varepsilon > 0\) there is a \(\delta > 0\) such that if \(x \in S \setminus \{c\}\) and \(|x - c| < \delta\), then \(|f(x) - L| < \varepsilon\). Because \(A \subset S\), if \(x \in A \setminus \{c\}\), then \(x \in S \setminus \{c\}\), and hence \(f|_A(x) \rightarrow L\) as \(x \rightarrow c\).
+
+Finally, suppose \(f|_A(x) \rightarrow L\) as \(x \rightarrow c\) and let \(\epsilon > 0\) be given. There is a \(\delta' > 0\) such that if \(x \in A \setminus \{c\}\) and \(|x - c| < \delta'\), then \(|f|_A(x) - L| < \varepsilon\). Take \(\delta := \min\{\delta', \alpha\}\). Now suppose \(x \in S \setminus \{c\}\) and \(|x - c| < \delta\). As \(|x - c| < \alpha\), we find \(x \in A \setminus \{c\}\), and as \(|x - c| < \delta'\), we get
+\[ |f(x) - L| = |f|_A(x) - L| < \varepsilon. \]
+
+The hypothesis on \(A\) in the proposition is necessary. For an arbitrary restriction we generally get an implication in only one direction, see Exercise 3.1.6. The usual notation for the limit is
+\[ \lim_{\substack{x \rightarrow c \\ x \in A}} f(x) := \lim_{x \rightarrow c} f|_A(x). \]
+
+A common use of restriction with respect to limits, which does not satisfy the hypothesis in the proposition, is the so-called one-sided limit*.
+\end{proof}
+
+\begin{defi}
+    Let \( f: S \rightarrow \mathbb{R} \) be a function and let \( c \in \mathbb{R} \). If \( c \) is a cluster point of \( S \cap (c, \infty) \) and the limit of the restriction of \( f \) to \( S \cap (c, \infty) \) as \( x \rightarrow c \) exists, define
+    \[ \lim_{x \to c^+} f(x) := \lim_{x \to c} f|_{S \cap (c, \infty)}(x). \]
+    
+    Similarly, if \( c \) is a cluster point of \( S \cap (-\infty, c) \) and the limit of the restriction as \( x \rightarrow c \) exists, define
+    \[ \lim_{x \to c^-} f(x) := \lim_{x \to c} f|_{S \cap (-\infty, c)}(x). \]    
+\end{defi}
+
+\begin{prop}
+    Let \( S \subset \mathbb{R} \) be such that \( c \) is a cluster point of both \( S \cap (-\infty, c) \) and \( S \cap (c, \infty) \), let \( f: S \rightarrow \mathbb{R} \) be a function, and let \( L \in \mathbb{R} \). Then \( c \) is a cluster point of \( S \) and
+    \[ \lim_{x \to c} f(x) = L \quad \text{if and only if} \quad \lim_{x \to c^-} f(x) = \lim_{x \to c^+} f(x) = L. \]
+    
+    That is, a limit at \( c \) exists if and only if both one-sided limits exist and are equal. The proof is a straightforward application of the definition of limit and is left as an exercise. The key point is that
+    \[ (S \cap (-\infty, c)) \cup (S \cap (c, \infty)) = S \setminus \{c\}. \]    
+\end{prop}
+
+
+\subsection{Limits at Infinity}
+\begin{defi}
+    We say \( \infty \) is a cluster point of \( S \subset \mathbb{R} \) if for every \( M \in \mathbb{R} \), there exists an \( x \in S \) such that \( x \geq M \). Similarly, \( -\infty \) is a cluster point of \( S \subset \mathbb{R} \) if for every \( M \in \mathbb{R} \), there exists an \( x \in S \) such that \( x \leq M \).
+
+Let \( f: S \rightarrow \mathbb{R} \) be a function, where \( \infty \) is a cluster point of \( S \). If there exists an \( L \in \mathbb{R} \) such that for every \( \varepsilon > 0 \), there is an \( M \in \mathbb{R} \) such that
+\[
+|f(x) - L| < \varepsilon
+\]
+whenever \( x \in S \) and \( x \geq M \), then we say \( f(x) \) converges to \( L \) as \( x \) goes to \( \infty \). We call \( L \) the limit and write
+\[
+\lim_{x \rightarrow \infty} f(x) := L.
+\]
+Alternatively we write \( f(x) \rightarrow L \) as \( x \rightarrow \infty \).
+
+Similarly, if \( -\infty \) is a cluster point of \( S \) and there exists an \( L \in \mathbb{R} \) such that for every \( \varepsilon > 0 \), there is an \( M \in \mathbb{R} \) such that
+\[
+|f(x) - L| < \varepsilon
+\]
+whenever \( x \in S \) and \( x \leq M \), then we say \( f(x) \) converges to \( L \) as \( x \) goes to \( -\infty \). Alternatively, we write \( f(x) \rightarrow L \) as \( x \rightarrow -\infty \). We call \( L \) a limit and, if unique, write
+\[
+\lim_{x \rightarrow -\infty} f(x) := L.
+\]
+\end{defi}
+
+\begin{prop}
+    The limit at $\infty$ and $-\infty$ aas defined above is unique if it exists.
+\end{prop}
+
+
+\begin{lemma}
+    Suppose \( f: S \rightarrow \mathbb{R} \) is a function, \( \infty \) is a cluster point of \( S \subset \mathbb{R} \), and \( L \in \mathbb{R} \). Then
+\[
+\lim_{x \rightarrow \infty} f(x) = L \quad \text{if and only if} \quad \lim_{n \rightarrow \infty} f(x_n) = L
+\]
+for all sequences \( \{x_n\}_{n=1}^{\infty} \) in \( S \) such that \( \lim_{n \rightarrow \infty} x_n = \infty \).
+\end{lemma}
+
+\begin{proof}
+    First suppose \( f(x) \rightarrow L \) as \( x \rightarrow \infty \). Given an \( \varepsilon > 0 \), there exists an \( M \) such that for all \( x \geq M \), we have \( |f(x) - L| < \varepsilon \). Let \( \{x_n\}_{n=1}^{\infty} \) be a sequence in \( S \) such that \( \lim_{n \rightarrow \infty} x_n = \infty \). Then there exists an \( N \) such that for all \( n \geq N \), we have \( x_n \geq M \). And thus \( |f(x_n) - L| < \varepsilon \).
+
+We prove the converse by contrapositive. Suppose \( f(x) \) does not go to \( L \) as \( x \rightarrow \infty \). This means that there exists an \( \varepsilon > 0 \), such that for every \( n \in \mathbb{N} \), there exists an \( x \in S \), \( x \geq n \), let us call it \( x_n \), such that \( |f(x_n) - L| \geq \varepsilon \). Consider the sequence \( \{x_n\}_{n=1}^{\infty} \). Clearly \( \{f(x_n)\}_{n=1}^{\infty} \) does not converge to \( L \). It remains to note that \( \lim_{n \rightarrow \infty} x_n = \infty \), because \( x_n \geq n \) for all \( n \).
+\end{proof}
+
+
 
 
 \section{Continuity}
 
-\subsection{}
+\subsection{Basis}
+
+\begin{defi}
+    Suppose \( S \subset \mathbb{R} \) and \( c \in S \). We say \( f: S \rightarrow \mathbb{R} \) is \textit{continuous at} \( c \) if for every \( \epsilon > 0 \) there is a \( \delta > 0 \) such that whenever \( x \in S \) and \( |x - c| < \delta \), we have \( |f(x) - f(c)| < \epsilon \). When \( f: S \rightarrow \mathbb{R} \) is continuous at all \( c \in S \), then we simply say \( f \) is a \textit{continuous function}.    
+\end{defi}
+
+\begin{prop}
+    Consider a function \( f: S \rightarrow \mathbb{R} \) defined on a set \( S \subset \mathbb{R} \) and let \( c \in S \). Then:
+
+\begin{enumerate}
+    \item If \( c \) is not a cluster point of \( S \), then \( f \) is continuous at \( c \).
+    \item If \( c \) is a cluster point of \( S \), then \( f \) is continuous at \( c \) if and only if the limit of \( f(x) \) as \( x \rightarrow c \) exists and
+    \[
+    \lim_{x \rightarrow c} f(x) = f(c).
+    \]
+    \item The function \( f \) is continuous at \( c \) if and only if for every sequence \( \{x_n\}_{n=1}^{\infty} \) where \( x_n \in S \) and \( \lim_{n \rightarrow \infty} x_n = c \), the sequence \( \{f(x_n)\}_{n=1}^{\infty} \) converges to \( f(c) \).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+    We start with (i). Suppose \( c \) is not a cluster point of \( S \). Then there exists a \( \delta > 0 \) such that \( S \cap (c - \delta, c + \delta) = \{c\} \). For any \( \epsilon > 0 \), simply pick this given \( \delta \). The only \( x \in S \) such that \( |x - c| < \delta \) is \( x = c \). Then \( |f(x) - f(c)| = |f(c) - f(c)| = 0 < \epsilon \).
+
+Let us move to (ii). Suppose \( c \) is a cluster point of \( S \). Let us first suppose that \( \lim_{x \to c} f(x) = f(c) \). Then for every \( \epsilon > 0 \), there is a \( \delta > 0 \) such that if \( x \in S \setminus \{c\} \) and \( |x - c| < \delta \), then \( |f(x) - f(c)| < \epsilon \). Also \( |f(c) - f(c)| = 0 < \epsilon \), so the definition of continuity at \( c \) is satisfied. On the other hand, suppose \( f \) is continuous at \( c \). For every \( \epsilon > 0 \), there exists a \( \delta > 0 \) such that for \( x \in S \) where \( |x - c| < \delta \), we have \( |f(x) - f(c)| < \epsilon \). Then the statement is, of course, still true if \( x \in S \setminus \{c\} \subset S \). Therefore, \( \lim_{x \to c} f(x) = f(c) \).
+
+For (iii), first suppose \( f \) is continuous at \( c \). Let \( \{x_n\}_{n=1}^{\infty} \) be a sequence such that \( x_n \in S \) and \( \lim_{n \to \infty} x_n = c \). Let \( \epsilon > 0 \) be given. Find a \( \delta > 0 \) such that \( |f(x) - f(c)| < \epsilon \) for all \( x \in S \) where \( |x - c| < \delta \). Find an \( M \in \mathbb{N} \) such that for \( n \geq M \), we have \( |x_n - c| < \delta \). Then for \( n \geq M \), we have that \( |f(x_n) - f(c)| < \epsilon \), so \( \{f(x_n)\}_{n=1}^{\infty} \) converges to \( f(c) \).
+
+We prove the other direction of (iii) by contrapositive. Suppose \( f \) is not continuous at \( c \). Then there exists an \( \epsilon > 0 \) such that for every \( \delta > 0 \), there exists an \( x \in S \) such that \( |x - c| < \delta \) and \( |f(x) - f(c)| \geq \epsilon \). Define a sequence \( \{x_n\}_{n=1}^{\infty} \) as follows. Let \( x_n \in S \) be such that \( |x_n - c| < 1/n \) and \( |f(x_n) - f(c)| \geq \epsilon \). Now \( \{x_n\}_{n=1}^{\infty} \) is a sequence in \( S \) such that \( \lim_{n \to \infty} x_n = c \) and such that \( |f(x_n) - f(c)| \geq \epsilon \) for all \( n \in \mathbb{N} \). Thus \( \{f(x_n)\}_{n=1}^{\infty} \) does not converge to \( f(c) \). It may or may not converge, but it definitely does not converge to \( f(c) \).
+\end{proof}
+
+\begin{prop}
+    Let \( f: S \rightarrow \mathbb{R} \) and \( g: S \rightarrow \mathbb{R} \) be functions continuous at \( c \in S \).
+
+    \begin{enumerate}[label=(\roman*)]
+        \item The function \( h: S \rightarrow \mathbb{R} \) defined by \( h(x) := f(x) + g(x) \) is continuous at \( c \).
+        \item The function \( h: S \rightarrow \mathbb{R} \) defined by \( h(x) := f(x) - g(x) \) is continuous at \( c \).
+        \item The function \( h: S \rightarrow \mathbb{R} \) defined by \( h(x) := f(x) g(x) \) is continuous at \( c \).
+        \item If \( g(x) \neq 0 \) for all \( x \in S \), the function \( h: S \rightarrow \mathbb{R} \) given by \( h(x) := \frac{f(x)}{g(x)} \) is continuous at \( c \).
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    Let \( A, B \subset \mathbb{R} \) and \( f: B \rightarrow \mathbb{R} \) and \( g: A \rightarrow B \) be functions. If \( g \) is continuous at \( c \in A \) and \( f \) is continuous at \( g(c) \), then \( f \circ g: A \rightarrow \mathbb{R} \) is continuous at \( c \).    
+\end{prop}
+
+
+
+
+
+\subsection{Discontinuous Functions}
+
+\begin{prop}
+    Let \( f: S \rightarrow \mathbb{R} \) be a function and \( c \in S \). Suppose there exists a sequence \( \{x_n\}_{n=1}^{\infty} \), \( x_n \in S \) for all \( n \), and \( \lim_{n \to \infty} x_n = c \) such that \( \{f(x_n)\}_{n=1}^{\infty} \) does not converge to \( f(c) \). Then \( f \) is discontinuous at \( c \).
+\end{prop}
+
+
 
 
 \subsection{Uniform Continuity}
 
+\begin{defi}
+    Let \( S \subset \mathbb{R} \), and let \( f: S \rightarrow \mathbb{R} \) be a function. Suppose for every \( \varepsilon > 0 \) there exists a \( \delta > 0 \) such that whenever \( x, c \in S \) and \( |x - c| < \delta \), then \( |f(x) - f(c)| < \varepsilon \). Then we say \( f \) is \textit{uniformly continuous}.
+\end{defi}
+
+\begin{theorem}
+    Let \( f: [a, b] \rightarrow \mathbb{R} \) be a continuous function. Then \( f \) is uniformly continuous.
+\end{theorem}
+
+\begin{proof}
+    We prove the statement by contrapositive. Suppose \( f \) is not uniformly continuous. We will prove that there is some \( c \in [a, b] \) where \( f \) is not continuous. Let us negate the definition of uniformly continuous. There exists an \( \varepsilon > 0 \) such that for every \( \delta > 0 \), there exist points \( x, y \) in \( [a, b] \) with \( |x - y| < \delta \) and \( |f(x) - f(y)| \geq \varepsilon \).
+
+So for the \( \varepsilon > 0 \) above, we find sequences \( \{x_n\}_{n=1}^{\infty} \) and \( \{y_n\}_{n=1}^{\infty} \) such that \( |x_n - y_n| < 1/n \) and such that \( |f(x_n) - f(y_n)| \geq \varepsilon \). By Bolzano-Weierstrass, there exists a convergent subsequence \( \{x_{n_k}\}_{k=1}^{\infty} \). Let \( c := \lim_{k \rightarrow \infty} x_{n_k} \). As \( a \leq x_{n_k} \leq b \) for all \( k \), we have \( a \leq c \leq b \). Estimate
+\[
+|y_{n_k} - c| = |y_{n_k} - x_{n_k} + x_{n_k} - c| \leq |y_{n_k} - x_{n_k}| + |x_{n_k} - c| < 1/n_k + |x_{n_k} - c|.
+\]
+
+As \( 1/n_k \) and \( |x_{n_k} - c| \) both go to zero when \( k \) goes to infinity, \( \{y_{n_k}\}_{k=1}^{\infty} \) converges and the limit is \( c \). We now show that \( f \) is not continuous at \( c \). Estimate
+
+\begin{align*}
+|f(x_{n_k}) - f(c)| &= |f(x_{n_k}) - f(y_{n_k}) + f(y_{n_k}) - f(c)| \\
+&\geq |f(x_{n_k}) - f(y_{n_k})| - |f(y_{n_k}) - f(c)| \\
+&\geq \varepsilon - |f(y_{n_k}) - f(c)|.
+\end{align*}
 
 
-\section{Derivative}
+Or in other words,
+\[
+|f(x_{n_k}) - f(c)| + |f(y_{n_k}) - f(c)| \geq \varepsilon.
+\]
+
+At least one of the sequences \( \{f(x_{n_k})\}_{k=1}^{\infty} \) or \( \{f(y_{n_k})\}_{k=1}^{\infty} \) cannot converge to \( f(c) \), otherwise the left-hand side of the inequality would go to zero while the right-hand side is positive. Thus \( f \) cannot be continuous at \( c \). 
+\end{proof}
+\subsubsection{Continuous Extension}
+
+\begin{lemma}
+    Let \( S \subset \mathbb{R} \) and let \( f: S \rightarrow \mathbb{R} \) be a uniformly continuous function. Let \( \{x_n\}_{n=1}^{\infty} \) be a Cauchy sequence in \( S \). Then \( \{f(x_n)\}_{n=1}^{\infty} \) is Cauchy.
+\end{lemma}
+
+\begin{proof}
+    Let \( \varepsilon > 0 \) be given. There is a \( \delta > 0 \) such that \( |f(x) - f(y)| < \varepsilon \) whenever \( x, y \in S \) and \( |x - y| < \delta \). Find an \( M \in \mathbb{N} \) such that for all \( n, k \geq M \), we have \( |x_n - x_k| < \delta \). Then for all \( n, k \geq M \), we have \( |f(x_n) - f(x_k)| < \varepsilon \). 
+\end{proof}
+
+\begin{prop}
+    function \( f: (a, b) \rightarrow \mathbb{R} \) is uniformly continuous if and only if the limits
+    \[
+    L_a := \lim_{x \rightarrow a} f(x) \quad \text{and} \quad L_b := \lim_{x \rightarrow b} f(x)
+    \]
+    exist and the function \( \widetilde{f}: [a, b] \rightarrow \mathbb{R} \) defined by
+    
+    $$\widetilde{f}(x) := \begin{cases} 
+    f(x) & \text{if } x \in (a, b), \\
+    L_a & \text{if } x = a, \\
+    L_b & \text{if } x = b
+    \end{cases}$$
+    
+    is continuous.
+\end{prop}
+
+
+
+% todo
+
+\begin{proof}
+    
+First, if $L_a$ exists, then $\lim_{x\to a}\widetilde{f}(x)$ exists and equal to $L_a$. Similarly, if $L_b$ exists, then $\lim_{x\to b}\widetilde{f}(x)$ exists and equal to $L_b$. Then 
+
+Now, we prove the other direction. If $\widetilde{f}(x)$ is defined as above and , then 
+
+
+
+
+
+\end{proof}
+
+\subsubsection{Lipschitz Continuity}
+
+\begin{defi}
+    A function \( f: S \rightarrow \mathbb{R} \) is Lipschitz continuous*, if there exists a \( K \in \mathbb{R} \), such that
+\[
+|f(x) - f(y)| \leq K|x - y| \quad \text{for all } x \text{ and } y \text{ in } S.
+\]
+\end{defi}
+
+\begin{prop}
+    A Lipschitz continuous function is uniformly continuous.
+\end{prop}
+
+\begin{proof}
+    Let \( f: S \rightarrow \mathbb{R} \) be a function and let \( K \) be a constant such that \( |f(x) - f(y)| \leq K|x - y| \) for all \( x, y \) in \( S \). Let \( \varepsilon > 0 \) be given. Take \( \delta := \varepsilon / K \). For all \( x \) and \( y \) in \( S \) such that \( |x - y| < \delta \),
+\[
+|f(x) - f(y)| \leq K|x - y| < K\delta = K\frac{\varepsilon}{K} = \varepsilon.
+\]
+Therefore, \( f \) is uniformly continuous. 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Extreme and Intermediate Value Theorems}
+
+\subsection{Min-Max or Extreme Value Theorem}
+
+\begin{lemma}
+    A continuous function $f:[a,b]\rightarrow \mathbb{R}$ is bounded.
+\end{lemma}
+
+
+\begin{proof}
+    We prove the claim by contrapositive. Suppose \( f \) is not bounded. Then for each \( n \in \mathbb{N} \), there is an \( x_n \in [a, b] \), such that
+    \[
+    \left| f(x_n) \right| \geq n.
+    \]
+    The sequence \( \{x_n\}_{n=1}^{\infty} \) is bounded as \( a \leq x_n \leq b \). By the Bolzano-Weierstrass theorem, there is a convergent subsequence \( \{x_{n_i}\}_{i=1}^{\infty} \). Let \( x := \lim_{i \rightarrow \infty} x_{n_i} \). Since \( a \leq x_{n_i} \leq b \) for all \( i \), then \( a \leq x \leq b \). The sequence \( \{f(x_{n_i})\}_{i=1}^{\infty} \) is not bounded as \( \left| f(x_{n_i}) \right| \geq n_i \geq i \). Thus \( f \) is not continuous at \( x \) as
+    \[
+    f(x) = f\left( \lim_{i \rightarrow \infty} x_{n_i} \right), \quad \text{but} \quad \lim_{i \rightarrow \infty} f(x_{n_i}) \text{ does not exist.}
+    \]
+\end{proof}
+
+\begin{theorem}
+    A continuous function \( f: [a, b] \rightarrow \mathbb{R} \) achieves both an absolute minimum and an absolute maximum on \([a, b]\).
+\end{theorem}
+
+\begin{proof}
+    The lemma says that \( f \) is bounded, so the set \( f([a, b]) = \{ f(x) : x \in [a, b] \} \) has a supremum and an infimum. There exist sequences in the set \( f([a, b]) \) that approach its supremum and its infimum. That is, there are sequences \( \{ f(x_n) \}_{n=1}^{\infty} \) and \( \{ f(y_n) \}_{n=1}^{\infty} \), where \( x_n \) and \( y_n \) are in \( [a, b] \), such that
+\[
+\lim_{n \rightarrow \infty} f(x_n) = \inf f([a, b]) \quad \text{and} \quad \lim_{n \rightarrow \infty} f(y_n) = \sup f([a, b]).
+\]
+
+We are not done yet; we need to find where the minima and the maxima are. The problem is that the sequences \( \{ x_n \}_{n=1}^{\infty} \) and \( \{ y_n \}_{n=1}^{\infty} \) need not converge. We know \( \{ x_n \}_{n=1}^{\infty} \) and \( \{ y_n \}_{n=1}^{\infty} \) are bounded (their elements belong to a bounded interval \( [a, b] \)). Apply the Bolzano-Weierstrass theorem, to find convergent subsequences \( \{ x_{n_i} \}_{i=1}^{\infty} \) and \( \{ y_{m_i} \}_{i=1}^{\infty} \). Let
+\[
+x := \lim_{i \rightarrow \infty} x_{n_i} \quad \text{and} \quad y := \lim_{i \rightarrow \infty} y_{m_i}.
+\]
+
+As \( a \leq x_{n_i} \leq b \) for all \( i \), we have \( a \leq x \leq b \). Similarly, \( a \leq y \leq b \). So \( x \) and \( y \) are in \( [a, b] \). A limit of a subsequence is the same as the limit of the sequence, and we can take a limit past the continuous function \( f \):
+\[
+\inf f([a, b]) = \lim_{n \rightarrow \infty} f(x_n) = \lim_{i \rightarrow \infty} f(x_{n_i}) = f\left( \lim_{i \rightarrow \infty} x_{n_i} \right) = f(x).
+\]
+
+Similarly,
+\[
+\sup f([a, b]) = \lim_{n \rightarrow \infty} f(y_n) = \lim_{i \rightarrow \infty} f(y_{m_i}) = f\left( \lim_{i \rightarrow \infty} y_{m_i} \right) = f(y).
+\]
+
+Hence, \( f \) achieves an absolute minimum at \( x \) and an absolute maximum at \( y \).
+\end{proof}
+
+
+\subsection{Bolzano's Intermediate Value Theorem}
+
+\begin{lemma}
+    Let \( f: [a, b] \rightarrow \mathbb{R} \) be a continuous function. Suppose \( f(a) < 0 \) and \( f(b) > 0 \). Then there exists a number \( c \in (a, b) \) such that \( f(c) = 0 \).
+\end{lemma}
+
+
+\begin{theorem}[Bolzano's intermediate value theorem] 
+    Let \( f: [a, b] \rightarrow \mathbb{R} \) be a continuous function. Suppose \( y \in \mathbb{R} \) is such that \( f(a) < y < f(b) \) or \( f(a) > y > f(b) \). Then there exists a \( c \in (a, b) \) such that \( f(c) = y \).   
+\end{theorem}
+
+\begin{corollary}
+    If $f:[a,b]\to\mathbb{R}$ is continuous, then the direct image $f([a,b])$ is a closed and bounded interval or a single number.
+\end{corollary}
+
+
+\begin{prop}
+    Let $f(x)$ be a polynomial of odd degree. Then $f$ has a real root.
+\end{prop}
+
+
+
+\newpage
+
+\section{Exercise}
+
+\begin{exe}[Dirichlet function]
+
+    $$f(x)=\begin{cases}
+        1,\ x\ is\ rational\\
+        0,\ x\ is irrational
+    \end{cases}$$
+
+    The function is discontinuous at all $c\in\mathbb{R}$.
+\end{exe}
+
+\begin{sol}
+If $c$ is rational, take a sequence $\left\{x_n\right\}_{n=1}^{\infty}$ of rational numbers such that $\lim_{n\to\infty}x_n=c$. Then 
+$f(x_{n})=0$ and $\lim_{n\to \infty}f(x_n)=0$, but $f(c)=1$. And vise versa.
+\end{sol}
+
+
+
+
+
+\begin{exe}[3.1.7]
+    Find an example of a function \( f: [-1,1] \rightarrow \mathbb{R} \), where for \( A := [0,1] \), we have \( f|_{A}(x) \rightarrow 0 \) as \( x \rightarrow 0 \), but the limit of \( f(x) \) as \( x \rightarrow 0 \) does not exist. Note why you cannot apply Proposition 3.1.15.
+\end{exe}
+\begin{sol}[3.1.7]
+$$f(x)=\begin{cases}
+    x,\ x\in [0,1]\\
+    \sin\frac{1}{x},\ x\in [-1,0)
+\end{cases}$$
+\end{sol}
+
+\begin{exe}[3.1.8]
+    Find example functions \( f \) and \( g \) such that the limit of neither \( f(x) \) nor \( g(x) \) exists as \( x \rightarrow 0 \), but such that the limit of \( f(x) + g(x) \) exists as \( x \rightarrow 0 \).
+\end{exe}
+
+
+
+\begin{sol}[3.1.8]
+$$f(x)=\begin{cases}
+    x,\ x\in [0,1]\\
+    \sin\frac{1}{x},\ x\in [-1,0)
+\end{cases} g(x)=\begin{cases}
+    x,\ x\in [0,1]\\
+    -\sin\frac{1}{x},\ x\in [-1,0)
+\end{cases}$$
+
+\end{sol}
+
+\begin{exe}[3.1.9]
+    Let \( c_1 \) be a cluster point of \( A \subset \mathbb{R} \) and \( c_2 \) be a cluster point of \( B \subset \mathbb{R} \). Suppose \( f: A \rightarrow B \) and \( g: B \rightarrow \mathbb{R} \) are functions such that \( f(x) \rightarrow c_2 \) as \( x \rightarrow c_1 \) and \( g(y) \rightarrow L \) as \( y \rightarrow c_2 \). If \( c_2 \in B \), also suppose that \( g(c_2) = L \). Let \( h(x) := g(f(x)) \) and show \( h(x) \rightarrow L \) as \( x \rightarrow c_1 \). Hint: Note that \( f(x) \) could equal \( c_2 \) for many \( x \in A \), see also Exercise 3.1.14.
+\end{exe}
+
+\begin{sol}[3.1.9]
+Set $\epsilon>0$, there exists a $\delta'>0$ such that for all $y\in B$ such that $|y-c_2|<\delta'$, we have $|g(y)-L|<\epsilon$. And we can have that for $\delta'>0$, 
+there exists $\delta>0$ such that for all $x\in A$ such that $|x-c_1|<\delta$, we have $|f(x)-c_2|<\delta'$. Then we have for $\epsilon>0$, there exists 
+$\delta>0$ such that for all $x\in A$ such that $|x-c_1|<\delta$, we have $|f(x)-c_2|<\delta'$ and $|g(f(x))-L|<\epsilon$.
+\end{sol}
+
+\begin{exe}[3.1.10]
+    Suppose that \( f: \mathbb{R} \rightarrow \mathbb{R} \) be a function such that for every sequence \( \{x_n\}_{n=1}^{\infty} \) in \( \mathbb{R} \), the sequence \( \{f(x_n)\}_{n=1}^{\infty} \) converges. Prove that \( f \) is constant, that is, \( f(x) = f(y) \) for all \( x, y \in \mathbb{R} \).
+\end{exe}
+
+\begin{sol}[3.1.10]
+Now we construct a divergent sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ such that $x_{2n-1}=a,x_{2n}=b,a\neq b\ a,b\in \mathbb{R}$, then
+$\left\{f(x_{2n-1})\right\}_{n=1}^{\infty}$ converges to $f(a)$ and $\left\{f(x_{2n})\right\}_{n=1}^{\infty}$ converges to $f(b)$. If $f(a)\neq f(b)$, $\left\{f(x_{n})\right\}_{n=1}^{\infty}$ is divergent, contradictint with the assumption. Then we know that $a=b$. 
+Then for $a,b\in \mathbb{R}$, we have that $f(x)=f(a)=f(b)$, so $f$ is constant.
+\end{sol}
+
+
+\begin{exe}[3.2.3]
+    Define \( f: \mathbb{R} \rightarrow \mathbb{R} \) by
+\[ f(x) := \begin{cases} 
+x & \text{if } x \text{ is rational,} \\
+x^2 & \text{if } x \text{ is irrational.}
+\end{cases} \]
+
+Using the definition of continuity, directly prove that \( f \) is continuous at 1 and discontinuous at 2.
+
+\end{exe}
+
+\begin{sol}[3.2.3]
+For $f$ at 1, for $\epsilon>0$, there exists $\delta=\epsilon>0$ for rational $x$, such that $|x-1|<\delta$ and $|f(x)-1|=|x-1|<\epsilon$. For $\delta'>0$, for irrational $x$, we have $|x-1|<\delta'$, 
+so $|f(x)-1|=|x^2-1|=|(x+1)(x-1)|<|\delta'(\delta'+2)|<|\delta'$. If $\epsilon>2$, we set $\delta'=1/2$, then we have $|f(x)-1|<1.5<\epsilon$. If 
+$\epsilon \leq 2$, we set $\delta'= \epsilon/3<2/3<1$, then we have $|f(x)-1|<\epsilon/3*(2+1)<\epsilon$. So $f$ is continuous at 1.
+
+For $f$ at 2, for $\epsilon>0$, there exists $\delta=\epsilon>0$ for rational $x$, such that $|x-2|<\delta$ and $|f(x)-2|=|x-2|<\epsilon$. For $\delta'>0$, for irrational $x$, we can have an $x$ such that $2<x<2+\delta'$, then
+$|f(x)-f(2)|=|x^2-2|>2$, so $f$ is discontinuous at 2.
+\end{sol}
+
+
+\begin{exe}[3.2.4]
+    Define \( f: \mathbb{R} \rightarrow \mathbb{R} \) by
+\[ f(x) := \begin{cases} 
+\sin(1/x) & \text{if } x \neq 0, \\
+0 & \text{if } x = 0.
+\end{cases} \]
+Is \( f \) continuous? Prove your assertion.
+\end{exe}
+
+\begin{sol}[3.2.4]
+    
+\end{sol}
+
+
+\begin{exe} 3.2.4: Define \( f: \mathbb{R} \rightarrow \mathbb{R} \) by
+\[ f(x) := \begin{cases} 
+\sin(1/x) & \text{if } x \neq 0, \\
+0 & \text{if } x = 0.
+\end{cases} \]
+Is \( f \) continuous? Prove your assertion.
+
+\end{exe}
+
+\begin{sol}[3.2.4]
+Consider the sequence $\left\{x_{n}\right\}_{n=1}^{\infty}$ such that $x_{n}=\frac{1}{(2n+1/2)\pi}$ for $n=1,2,3,\ldots$. Then 
+$f(x_n)= \sin(1/x_n)=1$, don't converge to $f(0)=0$. So $f$ is not continuous at 0.
+\end{sol}
+
+\begin{exe} 3.2.5: Define \( f: \mathbb{R} \rightarrow \mathbb{R} \) by
+\[ f(x) := \begin{cases} 
+x \sin(1/x) & \text{if } x \neq 0, \\
+0 & \text{if } x = 0.
+\end{cases} \]
+Is \( f \) continuous? Prove your assertion.
+
+\end{exe} 
+
+\begin{sol}[3.2.5]
+    \begin{align*}
+        -1\leq \sin (1/x) \leq 1, \quad x \neq 0\\
+        -x\leq x \sin(1/x) \leq x, \quad x=\neq 0\\
+        \lim_{x\to 0}(-x)\leq \lim_{x\to0}f(x) \leq \lim_{x\to}(x)\\
+        0\leq \lim_{x\to 0}f(x) \leq 0\\
+    \end{align*}
+    That is $\lim_{x\to0}f(x)=f(0)$. So $f$ is continuous at 0.
+\end{sol}
+
+\begin{exe} 3.2.6: Prove Proposition 3.2.5.
+\end{exe} 
+
+\begin{sol}[3.2.6]
+
+    You just need to use the properties of limits and you can prove it easily.
+
+    But here to prove it, we prove it from the definition.
+    \begin{enumerate}[label=(\roman*)]
+        \item $|h(x)-h(c)|=|f(x)-f(c)+g(x)-g(c)|\leq |f(x)-f(c)|+|g(x)-g(c)|$. Then you can follow the normal process to prove it.
+        \item same as (i)
+        \item $|h(x)-h(c)|=|f(x)g(x)-f(c)g(c)|=|f(x)g(x)-f(x)g(c)+f(x)g(c)-f(c)g(c)|\leq |f(x)(g(x)-g(c))+(f(x)-f(c))g(c)| \leq |f(x)||(g(x)-g(c))| + |(f(x)-f(c))||g(c)|$.
+        As we know that $f(x)$ is continuous at $c$, thus it is bounded around $f(c)$, like this, for $\epsilon_1>0$, we can find a $delta_1>0$, 
+        for all $|x-c|<\delta_1$, we have $|f(x)|<max{|f(c)-\epsilon_1|,|f(c)+\epsilon_1|}$, we denote the last term as $M$. Then we can have that 
+        $$|h(x)-h(c)|<M||(g(x)-g(c))| + |(f(x)-f(c))||g(c)| < M |(g(x)-g(c))| + \epsilon_1 |g(c)|.$$
+        For $\epsilon_2>0$, we can find a $delta_2>0$, for all $|x-c|<\delta_2$, we have $|g(x)-g(c)|<\epsilon_2$, then we have that for 
+$|x-c|<min(\delta_1,\delta_2)$, we have that 
+$$|h(x)-h(c)|<M\epsilon_2+\epsilon_1|g(c)|<|f(c)|\epsilon_2+\epsilon_1|g(c)|+\epsilon_1\epsilon_2.$$
+Hence for all $\epsilon>0$, we can find a pair of $\epsilon_1,\epsilon_2>0$ such that $$|f(c)|\epsilon_2+\epsilon_1|g(c)|+\epsilon_1\epsilon_2<\epsilon,$$
+and for each $\epsilon_1,\epsilon_2$, we can find $\delta_1,\delta_2>0$, and then $\delta=min(\delta_1,\delta_2)$ for all $|x-c|<\delta$, we have $$|h(x)-h(c)|<\epsilon.$$ Then $h(x)$ is continuous at $c$.
+
+\item Simiar as (iii), $|h(x)-h(c)|<|\frac{(f(x)-f(c))g(c)+f(c)(g(x)-g(c))}{g(c)g(x)}|<|\frac{(f(x)-f(c))g(c)}{g(c)g(x)}|+\frac{f(c)(g(x)-g(c))}{g(c)g(x)}$, then the left process is nothing defferent with (iii).
+\end{enumerate}
+\end{sol}
+
+
+
+
+\begin{exe} 3.2.9: Give an example of functions \( f: \mathbb{R} \rightarrow \mathbb{R} \) and \( g: \mathbb{R} \rightarrow \mathbb{R} \) such that the function \( h \), defined by \( h(x) := f(x) + g(x) \), is continuous, but \( f \) and \( g \) are not continuous. Can you find \( f \) and \( g \) that are nowhere continuous, but \( h \) is a continuous function?
+
+\end{exe} 
+
+\begin{sol}[3.2.9]
+$$f(x)=\begin{cases}
+    1,\ x\ is\ rational\\
+    0,\ x\ is\ irrational
+\end{cases}$$$$
+g(x)=\begin{cases}
+    0,\ x\ is\ rational\\
+    1,\ x\ is\ irrational
+\end{cases}$$
+\end{sol}
+
+
+\begin{exe} 3.2.10: Let \( f: \mathbb{R} \rightarrow \mathbb{R} \) and \( g: \mathbb{R} \rightarrow \mathbb{R} \) be continuous functions. Suppose that \( f(r) = g(r) \) for all \( r \in \mathbb{Q} \). Show that \( f(x) = g(x) \) for all \( x \in \mathbb{R} \).
+
+\end{exe}
+
+\begin{sol}[3.2.10]
+    Since $\mathbb{Q}$ is dense in $\mathbb{R}$, then we for all irrational number $x$, we can find a rationl sequence $\left\{x_n\right\}_[n=1]^{\infty}$ converges to $x$, that is  
+    $$\lim_{n\to\infty}x_n=x,$$
+    then we have that $\lim_{n\to\infty} f(x_n) = f(x)$ since $f(x)$ is a continuous function. It is the same for the $g(x)$. Then we have that $\lim_{n\to\infty}g(x_n)=g(x)$. 
+    As we know that $f(y)=g(y)$ for $y$ is rational, then we have that $\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}g(x_n)$. Obviously, $f(x)=g(x)$ for all irrational $x$. Combine two conditions, we know that 
+    $f(x)=g(x)$ for all $x\in\mathbb{R}$.
+\end{sol}
+
+
+\begin{exe} 3.2.11: Let \( f: \mathbb{R} \rightarrow \mathbb{R} \) be continuous. Suppose \( f(c) > 0 \). Show that there exists an \( \alpha > 0 \) such that for all \( x \in (c - \alpha, c + \alpha) \), we have \( f(x) > 0 \).
+
+\end{exe}
+
+\begin{sol}[3.2.11]
+Since $f(x)$ is continuous, for $x=c$, we have that for every $\epsilon>0$, we have a $\delta>0$, for all $|x-c|<\delta$, we have $|f(x)-f(c)|<\epsilon$. Then $f(c)-\epsilon<f(x)<f(c)+\epsilon$, we choose $\epsilon<f(c)$ then $f(x)>0$. That is there exists $\alpha>0$ satisfying the condition.
+\end{sol}
+
+\begin{exe} 3.2.12: Let \( f: \mathbb{Z} \rightarrow \mathbb{R} \) be a function. Show that \( f \) is continuous.
+
+\end{exe} 
+
+\begin{sol}[3.2.12]
+    Actually, for every $\epsilon>0$, there exists $\delta=1$, for all $|x-c|<\delta$($\mathbb{Z}$ is continuous), we have $|f(x)-f(c)|<\epsilon$. Then $f(x)$ is continuous.
+\end{sol}
+
+\begin{exe} 3.2.13: Let \( f: S \rightarrow \mathbb{R} \) be a function and \( c \in S \), such that for every sequence \( \{x_n\}_{n=1}^{\infty} \) in \( S \) with \( \lim_{n \to \infty} x_n = c \), the sequence \( \{f(x_n)\}_{n=1}^{\infty} \) converges. Show that \( f \) is continuous at \( c \).
+
+\end{exe} 
+
+\begin{sol}[3.2.13]
+It's a strange problem, can I prove that the sequence must converge to $f(c)$?
+\end{sol}
+
+
+\begin{exe} 3.2.14: Suppose \( f: [-1,0] \rightarrow \mathbb{R} \) and \( g: [0,1] \rightarrow \mathbb{R} \) are continuous and \( f(0) = g(0) \). Define \( h: [-1,1] \rightarrow \mathbb{R} \) by \( h(x) := f(x) \) if \( x \leq 0 \) and \( h(x) := g(x) \) if \( x > 0 \). Show that \( h \) is continuous.
+
+\end{exe} 
+
+\begin{sol}[3.2.14]
+For $x=0$, $h(x)=0$, $\lim_{x\to 0^-} h(x)=0$, $\lim_{x\to 0^+} h(x)=0$, then $h$ is continuous at $0$.
+For $x\in(0,1]$, $h(x)=g(x)$, $g(x)$ is continuous in $(0,1]$, then $h$ is continuous in $(0,1]$.
+For $x\in[-1,0)$, $h(x)=f(x)$, $f(x)$ is continuous in $[-1,0)$, then $h$ is continuous in $[-1,0)$.
+\end{sol}
+
+
+\begin{exe} 3.2.15: Suppose \( g: \mathbb{R} \rightarrow \mathbb{R} \) is a continuous function such that \( g(0) = 0 \), and suppose \( f: \mathbb{R} \rightarrow \mathbb{R} \) is such that \( |f(x) - f(y)| \leq g(x - y) \) for all \( x \) and \( y \). Show that \( f \) is continuous.
+\end{exe}
+
+\begin{sol}[3.2.15]
+
+As $x\to y$, we have $0\leq \lim_{x\to y}|f(x)-f(y)| \leq\lim_{x\to y}g(x-y)=0$. Then $\lim_{x\to y} f(x)=f(y)$ for all $x,y$, then $f$ is continuous.
+    
+\end{sol}
+
+\begin{exe}[3.3.4]
+    Let
+
+$$f(x) := \begin{cases} 
+\sin(1/x) & \text{if } x \neq 0, \\
+0 & \text{if } x = 0.
+\end{cases}$$
+
+
+Show that \( f \) has the intermediate value property. That is, whenever \( a < b \), if there exists a \( y \) such that \( f(a) < y < f(b) \) or \( f(a) > y > f(b) \), then there exists a \( c \in (a, b) \) such that \( f(c) = y \).
+\end{exe}
+
+
+
+
+\begin{sol}[3.3.4]
+For $ab>0$, $f(x)$ is continuous in $[a,b]$ and it is obvious.
+
+For $ab<0$, why not suppose that $a<0$ and $b>0$, then we consider the interval $(0,b)$. Actually, near the $0$, $f(x)$ oscillates between 
+$[-1,1]$ infinity. No matter how we choose $b$, the range of $f((0,b))$ is always $[-1,1]$. Thus there at least exists a $c$ such that $f(c)=y$.
+
+
+\end{sol}
+
+
+
+
+
+
+
+\begin{exe}[3.3.12]
+    Suppose \( f: \mathbb{R} \rightarrow \mathbb{R} \) is continuous such that \( x \leq f(x) \leq x + 1 \) for all \( x \in \mathbb{R} \). Find \( f(\mathbb{R}) \).
+\end{exe}
+
+\begin{sol}[3.3.12]
+    $\mathbb{R}$
+\end{sol}
+
+\begin{exe}[3.3.13]
+    \textit{True/False, prove or find a counterexample.} If \( f: \mathbb{R} \rightarrow \mathbb{R} \) is a continuous function such that \( f|_{\mathbb{Z}} \) is bounded, then \( f \) is bounded.
+\end{exe}
+
+
+\begin{sol}[3.3.13]
+    False. For example, $f(x)=\sin (\pi x) \ln(x^2+1)$ is continuous, but $f$ is not bounded.
+\end{sol}
+
+\begin{exe}[3.3.14]
+    Suppose \( f: [0, 1] \rightarrow (0, 1) \) is a bijection. Prove that \( f \) is not continuous
+\end{exe}
+
+\begin{sol}[3.3.14]
+
+If $f(x)$ is continuos and  a bijection, then $f(x)$ should hava a minimum and maximum. But $(0,1)$ doesn't have a maximum and minimum. Then $f$ is not continuous.
+\end{sol}
+
+
+\begin{exe}[3.3.15]
+    Suppose \( f: \mathbb{R} \rightarrow \mathbb{R} \) is continuous.
+
+\begin{enumerate}
+    \item[a)] Prove that if there is a \( c \) such that \( f(c) f(-c) < 0 \), then there is a \( d \in \mathbb{R} \) such that \( f(d) = 0 \).
+    \item[b)] Find a continuous function \( f \) such that \( f(\mathbb{R}) = \mathbb{R} \), but \( f(x) f(-x) \geq 0 \) for all \( x \in \mathbb{R} \).
+\end{enumerate}
+\end{exe}
+
+\begin{sol}[3.3.15]
+    
+a is easy to prove. b is $f(x)=x^3$. 
+\end{sol}
+
+\begin{exe}[3.3.16]
+    Suppose \( g(x) \) is a monic polynomial of even degree \( d \), that is,
+    \[
+    g(x) = x^d + b_{d-1} x^{d-1} + \cdots + b_1 x + b_0,
+    \]
+    for some real numbers \( b_0, b_1, \ldots, b_{d-1} \). Show that \( g \) achieves an absolute minimum on \( \mathbb{R} \).
+\end{exe}
+
+\begin{sol}[3.3.16]
+
+Since $g(x)$ tends to $+\infty$ as $x\to -\infty$ and $x\to \infty$. Consider $g(0)$, there exists an $N>0$, for all $x\geq N$, 
+$g(x)>g(0)$, and there exists an $M<0$, for all $x\leq M$, $g(x)>g(0)$. And in the interval $[M,N]$, there exists a minima $g(x_0)$. For $x\in [M,N]$, $g(x)\geq g(x_0)$. 
+For $x\in (-\infty,M)$, $g(x)> g(0)\geq g(x_0)$. For $x\in (N,\infty)$, $g(x)>g(0)\geq g(x_0)$. Then $g(x_0)$ is the absolute minimum.  
+\end{sol}
 
 
 
@@ -60,10 +839,106 @@
 
 
 
+\begin{exe}[3.4.7]
+    Let \( f: (0,1) \rightarrow \mathbb{R} \) be a bounded continuous function. Show that the function \( g(x) := x(1-x) f(x) \) is uniformly continuous.
+\end{exe}
+
+\begin{sol}[3.4.7]
+
+Since $f(x)$ is bounded, then $\lim_{x\to 0}f(x)$ or $\lim_{x\to 1}f(x)$ don't go to infinity. Then we denote them as $L_0$ and $L_1$, then we extend $f(x)$ into $[0,1]$, it is uniformly continuous. 
+And for $x(1-x)$ is uniformly continuous, then $g(x)$ is uniformly continuous.
+\end{sol}
+
+
+\begin{exe}[3.4.8]
+    Show that \( f: (0,\infty) \rightarrow \mathbb{R} \) defined by \( f(x) := \sin(1/x) \) is not uniformly continuous.
+\end{exe}
+
+\begin{sol}[3.4.8]
+
+For $\epsilon=1/2$, there exists $\delta>0$, we choose $x= \frac{1}{2n\pi},y=\frac{1}{(2n+1/2)\pi}$, it's obvious that 
+$$|x-y|=\frac{1/2}{2n(2n+1/2)\pi}$$
+if there exists a $\delta$, then no matter how small it is, we can always find that there exists a $N$ such that for $n\geq N$,$|x-y|<\delta$, satisfying the condition. Then we know that 
+$$|f(x)-f(y)|=1>\epsilon$$
+So $f$ is not uniformly continuous.
+\end{sol}
+
+
+
+\begin{exe}[3.4.10]
+    \begin{enumerate}
+        \item[a)] Find a continuous \( f: (0,1) \rightarrow \mathbb{R} \) and a sequence \( \{x_n\}_{n=1}^{\infty} \) in \( (0,1) \) that is Cauchy, but such that \( \{f(x_n)\}_{n=1}^{\infty} \) is not Cauchy.
+        \item[b)] Prove that if \( f: \mathbb{R} \rightarrow \mathbb{R} \) is continuous, and \( \{x_n\}_{n=1}^{\infty} \) is Cauchy, then \( \{f(x_n)\}_{n=1}^{\infty} \) is Cauchy.
+    \end{enumerate}
+\end{exe}
+
+\begin{sol}[3.4.10]
+a. $f(x)=1/x$, $x_n=\frac{1}{n}$, then $f(x_n)=n$, but $f(x_n)$ is not Cauchy.
+
+b. Since $\left\{x_n\right\}_{n=1}^{\infty}$ is Cauchy, it is bounded and we denote them as $L$,$U$. Then we can extend the domain of $f(x)$ into a closed interval and $f(x)$ is uniformly continuous. Then $f(x_n)$ is Cauchy.
+\end{sol}
 
 
 
 
+\begin{exe}[3.4.11]
+    \begin{enumerate}
+        \item[a)] If \( f: S \rightarrow \mathbb{R} \) and \( g: S \rightarrow \mathbb{R} \) are uniformly continuous, then \( h: S \rightarrow \mathbb{R} \) given by \( h(x) := f(x) + g(x) \) is uniformly continuous.
+        \item[b)] If \( f: S \rightarrow \mathbb{R} \) is uniformly continuous and \( a \in \mathbb{R} \), then \( h: S \rightarrow \mathbb{R} \) given by \( h(x) := a f(x) \) is uniformly continuous.
+    \end{enumerate}
+\end{exe}
+
+\begin{sol}[3.4.11]
+There is nothing defferent with the proof of normal continuity
+\end{sol}
+
+
+\begin{exe}[3.4.12]
+    Prove:
+    \begin{enumerate}
+        \item[a)] If \( f: S \rightarrow \mathbb{R} \) and \( g: S \rightarrow \mathbb{R} \) are Lipschitz, then \( h: S \rightarrow \mathbb{R} \) given by \( h(x) := f(x) + g(x) \) is Lipschitz.
+        \item[b)] If \( f: S \rightarrow \mathbb{R} \) is Lipschitz and \( a \in \mathbb{R} \), then \( h: S \rightarrow \mathbb{R} \) given by \( h(x) := a f(x) \) is Lipschitz.
+    \end{enumerate}
+\end{exe}
+
+
+
+\begin{sol}[3.4.12]
+Emmmmmm, it's nothing defferent with the proof of normal continuity.
+\end{sol}
+
+
+\begin{exe}[3.5.2]
+    Let \( f: [1, \infty) \rightarrow \mathbb{R} \) be a function. Define \( g: (0, 1] \rightarrow \mathbb{R} \) via \( g(x) := f(1/x) \). Using the definitions of limits directly, show that \( \lim_{x \rightarrow 0^+} g(x) \) exists if and only if \( \lim_{x \rightarrow \infty} f(x) \) exists, in which case they are equal.
+\end{exe}
+
+
+\begin{sol}[3.5.2]
+
+Suppose that $\lim_{x\to 0^+}g(x)$ exists and equals to $L$, then for $\epsilon>0$, there exists an $\delta >0$, for all $x<\delta$, $|g(x)-L|<\epsilon$ that is $|f(1/x)-L|<\epsilon$. Now set $y=1/x$, for all $y>1/\delta$, 
+$|f(y)-L|<\epsilon$, then $\lim_{x\to\infty}f(x)=L$. Vise versa, you can prove that $\lim_{x\to0^+}g(x)=\lim_{x\to\infty}f(x)$ if they exist.
+
+\end{sol}
+
+
+
+
+
+
+\begin{exe}[3.5.7]
+    Let \(\{x_n\}_{n=1}^{\infty}\) be a sequence. Consider \( S := \mathbb{N} \subset \mathbb{R} \), and \( f: S \rightarrow \mathbb{R} \) defined by \( f(n) := x_n \). Show that the two notions of limit,
+    \[
+    \lim_{n \rightarrow \infty} x_n \quad \text{and} \quad \lim_{x \rightarrow \infty} f(x)
+    \]
+    are equivalent. That is, show that if one exists so does the other one, and in this case they are equal.
+\end{exe}
+
+\begin{sol}[3.5.7]
+
+If $\lim_{x\to\infty}f(x)=L$ exists, then for all $\epsilon>0$, there exists $N>0$, for all $x\geq N$, $|f(x)-L|<\epsilon$. Since $f(n)=x_n$, then for all $n\geq N$, $|x_n-L|<\epsilon$. And we have $\lim_{n\to\infty} x_n =L$. 
+
+If $\lim_{n\to\infty}x_n=L$ exists, then for all $\epsilon>0$, there exists $N>0$, for all $n\geq N$, $|x_n-L|<\epsilon$. Since, $f(n)=x_n$, then for all $n\geq N$, $|f(n)-L|<\epsilon$, that is $\lim_{x\to\infty}f(x)=L$.
+\end{sol}
 
 
 
