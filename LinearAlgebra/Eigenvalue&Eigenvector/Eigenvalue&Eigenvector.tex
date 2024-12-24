@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{amsmath}
+\usepackage{mathptmx}
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{enumitem}
@@ -19,7 +20,7 @@
 \newtheorem{pro}{Properties}[section]
 
 
-\linespread{1.5}
+\linespread{1.25}
 
 
 \title{Eigenvalue and Eigenvector}
@@ -33,8 +34,27 @@
 % todo finish the abstract part.
 
 \begin{abstract}
-    This is the note made by Len Fu during his learning progress in BIT.
-    The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra Allenby}.
+    This is the note made by Len Fu during his learning progress in BIT. The main content is from \textit{Linear Algebra Done Right} and \textit{Linear Algebra, J.K.Wan, BIT 2024 Fall}.
+    
+    The follow part is a summary of the note.
+    \begin{enumerate}
+        \item \textbf{Eigenvalues and Eigenvectors}
+        \begin{itemize}
+            \item The concept and properties of eigenvalues and eigenvectors, computation of eigenvalues and eigenvectors.
+        \end{itemize}
+        \item \textbf{Diagonalization of Matrices}
+        \begin{itemize}
+            \item Criteria for diagonalizability, the process of diagonalization.
+        \end{itemize}
+        \item \textbf{Diagonalization of Real Symmetric Matrices using Orthogonal Matrices}
+        \begin{itemize}
+            \item Properties of eigenvalues and eigenvectors of real symmetric matrices, the process of orthogonal similarity diagonalization.
+        \end{itemize}
+        \item \textbf{Jordan Canonical Form of Matrices}
+        \begin{itemize}
+            \item The method for finding the Jordan canonical form \( J \) and the similarity transformation matrix \( P \).
+        \end{itemize}
+    \end{enumerate}
 \end{abstract}
 
 \tableofcontents
@@ -436,6 +456,94 @@ We can use Gram-Schmidt Orthogonalization to orthogonalize the vectors :
 
 \section{}
 \subsection{Jordan Canonical Form}
+\begin{defi}[Jordan Block]
+    Define a m upper triangular matrix, as a m Jordan Block 
+$$\begin{bmatrix}
+    a&1&0\cdots&0&0&0\\
+    0&a&1&\cdots&0&0\\
+    \vdots&\vdots&\vdots&\ddots&\vdots&\vdots\\
+    0&0&0&\cdots&a&1\\
+    0&0&0&\cdots&1&a
+\end{bmatrix}$$
+    
+\end{defi}
+
+\begin{defi}[Jordan Form]
+    Call a quasi-diagonal matrix $A$ as a Jordan Form if it can be written as
+    \[
+\begin{bmatrix}
+J_1 & & \\
+& J_2 & \\
+& & \ddots \\
+& & & J_s
+\end{bmatrix}
+\]
+where $J_i$ is a Jordan Block.
+\end{defi}
+
+\begin{theorem}
+    Set $A\in C^{n\times n}$, then $A$ can be similar to a Jordan Form.
+    \[
+    J=\begin{bmatrix}
+        J_1 & & \\
+        & J_2 & \\
+        & & \ddots \\
+        & & & J_s
+    \end{bmatrix}
+    \]
+    and except for $J_1,J_2,\cdots,J_s$ 's order, $J$ is unique for $A$ and is Jordan Canonical Form of $A$.
+\end{theorem}
+
+\subsubsection{Elementary Divisors}
+\begin{defi}[Elementary Transformation]
+    Set $A$ as an n square, and let $A(\lambda)=\lambda I-A$, we call these three transformations as Elementary Transformation.:
+    \begin{enumerate}
+        \item Swap two rows or columns of $A(\lambda)$.
+        \item Multiply a row or column of $A(\lambda)$ by a nonzero scalar.
+        \item Use a polynomial of $\lambda$ to multiply a row or column of $A(\lambda)$ and add it to another row or column of $A(\lambda)$.
+    \end{enumerate}
+\end{defi}
+
+\begin{defi}[Elementary Divisors]
+    Set $A$ as a complex n-square, use elementary transformation to transform $A(\lambda)$ to diagonal matrix, Then decompose the diagonal elements into a product of distinct first-degree polynomial powers of 
+    $\lambda$. The powers of all first-degree factors with exponents greater than zero are called the elementary divisors of $A$. 
+\end{defi}
+
+\begin{corollary}[m-Jordan Block]
+    $$\begin{bmatrix}
+        a&1&0\cdots&0&0\\
+        0&a&1&\cdots&0\\
+        \vdots&\vdots&\vdots&\ddots&\vdots\\
+        0&0&0&\cdots&a\\
+    \end{bmatrix}$$ 
+    The elementary divisors of $A$ are $(\lambda-a)^m.$
+\end{corollary}
+
+\begin{theorem}
+    Set $A$'s elementary divisors are $(\lambda-a_1)^{m_1},\cdots,(\lambda-a_s)^{m_s}$, then $A$'s Jordan Canonical Form is
+    $$\begin{bmatrix}
+        J_1&0&\cdots&0\\
+        0&J_2&\cdots&0\\
+        0&0&\ddots&0\\
+        0&0&\cdots&J_s\\
+    \end{bmatrix}$$
+    where $J_i$ is 
+    $$\begin{bmatrix}
+        a_i&1&0\cdots&0\\
+        0&a_i&1&\cdots&0\\
+        \vdots&\vdots&\vdots&\ddots&\vdots\\
+        0&0&0&\cdots&a_i\\
+    \end{bmatrix}_{m_i\times m_i}\ (i=1,2,\cdots,s)$$
+\end{theorem}
+
+
+
+
+
+
+
+
+
 
 \subsection{Smith Normal Form}
 
